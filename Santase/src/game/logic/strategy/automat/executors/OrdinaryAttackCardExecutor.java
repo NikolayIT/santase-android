@@ -24,34 +24,33 @@ import game.logic.strategy.automat.methods.SmallestOfAll;
  * @author Dimitar Karamanov
  */
 public final class OrdinaryAttackCardExecutor extends PlayAttackCardExecutor {
-	/**
-	 * Constructor.
-	 * 
-	 * @param game a BelotGame instance.
-	 */
-	public OrdinaryAttackCardExecutor(final Game game) {
-		super(game);
-		// Register play card methods.
-		register(new OrdinaryWinCoupleCard(game));
-		register(new OrdinaryCloseGameCard(game));
-		register(new OrdinaryWinBestTrumpCard(game));
-		register(new OrdinaryWinWithPowerTrumpsHands(game));
-		register(new CoupleCard(game));
-		register(new OrdinarySmallCard(game));
-		register(new OrdinaryTrumpCard(game));
-		register(new SmallestOfAll(game));
-	}
+    /**
+     * Constructor.
+     * 
+     * @param game a BelotGame instance.
+     */
+    public OrdinaryAttackCardExecutor(final Game game) {
+        super(game);
+        // Register play card methods.
+        register(new OrdinaryWinCoupleCard(game));
+        register(new OrdinaryCloseGameCard(game));
+        register(new OrdinaryWinBestTrumpCard(game));
+        register(new OrdinaryWinWithPowerTrumpsHands(game));
+        register(new CoupleCard(game));
+        register(new OrdinarySmallCard(game));
+        register(new OrdinaryTrumpCard(game));
+        register(new SmallestOfAll(game));
+    }
 
-	/**
-	 * Handler method providing the user facility to check custom condtion for
-	 * methods executions.
-	 * 
-	 * @param player for which is called the executor.
-	 * @param opposite for which is called the executor.
-	 * @return true to process method execution false to not.
-	 */
-	protected boolean fitPreCondition(final Player player) {
-		game.changeTrumpCard(player);
-		return super.fitPreCondition(player);
-	}
+    /**
+     * Handler method providing the user facility to check custom condtion for methods executions.
+     * 
+     * @param player for which is called the executor.
+     * @param opposite for which is called the executor.
+     * @return true to process method execution false to not.
+     */
+    protected boolean fitPreCondition(final Player player) {
+        game.changeTrumpCard(player);
+        return super.fitPreCondition(player);
+    }
 }

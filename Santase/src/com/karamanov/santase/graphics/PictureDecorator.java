@@ -28,7 +28,7 @@ import com.karamanov.santase.R;
  */
 public final class PictureDecorator {
 
-	/**
+    /**
      * Suits container.
      */
     private final Hashtable<Suit, Integer> suits = new Hashtable<Suit, Integer>();
@@ -36,7 +36,7 @@ public final class PictureDecorator {
     /**
      * Ranks container.
      */
-    private final Hashtable<Rank,  Hashtable<Suit, Integer>> ranks = new Hashtable<Rank, Hashtable<Suit, Integer>>();
+    private final Hashtable<Rank, Hashtable<Suit, Integer>> ranks = new Hashtable<Rank, Hashtable<Suit, Integer>>();
 
     private final Context context;
 
@@ -44,9 +44,9 @@ public final class PictureDecorator {
      * Constructor.
      */
     public PictureDecorator(Context context) {
-    	this.context = context;
-        
-    	suits.put(Suit.Club, R.drawable.club);
+        this.context = context;
+
+        suits.put(Suit.Club, R.drawable.club);
         suits.put(Suit.Diamond, R.drawable.diamond);
         suits.put(Suit.Heart, R.drawable.heart);
         suits.put(Suit.Spade, R.drawable.spade);
@@ -57,35 +57,35 @@ public final class PictureDecorator {
         aces.put(Suit.Heart, R.drawable.aceheart);
         aces.put(Suit.Spade, R.drawable.acespade);
         ranks.put(Rank.Ace, aces);
-        
+
         Hashtable<Suit, Integer> kings = new Hashtable<Suit, Integer>();
         kings.put(Suit.Club, R.drawable.kingclub);
         kings.put(Suit.Diamond, R.drawable.kingdiamond);
         kings.put(Suit.Heart, R.drawable.kingheart);
         kings.put(Suit.Spade, R.drawable.kingspade);
         ranks.put(Rank.King, kings);
-        
+
         Hashtable<Suit, Integer> queens = new Hashtable<Suit, Integer>();
         queens.put(Suit.Club, R.drawable.queenclub);
         queens.put(Suit.Diamond, R.drawable.queendiamond);
         queens.put(Suit.Heart, R.drawable.queenheart);
         queens.put(Suit.Spade, R.drawable.queenspade);
-        ranks.put(Rank.Queen,queens);
-        
+        ranks.put(Rank.Queen, queens);
+
         Hashtable<Suit, Integer> jacks = new Hashtable<Suit, Integer>();
         jacks.put(Suit.Club, R.drawable.jackclub);
         jacks.put(Suit.Diamond, R.drawable.jackdiamond);
         jacks.put(Suit.Heart, R.drawable.jackheart);
         jacks.put(Suit.Spade, R.drawable.jackspade);
         ranks.put(Rank.Jack, jacks);
-        
+
         Hashtable<Suit, Integer> tens = new Hashtable<Suit, Integer>();
         tens.put(Suit.Club, R.drawable.tenclub);
         tens.put(Suit.Diamond, R.drawable.tendiamond);
         tens.put(Suit.Heart, R.drawable.tenheart);
         tens.put(Suit.Spade, R.drawable.tenspade);
         ranks.put(Rank.Ten, tens);
-        
+
         Hashtable<Suit, Integer> nines = new Hashtable<Suit, Integer>();
         nines.put(Suit.Club, R.drawable.nineclub);
         nines.put(Suit.Diamond, R.drawable.ninediamond);
@@ -100,8 +100,8 @@ public final class PictureDecorator {
      * @return Image the card's image.
      */
     public Bitmap getCardImage(final Card card) {
-    	Hashtable<Suit, Integer> hashtable = ranks.get(card.getRank());
-    	return ((BitmapDrawable) context.getResources().getDrawable(hashtable.get(card.getSuit()).intValue())).getBitmap();
+        Hashtable<Suit, Integer> hashtable = ranks.get(card.getRank());
+        return ((BitmapDrawable) context.getResources().getDrawable(hashtable.get(card.getSuit()).intValue())).getBitmap();
     }
 
     /**
@@ -112,7 +112,7 @@ public final class PictureDecorator {
     public Bitmap getSuitImage(final Suit suit) {
         return ((BitmapDrawable) context.getResources().getDrawable(suits.get(suit).intValue())).getBitmap();
     }
-   
+
     /**
      * Returns the image of crad desk.
      * @return desk image.
@@ -120,7 +120,7 @@ public final class PictureDecorator {
     public Bitmap getCardBackImage() {
         return ((BitmapDrawable) context.getResources().getDrawable(R.drawable.card_back)).getBitmap();
     }
-    
+
     /**
      * Returns the image of crad desk.
      * @return desk image.
@@ -128,24 +128,24 @@ public final class PictureDecorator {
     public Bitmap getCardBackSmallImage() {
         return ((BitmapDrawable) context.getResources().getDrawable(R.drawable.card_back_small)).getBitmap();
     }
-    
+
     public GradientDrawable getMainBKG() {
-		return ((GradientDrawable) context.getResources().getDrawable(R.drawable.main_bkg));
-	}
-    
+        return ((GradientDrawable) context.getResources().getDrawable(R.drawable.main_bkg));
+    }
+
     public Bitmap getMask() {
-    	return ((BitmapDrawable) context.getResources().getDrawable(R.drawable.mask)).getBitmap();
+        return ((BitmapDrawable) context.getResources().getDrawable(R.drawable.mask)).getBitmap();
     }
-    
+
     public Bitmap getEmpty() {
-    	return ((BitmapDrawable) context.getResources().getDrawable(R.drawable.empty)).getBitmap();
+        return ((BitmapDrawable) context.getResources().getDrawable(R.drawable.empty)).getBitmap();
     }
-    
+
     public Bitmap getHappy() {
-    	return ((BitmapDrawable) context.getResources().getDrawable(R.drawable.happy)).getBitmap();
+        return ((BitmapDrawable) context.getResources().getDrawable(R.drawable.happy)).getBitmap();
     }
-    
+
     public Bitmap getUnhappy() {
-    	return ((BitmapDrawable) context.getResources().getDrawable(R.drawable.unhappy)).getBitmap();
+        return ((BitmapDrawable) context.getResources().getDrawable(R.drawable.unhappy)).getBitmap();
     }
 }

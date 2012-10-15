@@ -14,53 +14,52 @@ import game.beans.pack.card.rank.Rank;
 import game.logic.strategy.automat.methods.base.BaseMethod;
 
 /**
- * OrdinaryHandCard class. PlayCardMethod which implements the logic of playing
- * a ordinary hand card.
+ * OrdinaryHandCard class. PlayCardMethod which implements the logic of playing a ordinary hand card.
  * 
  * @author Dimitar Karamanov
  */
 public final class OrdinaryHandCard extends BaseMethod {
-	/**
-	 * Constructor.
-	 * 
-	 * @param game SantaseGame instance.
-	 */
-	public OrdinaryHandCard(final Game game) {
-		super(game);
-	}
+    /**
+     * Constructor.
+     * 
+     * @param game SantaseGame instance.
+     */
+    public OrdinaryHandCard(final Game game) {
+        super(game);
+    }
 
-	/**
-	 * Returns player's card.
-	 * 
-	 * @param player AI player.
-	 * @param opposite player.
-	 * @return Card object instance or null.
-	 */
-	protected Card getPlayMethodCard(final Player player) {
-		if (!getRival(player).getPlayedCard().getSuit().equals(game.getTrumpSuit()) || getRival(player).getPlayedCard().getRank().equals(Rank.Ten)) {
-			return getBiggerCard(player);
-		}
-		return null;
-	}
+    /**
+     * Returns player's card.
+     * 
+     * @param player AI player.
+     * @param opposite player.
+     * @return Card object instance or null.
+     */
+    protected Card getPlayMethodCard(final Player player) {
+        if (!getRival(player).getPlayedCard().getSuit().equals(game.getTrumpSuit()) || getRival(player).getPlayedCard().getRank().equals(Rank.Ten)) {
+            return getBiggerCard(player);
+        }
+        return null;
+    }
 
-	/**
-	 * Returns player's bigger card them opposite player.
-	 * 
-	 * @param human AI player.
-	 * @param opposite standart player.
-	 * @return Card object instance or null.
-	 */
-	private Card getBiggerCard(final Player player) {
-		Card result = null;
-		for (PackIterator iterator = player.getCards().iterator(); iterator.hasNext();) {
-			final Card card = iterator.next();
-			if (card.getSuit().equals(getRival(player).getPlayedCard().getSuit()) && card.getRank().compareTo(getRival(player).getPlayedCard().getRank()) > 0
-					&& noPossibleCoupleCard(player, card)) {
-				if (result == null || result.getRank().compareTo(card.getRank()) < 0) {
-					result = card;
-				}
-			}
-		}
-		return result;
-	}
+    /**
+     * Returns player's bigger card them opposite player.
+     * 
+     * @param human AI player.
+     * @param opposite standart player.
+     * @return Card object instance or null.
+     */
+    private Card getBiggerCard(final Player player) {
+        Card result = null;
+        for (PackIterator iterator = player.getCards().iterator(); iterator.hasNext();) {
+            final Card card = iterator.next();
+            if (card.getSuit().equals(getRival(player).getPlayedCard().getSuit()) && card.getRank().compareTo(getRival(player).getPlayedCard().getRank()) > 0
+                    && noPossibleCoupleCard(player, card)) {
+                if (result == null || result.getRank().compareTo(card.getRank()) < 0) {
+                    result = card;
+                }
+            }
+        }
+        return result;
+    }
 }

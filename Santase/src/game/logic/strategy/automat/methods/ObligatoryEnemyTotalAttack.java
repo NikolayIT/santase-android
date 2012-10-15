@@ -13,45 +13,44 @@ import game.logic.strategy.automat.base.PlayCardMethod;
 import game.logic.strategy.automat.methods.base.BaseMethod;
 
 /**
- * ObligatoryEnemyTotalAttack class. PlayCardMethod which implements the logic
- * of playing a obligatory card when enemy can win.
+ * ObligatoryEnemyTotalAttack class. PlayCardMethod which implements the logic of playing a obligatory card when enemy can win.
  * 
  * @author Dimitar Karamanov
  */
 public final class ObligatoryEnemyTotalAttack extends BaseMethod {
-	/**
-	 * Help play card method.
-	 */
-	private final PlayCardMethod obligatoryTotalAttack;
+    /**
+     * Help play card method.
+     */
+    private final PlayCardMethod obligatoryTotalAttack;
 
-	/**
-	 * Help play card method.
-	 */
-	private final PlayCardMethod obligatorySingleHand;
+    /**
+     * Help play card method.
+     */
+    private final PlayCardMethod obligatorySingleHand;
 
-	/**
-	 * Constructor.
-	 * 
-	 * @param game SantaseGame instance.
-	 */
-	public ObligatoryEnemyTotalAttack(final Game game) {
-		super(game);
-		obligatoryTotalAttack = new ObligatoryTotalAttack(game);
-		obligatorySingleHand = new ObligatorySingleHand(game);
-	}
+    /**
+     * Constructor.
+     * 
+     * @param game SantaseGame instance.
+     */
+    public ObligatoryEnemyTotalAttack(final Game game) {
+        super(game);
+        obligatoryTotalAttack = new ObligatoryTotalAttack(game);
+        obligatorySingleHand = new ObligatorySingleHand(game);
+    }
 
-	/**
-	 * Returns player's card.
-	 * 
-	 * @param player AI player.
-	 * @param opposite standart player.
-	 * @return Card object instance or null.
-	 */
-	protected Card getPlayMethodCard(final Player player) {
-		Card card = null;
-		if (obligatoryTotalAttack.getPlayerCard(player) != null) {
-			card = obligatorySingleHand.getPlayerCard(player);
-		}
-		return card;
-	}
+    /**
+     * Returns player's card.
+     * 
+     * @param player AI player.
+     * @param opposite standart player.
+     * @return Card object instance or null.
+     */
+    protected Card getPlayMethodCard(final Player player) {
+        Card card = null;
+        if (obligatoryTotalAttack.getPlayerCard(player) != null) {
+            card = obligatorySingleHand.getPlayerCard(player);
+        }
+        return card;
+    }
 }

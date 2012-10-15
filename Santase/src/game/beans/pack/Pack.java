@@ -19,18 +19,17 @@ import java.util.Iterator;
 import java.util.Random;
 
 /**
- * Pack class.
- * Represents a collection of cards objects.
- *
+ * Pack class. Represents a collection of cards objects.
+ * 
  * @author Dimitar Karamanov
  */
 public final class Pack implements Serializable {
     /**
 	 * 
 	 */
-	private static final long serialVersionUID = -2712837552486272028L;
+    private static final long serialVersionUID = -2712837552486272028L;
 
-	/**
+    /**
      * Shuffle count.
      */
     private static final int SHUFFLE_COUNT = 1000;
@@ -54,16 +53,16 @@ public final class Pack implements Serializable {
 
     /**
      * Constructor.
-     *
+     * 
      * @param pack indicates if the pack will be filled with cards or empty
      */
     public Pack(Pack pack) {
-    	cards.addAll(pack.cards);
+        cards.addAll(pack.cards);
     }
 
     /**
      * Factory method which returns a new full pack.
-     *
+     * 
      * @return Pack a full pack.
      */
     public static Pack createFullPack() {
@@ -75,7 +74,7 @@ public final class Pack implements Serializable {
 
     /**
      * Clear and copy all elements from another pack.
-     *
+     * 
      * @param pack a copy from pack.
      */
     public void fill(Pack pack) {
@@ -85,7 +84,7 @@ public final class Pack implements Serializable {
 
     /**
      * Returns true if the card is from couple, false otherwise.
-     *
+     * 
      * @param card a checked card.
      * @return boolean true if the provided card is from a couple, false otherwise.
      */
@@ -107,7 +106,7 @@ public final class Pack implements Serializable {
 
     /**
      * Checks if the pack has a couple from provided suit.
-     *
+     * 
      * @param suit checked suit.
      * @return boolean true if the pack has couple from the provided suit, false otherwise.
      */
@@ -117,7 +116,7 @@ public final class Pack implements Serializable {
 
     /**
      * Returns the number of cards with specified suit.
-     *
+     * 
      * @param suit specified suit.
      * @return int the number of cards with specified suit.
      */
@@ -134,7 +133,7 @@ public final class Pack implements Serializable {
 
     /**
      * Returns the number of the cards with the specified rank from the pack.
-     *
+     * 
      * @param rank specified rank.
      * @return int the number of the cards with the specified rank from the pack.
      */
@@ -168,11 +167,11 @@ public final class Pack implements Serializable {
      * Shuffles the pack.
      */
     public void shuffle() {
-    	final long milliseconds = new Date().getTime();
+        final long milliseconds = new Date().getTime();
         final Random random = new Random(milliseconds);
 
         for (int i = 0; i < SHUFFLE_COUNT; i++) {
-        	int randomInt = random.nextInt();
+            int randomInt = random.nextInt();
             final int index = Math.abs(randomInt % cards.size());
             if (index != cards.size() - 1) {
                 final Card indexCard = cards.remove(index);
@@ -183,7 +182,7 @@ public final class Pack implements Serializable {
 
     /**
      * Returns a string representation of the object.
-     *
+     * 
      * @return String a string representation of the object.
      */
     public String toString() {
@@ -201,14 +200,14 @@ public final class Pack implements Serializable {
      * Prints the pack.
      */
     public void printPack() {
-    	for (Card card : cards) {
+        for (Card card : cards) {
             System.out.println(card);
         }
     }
 
     /**
      * Gets a card by index.
-     *
+     * 
      * @param index of the card which to be returned.
      * @return Card a card instance.
      */
@@ -218,7 +217,7 @@ public final class Pack implements Serializable {
 
     /**
      * Returns pack's size.
-     *
+     * 
      * @return int the size of the pack.
      */
     public int getSize() {
@@ -227,7 +226,7 @@ public final class Pack implements Serializable {
 
     /**
      * Returns true if the pack is empty false otherwise.
-     *
+     * 
      * @return boolean true if the pack is empty false otherwise.
      */
     public boolean isEmpty() {
@@ -236,7 +235,7 @@ public final class Pack implements Serializable {
 
     /**
      * Removes a card by index from the pack.
-     *
+     * 
      * @param index of the card which to be removed.
      * @return Card the removed card.
      */
@@ -247,7 +246,7 @@ public final class Pack implements Serializable {
 
     /**
      * Removes the provided card from the pack.
-     *
+     * 
      * @param card which to be removed.
      * @return Card the removed card.
      */
@@ -262,7 +261,7 @@ public final class Pack implements Serializable {
 
     /**
      * Adds the provided card to the pack.
-     *
+     * 
      * @param card which to be added.
      */
     public void add(final Card card) {
@@ -271,7 +270,7 @@ public final class Pack implements Serializable {
 
     /**
      * Removes all cards from the pack, which are stored in the provided pack.
-     *
+     * 
      * @param pack which cards will be removed from the current one.
      * @return boolean true if all cards were removed, false otherwise.
      */
@@ -320,7 +319,7 @@ public final class Pack implements Serializable {
 
     /**
      * Returns true if the pack has the next rank order card, otherwise false.
-     *
+     * 
      * @param card which is checked.
      * @return boolean true if the pack has the next rank order card, otherwise false.
      */
@@ -333,7 +332,7 @@ public final class Pack implements Serializable {
 
     /**
      * Returns true if the pack has the previous rank order card, otherwise false.
-     *
+     * 
      * @param card base one.
      * @return boolean true if the pack has the previous rank order card, otherwise false.
      */
@@ -346,7 +345,7 @@ public final class Pack implements Serializable {
 
     /**
      * Returns specified by rank and suit card.
-     *
+     * 
      * @param rank searching card's rank.
      * @param suit searching card's suit.
      * @return Card the searching card if the pack contains it, otherwise null.
@@ -362,7 +361,7 @@ public final class Pack implements Serializable {
 
     /**
      * Returns the card with the max rank from a specified suit.
-     *
+     * 
      * @param suit the specified suit.
      * @return Card the max card or null.
      */
@@ -380,7 +379,7 @@ public final class Pack implements Serializable {
 
     /**
      * Returns the card with the max rank smaller than a specified one.
-     *
+     * 
      * @param card the specified card.
      * @return Card the max card or null.
      */
@@ -398,7 +397,7 @@ public final class Pack implements Serializable {
 
     /**
      * Returns the card with the min rank bigger than a specified one.
-     *
+     * 
      * @param card the specified card.
      * @return Card the min card or null.
      */
@@ -416,7 +415,7 @@ public final class Pack implements Serializable {
 
     /**
      * Returns the card with the min rank from a specified suit.
-     *
+     * 
      * @param suit the specified suit.
      * @return Card the min card or null.
      */
@@ -434,7 +433,7 @@ public final class Pack implements Serializable {
 
     /**
      * Returns the card with the min rank from all cards.
-     *
+     * 
      * @return Card the min card or null.
      */
     public Card findMinAllCard() {
@@ -449,7 +448,7 @@ public final class Pack implements Serializable {
 
     /**
      * Returns the pack iterator.
-     *
+     * 
      * @return PackIterator the pack iterator.
      */
     public PackIterator iterator() {
@@ -457,8 +456,7 @@ public final class Pack implements Serializable {
     }
 
     /**
-     * PackIteratorImpl class.
-     * Implements PackIterator interface.
+     * PackIteratorImpl class. Implements PackIterator interface.
      */
     private static class PackIteratorImpl implements PackIterator {
         /**
@@ -468,7 +466,7 @@ public final class Pack implements Serializable {
 
         /**
          * Constructor.
-         *
+         * 
          * @param enumerator the internal collection enumerator.
          */
         private PackIteratorImpl(final Iterator<Card> enumeration) {
@@ -477,7 +475,7 @@ public final class Pack implements Serializable {
 
         /**
          * Returns true if the iteration has more elements.
-         *
+         * 
          * @return boolean true if the iteration has more elements false otherwise.
          */
         public boolean hasNext() {
@@ -486,7 +484,7 @@ public final class Pack implements Serializable {
 
         /**
          * Returns the next element in the iteration.
-         *
+         * 
          * @return Card the next element in the iteration.
          */
         public Card next() {

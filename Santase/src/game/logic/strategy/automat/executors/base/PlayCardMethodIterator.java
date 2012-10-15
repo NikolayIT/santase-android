@@ -10,14 +10,13 @@ import game.logic.strategy.automat.base.PlayCardMethod;
 
 /**
  * PlayCardMethodIterator interface.
- *
+ * 
  * @author Dimitar Karamanov
  */
-public interface PlayCardMethodIterator
-{
+public interface PlayCardMethodIterator {
     /**
      * Returns true if the iteration has more elements.
-     *
+     * 
      * @return boolean true if the iteration has more elements false otherwise.
      */
     boolean hasNext();

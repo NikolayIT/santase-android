@@ -40,7 +40,7 @@ public class ImagePosition {
      */
     private final int position;
 
-    /** 
+    /**
      * Constructor.
      * @param position
      */

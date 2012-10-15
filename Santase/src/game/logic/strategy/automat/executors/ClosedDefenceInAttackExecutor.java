@@ -16,14 +16,14 @@ import game.logic.strategy.automat.methods.ClosedLongestSuitCard;
  * @author Dimitar Karamanov
  */
 public final class ClosedDefenceInAttackExecutor extends PlayCardExecutor {
-	
-	/**
-	 * Constructor.
-	 * @param game SantaseGame instance.
-	 */
-	public ClosedDefenceInAttackExecutor(final Game game) {
-		super(game);
-		register(new ClosedDoubleSuitCard(game));
-		register(new ClosedLongestSuitCard(game));
-	}
+
+    /**
+     * Constructor.
+     * @param game SantaseGame instance.
+     */
+    public ClosedDefenceInAttackExecutor(final Game game) {
+        super(game);
+        register(new ClosedDoubleSuitCard(game));
+        register(new ClosedLongestSuitCard(game));
+    }
 }

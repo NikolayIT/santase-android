@@ -43,7 +43,6 @@ public abstract class BasePainter {
      */
     protected final int cardBackHeight;
 
-    
     /**
      * Text decorator of game beans object (Suit, Rank, Announce ...)
      */
@@ -53,7 +52,7 @@ public abstract class BasePainter {
      * Text decorator of game beans object (Suit, Rank, Announce ...)
      */
     protected final PictureDecorator pictureDecorator;
-    
+
     private final Context context;
 
     /**
@@ -62,7 +61,7 @@ public abstract class BasePainter {
      * @param height canvas height.
      */
     protected BasePainter(Context context) {
-    	this.context = context;
+        this.context = context;
         pictureDecorator = new PictureDecorator(context);
         cardWidth = pictureDecorator.getCardBackImage().getWidth();
         cardHeight = pictureDecorator.getCardBackImage().getHeight();
@@ -70,9 +69,9 @@ public abstract class BasePainter {
         cardBackHeight = pictureDecorator.getCardBackSmallImage().getHeight();
         textDecorator = new TextDecorator(context);
     }
-    
+
     protected Context getContext() {
-    	return context;
+        return context;
     }
 
     /**
@@ -93,10 +92,10 @@ public abstract class BasePainter {
      * @param y position.
      */
     protected void drawDeskImage(final Canvas canvas, final int x, final int y) {
-    	Bitmap b = pictureDecorator.getCardBackSmallImage();
-    	canvas.drawBitmap(b, x, y, new Paint());
+        Bitmap b = pictureDecorator.getCardBackSmallImage();
+        canvas.drawBitmap(b, x, y, new Paint());
     }
-    
+
     /**
      * Draws desk image.
      * @param g Graphics object.
@@ -104,15 +103,15 @@ public abstract class BasePainter {
      * @param y position.
      */
     protected void drawDeskImageLarge(final Canvas canvas, final int x, final int y) {
-    	Bitmap b = pictureDecorator.getCardBackImage();
-    	canvas.drawBitmap(b, x, y, new Paint());
+        Bitmap b = pictureDecorator.getCardBackImage();
+        canvas.drawBitmap(b, x, y, new Paint());
     }
-    
+
     protected void drawRotatedDeskImage(final Canvas canvas, final int x, final int y) {
-    	Bitmap b = pictureDecorator.getCardBackSmallImage();
-    	canvas.save();
-    	canvas.rotate(90);
-    	canvas.drawBitmap(b, y, -x, new Paint());
-    	canvas.restore();
+        Bitmap b = pictureDecorator.getCardBackSmallImage();
+        canvas.save();
+        canvas.rotate(90);
+        canvas.drawBitmap(b, y, -x, new Paint());
+        canvas.restore();
     }
 }

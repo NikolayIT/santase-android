@@ -16,14 +16,14 @@ public class MessageData {
      * Text.
      */
     private final String text;
-    
+
     /**
      * Constructor.
      * @param image of the data.
      * @param text of the data.
      */
     public MessageData(final String text) {
-    	this(null, text);
+        this(null, text);
     }
 
     /**
@@ -35,12 +35,12 @@ public class MessageData {
         this.image = image;
         this.text = text;
     }
-    
+
     public Bitmap getImage() {
-    	return image;
+        return image;
     }
-    
+
     public String getMessage() {
-    	return text;
+        return text;
     }
 }

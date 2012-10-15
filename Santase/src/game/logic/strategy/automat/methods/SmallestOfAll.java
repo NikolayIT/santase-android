@@ -12,29 +12,28 @@ import game.beans.pack.card.Card;
 import game.logic.strategy.automat.methods.base.BaseMethod;
 
 /**
- * SmallestOfAll class. PlayCardMethod which implements the logic of playing a
- * the smallest of all card.
+ * SmallestOfAll class. PlayCardMethod which implements the logic of playing a the smallest of all card.
  * 
  * @author Dimitar Karamanov
  */
 public final class SmallestOfAll extends BaseMethod {
-	/**
-	 * Constructor.
-	 * 
-	 * @param game SantaseGame instance.
-	 */
-	public SmallestOfAll(final Game game) {
-		super(game);
-	}
+    /**
+     * Constructor.
+     * 
+     * @param game SantaseGame instance.
+     */
+    public SmallestOfAll(final Game game) {
+        super(game);
+    }
 
-	/**
-	 * Returns player's card.
-	 * 
-	 * @param player AI player.
-	 * @param opposite player.
-	 * @return Card object instance or null.
-	 */
-	protected Card getPlayMethodCard(final Player player) {
-		return player.getCards().findMinAllCard();
-	}
+    /**
+     * Returns player's card.
+     * 
+     * @param player AI player.
+     * @param opposite player.
+     * @return Card object instance or null.
+     */
+    protected Card getPlayMethodCard(final Player player) {
+        return player.getCards().findMinAllCard();
+    }
 }

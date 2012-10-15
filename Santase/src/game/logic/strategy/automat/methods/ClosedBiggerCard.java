@@ -12,35 +12,34 @@ import game.beans.pack.card.Card;
 import game.logic.strategy.automat.methods.base.BaseMethod;
 
 /**
- * ClosedBiggerCard class. PlayCardMethod which implements the logic of playing
- * a obligatory bigger card in a closed game.
+ * ClosedBiggerCard class. PlayCardMethod which implements the logic of playing a obligatory bigger card in a closed game.
  * 
  * @author Dimitar Karamanov
  */
 public final class ClosedBiggerCard extends BaseMethod {
-	/**
-	 * Constructor.
-	 * 
-	 * @param game SantaseGame instance.
-	 */
-	public ClosedBiggerCard(final Game game) {
-		super(game);
-	}
+    /**
+     * Constructor.
+     * 
+     * @param game SantaseGame instance.
+     */
+    public ClosedBiggerCard(final Game game) {
+        super(game);
+    }
 
-	/**
-	 * Returns player's card.
-	 * 
-	 * @param player AI player.
-	 * @param opposite player.
-	 * @return Card object instance or null.
-	 */
-	protected Card getPlayMethodCard(final Player player) {
-		if (getRival(player).getPlayedCard() != null) {
-			final Card result = player.getCards().findMaxSuitCard(getRival(player).getPlayedCard().getSuit());
-			if (result != null && result.getRank().compareTo(getRival(player).getPlayedCard().getRank()) > 0) {
-				return result;
-			}
-		}
-		return null;
-	}
+    /**
+     * Returns player's card.
+     * 
+     * @param player AI player.
+     * @param opposite player.
+     * @return Card object instance or null.
+     */
+    protected Card getPlayMethodCard(final Player player) {
+        if (getRival(player).getPlayedCard() != null) {
+            final Card result = player.getCards().findMaxSuitCard(getRival(player).getPlayedCard().getSuit());
+            if (result != null && result.getRank().compareTo(getRival(player).getPlayedCard().getRank()) > 0) {
+                return result;
+            }
+        }
+        return null;
+    }
 }

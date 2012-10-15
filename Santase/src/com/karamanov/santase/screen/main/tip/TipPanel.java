@@ -9,7 +9,6 @@
  */
 package com.karamanov.santase.screen.main.tip;
 
-
 import game.beans.Player;
 
 import java.util.ArrayList;
@@ -40,7 +39,7 @@ public class TipPanel extends TableLayout {
      */
     public TipPanel(Context context, Player player, ArrayList<MessageData> messages) {
         super(context);
-        
+
         TableRow row = new TableRow(context);
         TableRow.LayoutParams trp = new TableRow.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
         trp.span = 2;
@@ -53,12 +52,12 @@ public class TipPanel extends TableLayout {
         row.setBackgroundResource(R.drawable.message_title);
         tv.setLayoutParams(trp);
         addView(row);
-        
+
         for (MessageData data : messages) {
-        	addMessage(data.getImage(), data.getMessage());
+            addMessage(data.getImage(), data.getMessage());
         }
     }
-    
+
     /**
      * Clears messages.
      */
@@ -72,34 +71,34 @@ public class TipPanel extends TableLayout {
      * @param text of message.
      */
     private void addMessage(final Bitmap image, final String text) {
-    	int dip3 = Santase.fromPixelToDip(getContext(), 3);
-    	TableRow row = new TableRow(getContext());
-    	
-    	TextView message = new TextView(getContext());
-    	message.setText(text);
-    	message.setTextColor(Color.DKGRAY);
-    	message.setTypeface(Typeface.DEFAULT_BOLD);
+        int dip3 = Santase.fromPixelToDip(getContext(), 3);
+        TableRow row = new TableRow(getContext());
 
-    	if (image != null) {
-        	TableRow.LayoutParams trp = new TableRow.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-    		trp.rightMargin = dip3;
-    		trp.gravity = Gravity.CENTER_VERTICAL;
-    		message.setLayoutParams(trp);
-    	}
-    	
-    	row.addView(message);
-    	row.setPadding(dip3, dip3, dip3, dip3);
-    	addView(row);
-    	
-    	if (image == null) {
-    		row.addView(new TextView(getContext()));
-    	} else {
-    		ImageView imageView = new ImageView(getContext());
-    		imageView.setImageBitmap(image);
-    		TableRow.LayoutParams trp = new TableRow.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-    		trp.rightMargin = dip3;
-    		imageView.setLayoutParams(trp);
-    		row.addView(imageView);
-    	}
+        TextView message = new TextView(getContext());
+        message.setText(text);
+        message.setTextColor(Color.DKGRAY);
+        message.setTypeface(Typeface.DEFAULT_BOLD);
+
+        if (image != null) {
+            TableRow.LayoutParams trp = new TableRow.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+            trp.rightMargin = dip3;
+            trp.gravity = Gravity.CENTER_VERTICAL;
+            message.setLayoutParams(trp);
+        }
+
+        row.addView(message);
+        row.setPadding(dip3, dip3, dip3, dip3);
+        addView(row);
+
+        if (image == null) {
+            row.addView(new TextView(getContext()));
+        } else {
+            ImageView imageView = new ImageView(getContext());
+            imageView.setImageBitmap(image);
+            TableRow.LayoutParams trp = new TableRow.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+            trp.rightMargin = dip3;
+            imageView.setLayoutParams(trp);
+            row.addView(imageView);
+        }
     }
 }

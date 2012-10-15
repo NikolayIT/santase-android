@@ -17,13 +17,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public final class Suit implements Serializable {
-	
+
     /**
 	 * 
 	 */
-	private static final long serialVersionUID = 5752919335092570107L;
+    private static final long serialVersionUID = 5752919335092570107L;
 
-	/**
+    /**
      * Suit's constants.
      */
     private final static int CLUB = 0;
@@ -47,13 +47,13 @@ public final class Suit implements Serializable {
 
     private final static ArrayList<Suit> suitList = new ArrayList<Suit>();
 
-    static{
+    static {
         suitList.add(Club);
         suitList.add(Diamond);
         suitList.add(Heart);
         suitList.add(Spade);
     }
-    
+
     /**
      * Internal suit constant.
      */
@@ -95,7 +95,7 @@ public final class Suit implements Serializable {
 
     /**
      * The method checks if this Suit and specified object (Suit) are equal.
-     *
+     * 
      * @param obj specified object.
      * @return boolean true if this Suit is equal to specified object and false otherwise.
      */
@@ -109,7 +109,7 @@ public final class Suit implements Serializable {
 
     /**
      * Returns suit iterator.
-     *
+     * 
      * @return SuitIterator iterator.
      */
     public static SuitIterator iterator() {
@@ -117,11 +117,10 @@ public final class Suit implements Serializable {
     }
 
     /**
-     * SuitIteratorImpl class.
-     * Implements SuitIterator interface.
+     * SuitIteratorImpl class. Implements SuitIterator interface.
      */
     private static class SuitIteratorImpl implements SuitIterator {
-    	
+
         /**
          * The internal collection enumerator.
          */
@@ -129,7 +128,7 @@ public final class Suit implements Serializable {
 
         /**
          * Constructor.
-         *
+         * 
          * @param enumerator the internal collection enumerator.
          */
         private SuitIteratorImpl(final Iterator<Suit> enumeration) {

@@ -46,178 +46,178 @@ import android.view.View;
  */
 public class LogoActivity extends Activity {
 
-	private boolean send = false;
+    private boolean send = false;
 
-	/**
-	 * Constructor.
-	 * 
-	 * @param canvas parent container game canvas
-	 * @param rootComponent original root component
-	 */
-	public LogoActivity() {
-	}
+    /**
+     * Constructor.
+     * 
+     * @param canvas parent container game canvas
+     * @param rootComponent original root component
+     */
+    public LogoActivity() {
+    }
 
-	/** Called when the activity is first created. */
-	@Override
-	public void onCreate(Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
+    /** Called when the activity is first created. */
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
 
-		LogoView view = new LogoView(this);
+        LogoView view = new LogoView(this);
 
-		setContentView(view);
-	}
+        setContentView(view);
+    }
 
-	public boolean onKeyDown(int keyCode, KeyEvent event) {
-		startSantaseActivity();
-		return true;
-	}
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        startSantaseActivity();
+        return true;
+    }
 
-	public boolean onTouchEvent(MotionEvent event) {
-		startSantaseActivity();
-		return true;
-	}
-	
-	private void startSantaseActivity() {
-		if (!send) {
-			send = true;
-			if (!Santase.loadGame(this)) {
-				Santase.getGame().newGame();
-			}
-			Intent i = new Intent(this, SantaseActivity.class);
-			startActivity(i);
-		}
-		finish();
-	}
+    public boolean onTouchEvent(MotionEvent event) {
+        startSantaseActivity();
+        return true;
+    }
+
+    private void startSantaseActivity() {
+        if (!send) {
+            send = true;
+            if (!Santase.loadGame(this)) {
+                Santase.getGame().newGame();
+            }
+            Intent i = new Intent(this, SantaseActivity.class);
+            startActivity(i);
+        }
+        finish();
+    }
 }
 
 class LogoView extends View {
-	/**
-	 * Desk image.
-	 */
-	private final Bitmap desk;
+    /**
+     * Desk image.
+     */
+    private final Bitmap desk;
 
-	/**
-	 * Card widrh.
-	 */
-	private final int CardWidth;
+    /**
+     * Card widrh.
+     */
+    private final int CardWidth;
 
-	/**
-	 * Card height.
-	 */
-	private final int CardHeight;
+    /**
+     * Card height.
+     */
+    private final int CardHeight;
 
-	public LogoView(Context context) {
-		super(context);
+    public LogoView(Context context) {
+        super(context);
 
-		Drawable d = getResources().getDrawable(R.drawable.card_back);
-		desk = ((BitmapDrawable) d).getBitmap();
+        Drawable d = getResources().getDrawable(R.drawable.card_back);
+        desk = ((BitmapDrawable) d).getBitmap();
 
-		CardWidth = desk.getWidth();
-		CardHeight = desk.getHeight();
-	}
+        CardWidth = desk.getWidth();
+        CardHeight = desk.getHeight();
+    }
 
-	@Override
-	protected void onDraw(Canvas canvas) {
-		drawBufferedImage(canvas);
-	}
+    @Override
+    protected void onDraw(Canvas canvas) {
+        drawBufferedImage(canvas);
+    }
 
-	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-		super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-		setMeasuredDimension(getDefaultSize(0, widthMeasureSpec), getDefaultSize(0, heightMeasureSpec));
-	}
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        setMeasuredDimension(getDefaultSize(0, widthMeasureSpec), getDefaultSize(0, heightMeasureSpec));
+    }
 
-	private void drawBackground(Canvas canvas) {
-		Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-		paint.setStyle(Style.FILL);
+    private void drawBackground(Canvas canvas) {
+        Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        paint.setStyle(Style.FILL);
 
-		GradientDrawable gradientDrawable = (GradientDrawable) getResources().getDrawable(R.drawable.score_bkg);
-		gradientDrawable.setBounds(0, 0, getWidth(), getHeight());
-		gradientDrawable.draw(canvas);
-	}
+        GradientDrawable gradientDrawable = (GradientDrawable) getResources().getDrawable(R.drawable.score_bkg);
+        gradientDrawable.setBounds(0, 0, getWidth(), getHeight());
+        gradientDrawable.draw(canvas);
+    }
 
-	private void drawPack(Canvas canvas) {
-		final Pack pack = Pack.createFullPack();
-		pack.arrange();
+    private void drawPack(Canvas canvas) {
+        final Pack pack = Pack.createFullPack();
+        pack.arrange();
 
-		int visiblePart = (getWidth() - 2 - CardWidth) / (pack.getSize() - 1);
-		int x = (getWidth() - 2 - (pack.getSize() - 1) * visiblePart - CardWidth) / 2;
-		int y = (getHeight() - CardHeight) / 2;
+        int visiblePart = (getWidth() - 2 - CardWidth) / (pack.getSize() - 1);
+        int x = (getWidth() - 2 - (pack.getSize() - 1) * visiblePart - CardWidth) / 2;
+        int y = (getHeight() - CardHeight) / 2;
 
-		SantasePainter bp = new SantasePainter(getContext());
-		// draw all cards
-		for (int i = 0; i < pack.getSize(); i++) {
-			final Card card = pack.getCard(i);
-			bp.drawCard(card, canvas, x + i * visiblePart + 1, y);
-		}
-	}
+        SantasePainter bp = new SantasePainter(getContext());
+        // draw all cards
+        for (int i = 0; i < pack.getSize(); i++) {
+            final Card card = pack.getCard(i);
+            bp.drawCard(card, canvas, x + i * visiblePart + 1, y);
+        }
+    }
 
-	private void drawAutor(Canvas canvas) {
-		int dip14 = Santase.fromPixelToDip(getContext(), 14);
-		Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-		paint.setStyle(Style.FILL);
-		paint.setColor(Color.rgb(253, 241, 213));
-		paint.setTextSize(dip14);
-		paint.setAntiAlias(true);
-		paint.setTypeface(Typeface.SERIF);
-		Rect bounds = new Rect();
-		String autor = getResources().getString(R.string.Autor);
-		paint.getTextBounds(autor, 0, autor.length(), bounds);
+    private void drawAutor(Canvas canvas) {
+        int dip14 = Santase.fromPixelToDip(getContext(), 14);
+        Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        paint.setStyle(Style.FILL);
+        paint.setColor(Color.rgb(253, 241, 213));
+        paint.setTextSize(dip14);
+        paint.setAntiAlias(true);
+        paint.setTypeface(Typeface.SERIF);
+        Rect bounds = new Rect();
+        String autor = getResources().getString(R.string.Autor);
+        paint.getTextBounds(autor, 0, autor.length(), bounds);
 
-		int x = (getWidth() - bounds.width()) / 2;
-		int y = 2 * getHeight() / 3 + (getHeight() / 3 - bounds.height() * 2 - bounds.height()) / 2;
-		canvas.drawText(autor, x, y, paint);
-		y += bounds.bottom;
+        int x = (getWidth() - bounds.width()) / 2;
+        int y = 2 * getHeight() / 3 + (getHeight() / 3 - bounds.height() * 2 - bounds.height()) / 2;
+        canvas.drawText(autor, x, y, paint);
+        y += bounds.bottom;
 
-		//draw email;
-		bounds = new Rect();
-		String email = getResources().getString(R.string.Email);
-		paint.getTextBounds(email, 0, email.length(), bounds);
-		x = (getWidth() - bounds.width()) / 2;
-		y += bounds.height();
-		canvas.drawText(email, x, y, paint);
-		y += bounds.bottom;
-		// draw Copyright
-		bounds = new Rect();
-		String copyRight = getResources().getString(R.string.Copyright);
-		paint.getTextBounds(copyRight, 0, copyRight.length(), bounds);
-		x = (getWidth() - bounds.width()) / 2;
-		y += bounds.height();
-		canvas.drawText(copyRight, x, y, paint);
-		y += bounds.bottom;
-		// draw Version
-		bounds = new Rect();
+        // draw email;
+        bounds = new Rect();
+        String email = getResources().getString(R.string.Email);
+        paint.getTextBounds(email, 0, email.length(), bounds);
+        x = (getWidth() - bounds.width()) / 2;
+        y += bounds.height();
+        canvas.drawText(email, x, y, paint);
+        y += bounds.bottom;
+        // draw Copyright
+        bounds = new Rect();
+        String copyRight = getResources().getString(R.string.Copyright);
+        paint.getTextBounds(copyRight, 0, copyRight.length(), bounds);
+        x = (getWidth() - bounds.width()) / 2;
+        y += bounds.height();
+        canvas.drawText(copyRight, x, y, paint);
+        y += bounds.bottom;
+        // draw Version
+        bounds = new Rect();
 
-		String systemVersion;
-		try {
-			systemVersion = getContext().getPackageManager().getPackageInfo(getContext().getPackageName(), 0).versionName;
-		} catch (NameNotFoundException e) {
-			systemVersion = getResources().getString(R.string.NotAvailableShort);
-		}
-		String version = getResources().getString(R.string.Version) + " " + systemVersion;
+        String systemVersion;
+        try {
+            systemVersion = getContext().getPackageManager().getPackageInfo(getContext().getPackageName(), 0).versionName;
+        } catch (NameNotFoundException e) {
+            systemVersion = getResources().getString(R.string.NotAvailableShort);
+        }
+        String version = getResources().getString(R.string.Version) + " " + systemVersion;
 
-		paint.getTextBounds(version, 0, version.length(), bounds);
-		x = (getWidth() - bounds.width()) / 2;
-		y += bounds.height();
-		canvas.drawText(version, x, y, paint);
-	}
+        paint.getTextBounds(version, 0, version.length(), bounds);
+        x = (getWidth() - bounds.width()) / 2;
+        y += bounds.height();
+        canvas.drawText(version, x, y, paint);
+    }
 
-	private void drawSuitsCorners(Canvas canvas) {
-		SantasePainter bp = new SantasePainter(getContext());
-		Paint paint = new Paint();
+    private void drawSuitsCorners(Canvas canvas) {
+        SantasePainter bp = new SantasePainter(getContext());
+        Paint paint = new Paint();
 
-		int dip5 = Santase.fromPixelToDip(getContext(), 5);
+        int dip5 = Santase.fromPixelToDip(getContext(), 5);
 
-		Bitmap b = bp.getSuitImage(Suit.Spade);
-		canvas.drawBitmap(b, dip5, dip5, paint);
-		b = bp.getSuitImage(Suit.Heart);
-		canvas.drawBitmap(b, getWidth() - dip5 - b.getWidth(), dip5, paint);
-		b = bp.getSuitImage(Suit.Diamond);
-		canvas.drawBitmap(b, dip5, getHeight() - dip5 - b.getHeight(), paint);
-		b = bp.getSuitImage(Suit.Club);
-		canvas.drawBitmap(b, getWidth() - dip5 - b.getWidth(), getHeight() - dip5 - b.getHeight(), paint);
-	}
-	
-	private static float _getAdvance(Paint paint, String text) {
+        Bitmap b = bp.getSuitImage(Suit.Spade);
+        canvas.drawBitmap(b, dip5, dip5, paint);
+        b = bp.getSuitImage(Suit.Heart);
+        canvas.drawBitmap(b, getWidth() - dip5 - b.getWidth(), dip5, paint);
+        b = bp.getSuitImage(Suit.Diamond);
+        canvas.drawBitmap(b, dip5, getHeight() - dip5 - b.getHeight(), paint);
+        b = bp.getSuitImage(Suit.Club);
+        canvas.drawBitmap(b, getWidth() - dip5 - b.getWidth(), getHeight() - dip5 - b.getHeight(), paint);
+    }
+
+    private static float _getAdvance(Paint paint, String text) {
         float result = 0;
         float[] widths = new float[text.length()];
         paint.getTextWidths(text, widths);
@@ -229,54 +229,54 @@ class LogoView extends View {
         return result;
     }
 
-	private void drawSantaseText(Canvas canvas) {
-		int dip5 = Santase.fromPixelToDip(getContext(), 5);
-		int dip64 = Santase.fromPixelToDip(getContext(), 64);
-		Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
-		paint.setColor(Color.WHITE);
-		paint.setTextSize(dip64);
-		paint.setAntiAlias(true);
-		paint.setFakeBoldText(true);
-		paint.setTypeface(Typeface.SERIF);
-		paint.setTextAlign(Paint.Align.LEFT);
+    private void drawSantaseText(Canvas canvas) {
+        int dip5 = Santase.fromPixelToDip(getContext(), 5);
+        int dip64 = Santase.fromPixelToDip(getContext(), 64);
+        Paint paint = new Paint(Paint.ANTI_ALIAS_FLAG);
+        paint.setColor(Color.WHITE);
+        paint.setTextSize(dip64);
+        paint.setAntiAlias(true);
+        paint.setFakeBoldText(true);
+        paint.setTypeface(Typeface.SERIF);
+        paint.setTextAlign(Paint.Align.LEFT);
 
-		Rect rect = new Rect();
-		String santase = getContext().getString(R.string.santase);
-		paint.getTextBounds(santase, 0, santase.length(), rect);
-		
-		int santaseWidth = Math.round(_getAdvance(paint, santase));
+        Rect rect = new Rect();
+        String santase = getContext().getString(R.string.santase);
+        paint.getTextBounds(santase, 0, santase.length(), rect);
 
-		Bitmap gradientBitmap = Bitmap.createBitmap(santaseWidth, rect.height(), Bitmap.Config.ARGB_8888);
-		Canvas gradientCanvas = new Canvas(gradientBitmap);
-		int colors[] = { Color.YELLOW, Color.RED };
-		GradientDrawable gradientDrawable = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, colors);
-		gradientDrawable.setBounds(0, 0, santaseWidth, rect.height());
-		gradientDrawable.draw(gradientCanvas);
+        int santaseWidth = Math.round(_getAdvance(paint, santase));
 
-		Bitmap textBitmap = Bitmap.createBitmap(santaseWidth, rect.height(), Bitmap.Config.ARGB_8888);
-		Canvas textCanvas = new Canvas(textBitmap);
-		textCanvas.drawText(santase, 0, rect.height() - rect.bottom, paint);
+        Bitmap gradientBitmap = Bitmap.createBitmap(santaseWidth, rect.height(), Bitmap.Config.ARGB_8888);
+        Canvas gradientCanvas = new Canvas(gradientBitmap);
+        int colors[] = { Color.YELLOW, Color.RED };
+        GradientDrawable gradientDrawable = new GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, colors);
+        gradientDrawable.setBounds(0, 0, santaseWidth, rect.height());
+        gradientDrawable.draw(gradientCanvas);
 
-		Bitmap bitmapXfermode = Bitmap.createBitmap(santaseWidth, rect.height(), Bitmap.Config.ARGB_8888);
-		Canvas canvasXfermode = new Canvas(bitmapXfermode);
+        Bitmap textBitmap = Bitmap.createBitmap(santaseWidth, rect.height(), Bitmap.Config.ARGB_8888);
+        Canvas textCanvas = new Canvas(textBitmap);
+        textCanvas.drawText(santase, 0, rect.height() - rect.bottom, paint);
 
-		canvasXfermode.drawBitmap(gradientBitmap, 0, 0, paint);
-		Paint paintXfermode = new Paint(Paint.ANTI_ALIAS_FLAG);
-		paintXfermode.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.MULTIPLY));
-		canvasXfermode.drawBitmap(textBitmap, 0, 0, paintXfermode);
+        Bitmap bitmapXfermode = Bitmap.createBitmap(santaseWidth, rect.height(), Bitmap.Config.ARGB_8888);
+        Canvas canvasXfermode = new Canvas(bitmapXfermode);
 
-		paint.setColor(Color.BLACK);
-		int pictureTop = ((getHeight() - CardHeight) / 2 - bitmapXfermode.getHeight()) / 2;
-		int pictureLeft = (getWidth() - bitmapXfermode.getWidth()) / 2;
-		canvas.drawText(santase, pictureLeft + dip5, pictureTop + dip5 + rect.height() - rect.bottom, paint);
-		canvas.drawBitmap(bitmapXfermode, pictureLeft, pictureTop, paint);
-	}
+        canvasXfermode.drawBitmap(gradientBitmap, 0, 0, paint);
+        Paint paintXfermode = new Paint(Paint.ANTI_ALIAS_FLAG);
+        paintXfermode.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.MULTIPLY));
+        canvasXfermode.drawBitmap(textBitmap, 0, 0, paintXfermode);
 
-	private void drawBufferedImage(Canvas canvas) {
-		drawBackground(canvas);
-		drawPack(canvas);
-		drawAutor(canvas);
-		drawSuitsCorners(canvas);
-		drawSantaseText(canvas);
-	}
+        paint.setColor(Color.BLACK);
+        int pictureTop = ((getHeight() - CardHeight) / 2 - bitmapXfermode.getHeight()) / 2;
+        int pictureLeft = (getWidth() - bitmapXfermode.getWidth()) / 2;
+        canvas.drawText(santase, pictureLeft + dip5, pictureTop + dip5 + rect.height() - rect.bottom, paint);
+        canvas.drawBitmap(bitmapXfermode, pictureLeft, pictureTop, paint);
+    }
+
+    private void drawBufferedImage(Canvas canvas) {
+        drawBackground(canvas);
+        drawPack(canvas);
+        drawAutor(canvas);
+        drawSuitsCorners(canvas);
+        drawSantaseText(canvas);
+    }
 }

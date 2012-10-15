@@ -14,43 +14,42 @@ import game.beans.pack.card.Card;
 import game.logic.strategy.automat.methods.base.BaseMethod;
 
 /**
- * OrdinarySingleLoose class. PlayCardMethod which implements the logic of
- * playing a ordinary single loose card.
+ * OrdinarySingleLoose class. PlayCardMethod which implements the logic of playing a ordinary single loose card.
  * 
  * @author Dimitar Karamanov
  */
 public final class OrdinarySingleLoose extends BaseMethod {
-	/**
-	 * Constructor.
-	 * 
-	 * @param game SantaseGame instance.
-	 */
-	public OrdinarySingleLoose(final Game game) {
-		super(game);
-	}
+    /**
+     * Constructor.
+     * 
+     * @param game SantaseGame instance.
+     */
+    public OrdinarySingleLoose(final Game game) {
+        super(game);
+    }
 
-	/**
-	 * Returns player's card.
-	 * 
-	 * @param player AI player.
-	 * @param opposite player.
-	 * @return Card object instance or null.
-	 */
-	protected Card getPlayMethodCard(final Player player) {
-		Card result = null;
-		for (PackIterator iterator = player.getCards().iterator(); iterator.hasNext();) {
-			final Card card = iterator.next();
-			final Pack pack = possibleEnemyCards(player, true);
+    /**
+     * Returns player's card.
+     * 
+     * @param player AI player.
+     * @param opposite player.
+     * @return Card object instance or null.
+     */
+    protected Card getPlayMethodCard(final Player player) {
+        Card result = null;
+        for (PackIterator iterator = player.getCards().iterator(); iterator.hasNext();) {
+            final Card card = iterator.next();
+            final Pack pack = possibleEnemyCards(player, true);
 
-			final Card bestSuitCard = pack.findMaxSuitCard(card.getSuit());
-			final boolean isSingleCard = player.getCards().getSuitCount(card.getSuit()) == 1;
+            final Card bestSuitCard = pack.findMaxSuitCard(card.getSuit());
+            final boolean isSingleCard = player.getCards().getSuitCount(card.getSuit()) == 1;
 
-			if (isSingleCard && bestSuitCard != null && bestSuitCard.getRank().compareTo(card.getRank()) > 0) {
-				if (result == null || result.getRank().compareTo(card.getRank()) > 0) {
-					result = card;
-				}
-			}
-		}
-		return canPlayWithoutLoose(getRival(player), result) ? result : null;
-	}
+            if (isSingleCard && bestSuitCard != null && bestSuitCard.getRank().compareTo(card.getRank()) > 0) {
+                if (result == null || result.getRank().compareTo(card.getRank()) > 0) {
+                    result = card;
+                }
+            }
+        }
+        return canPlayWithoutLoose(getRival(player), result) ? result : null;
+    }
 }

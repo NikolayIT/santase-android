@@ -14,17 +14,17 @@ import game.beans.pack.card.suit.Suit;
 
 /**
  * GamePlayer class.
- *
+ * 
  * @author Dimitar Karamanov
  */
 public final class Player implements Serializable {
-	
+
     /**
 	 * 
 	 */
-	private static final long serialVersionUID = -617238319488864541L;
+    private static final long serialVersionUID = -617238319488864541L;
 
-	/**
+    /**
      * Player's cards
      */
     private final Pack cards = new Pack();
@@ -78,7 +78,7 @@ public final class Player implements Serializable {
      * Player's copy played card
      */
     private Card copyPlayedCard;
-    
+
     private Card selectedCard;
 
     /**
@@ -88,7 +88,7 @@ public final class Player implements Serializable {
 
     /**
      * Initialization of new game
-     *
+     * 
      * @param gameCards pack
      */
     public void newGame(final Pack gameCards) {
@@ -124,7 +124,7 @@ public final class Player implements Serializable {
 
     /**
      * Returns player points.
-     *
+     * 
      * @param trumpSuit trump suit
      * @return players points
      */
@@ -141,7 +141,7 @@ public final class Player implements Serializable {
 
     /**
      * Return true if the player has a couple of a provided suit false otherwise.
-     *
+     * 
      * @param suit which will be cheked for a couple
      * @return boolean true or false
      */
@@ -169,42 +169,42 @@ public final class Player implements Serializable {
         setBigGames(rep);
     }
 
-	public Pack getCards() {
-		return cards;
-	}
+    public Pack getCards() {
+        return cards;
+    }
 
-	public Pack getHands() {
-		return hands;
-	}
+    public Pack getHands() {
+        return hands;
+    }
 
-	public Couples getCouples() {
-		return couples;
-	}
+    public Couples getCouples() {
+        return couples;
+    }
 
-	public int getLittleGames() {
-		return littleGames;
-	}
+    public int getLittleGames() {
+        return littleGames;
+    }
 
-	public void setLittleGames(int littleGames) {
-		this.littleGames = littleGames;
-	}
+    public void setLittleGames(int littleGames) {
+        this.littleGames = littleGames;
+    }
 
-	public int getBigGames() {
-		return bigGames;
-	}
+    public int getBigGames() {
+        return bigGames;
+    }
 
-	public void setBigGames(int bigGames) {
-		this.bigGames = bigGames;
-	}
+    public void setBigGames(int bigGames) {
+        this.bigGames = bigGames;
+    }
 
-	public Card getPlayedCard() {
-		return playedCard;
-	}
+    public Card getPlayedCard() {
+        return playedCard;
+    }
 
-	public void setPlayedCard(Card playedCard) {
-		this.playedCard = playedCard;
-	}
-	
+    public void setPlayedCard(Card playedCard) {
+        this.playedCard = playedCard;
+    }
+
     /**
      * @return the humanSelectedCard
      */

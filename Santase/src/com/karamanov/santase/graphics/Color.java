@@ -195,7 +195,7 @@ public final class Color {
         }
         return 0xFF;
     }
-    
+
     /**
      * Returns RGB color by provided red, green and blue values.
      * @param red of the RGB

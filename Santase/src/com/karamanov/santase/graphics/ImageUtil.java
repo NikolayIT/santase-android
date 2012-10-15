@@ -75,6 +75,3 @@ public final class ImageUtil {
         return new MixedColorImageTransformer(mixedColor).transformImage(image, rec);
     }
 }
-
-
-

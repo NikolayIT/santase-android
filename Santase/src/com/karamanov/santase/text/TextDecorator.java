@@ -23,10 +23,10 @@ import com.karamanov.santase.R;
  * @author Dimitar Karamanov
  */
 public final class TextDecorator {
-	
-	private static final String COUPLE = "COUPLE";
-	
-	private static final String SUIT = "SUIT";
+
+    private static final String COUPLE = "COUPLE";
+
+    private static final String SUIT = "SUIT";
 
     /**
      * Rank signs container.
@@ -37,21 +37,21 @@ public final class TextDecorator {
      * Rank signs container.
      */
     private final Hashtable<Rank, String> ranks = new Hashtable<Rank, String>();
-    
+
     /**
      * Suit signs container.
      */
     private final Hashtable<Suit, String> suits = new Hashtable<Suit, String>();
-    
+
     private final Context context;
 
     /**
      * Constructor.
      */
     public TextDecorator(Context context) {
-    	this.context = context;
-    	
-        //Rank signs initialization
+        this.context = context;
+
+        // Rank signs initialization
         rankSigns.put(Rank.Ace, context.getString(R.string.AceSign));
         rankSigns.put(Rank.King, context.getString(R.string.KingSign));
         rankSigns.put(Rank.Queen, context.getString(R.string.QueenSign));
@@ -59,15 +59,15 @@ public final class TextDecorator {
         rankSigns.put(Rank.Ten, context.getString(R.string.TenSign));
         rankSigns.put(Rank.Nine, context.getString(R.string.NineSign));
 
-        //Rank signs initialization
+        // Rank signs initialization
         ranks.put(Rank.Ace, context.getString(R.string.Ace));
         ranks.put(Rank.King, context.getString(R.string.King));
         ranks.put(Rank.Queen, context.getString(R.string.Queen));
         ranks.put(Rank.Jack, context.getString(R.string.Jack));
         ranks.put(Rank.Ten, context.getString(R.string.Ten));
         ranks.put(Rank.Nine, context.getString(R.string.Nine));
-        
-        //Suits
+
+        // Suits
         suits.put(Suit.Club, context.getString(R.string.Clubs));
         suits.put(Suit.Diamond, context.getString(R.string.Diamonds));
         suits.put(Suit.Heart, context.getString(R.string.Hearts));
@@ -91,7 +91,7 @@ public final class TextDecorator {
     public String getRank(final Rank rank) {
         return getHasTableKeyString(ranks, rank);
     }
-    
+
     /**
      * Returns rank sign text.
      * @param rank Rank instance.
@@ -113,7 +113,7 @@ public final class TextDecorator {
         }
         return "";
     }
-    
+
     /**
      * Returns associated key object value text presentation.
      * @param hash container.
@@ -126,19 +126,19 @@ public final class TextDecorator {
         }
         return "";
     }
-    
+
     public String translateCouple(Suit suit, Suit trump, String message) {
-		String couple;
-		if (suit.equals(trump)) {
-			couple = context.getString(R.string.CoupleForty);
-		} else {
-			couple = context.getString(R.string.CoupleTwenty);
-		}
-		
-		return message.replace(COUPLE, couple);
-	}
-    
+        String couple;
+        if (suit.equals(trump)) {
+            couple = context.getString(R.string.CoupleForty);
+        } else {
+            couple = context.getString(R.string.CoupleTwenty);
+        }
+
+        return message.replace(COUPLE, couple);
+    }
+
     public String replaceSuit(Suit suit, String message) {
-    	return message.replace(SUIT, getSuit(suit));
+        return message.replace(SUIT, getSuit(suit));
     }
 }
