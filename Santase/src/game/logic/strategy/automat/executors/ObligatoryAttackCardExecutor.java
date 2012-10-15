@@ -23,21 +23,21 @@ import game.logic.strategy.automat.methods.SmallestOfAll;
  * @author Dimitar Karamanov.
  */
 public final class ObligatoryAttackCardExecutor extends PlayAttackCardExecutor {
-	/**
-	 * Constructor.
-	 * 
-	 * @param game a BelotGame instance.
-	 */
-	public ObligatoryAttackCardExecutor(final Game game) {
-		super(game);
-		// Register play card methods.
-		register(new ObligatoryTotalAttack(game));
-		register(new ObligatoryEnemyTotalAttack(game));
-		register(new ObligatoryDefenceAgainstForty(game));
-		register(new CoupleCard(game));
-		register(new ObligatoryDefenceInAttackWithoutLoose(game));
-		register(new ObligatorySingleHand(game));
-		register(new ObligatoryForceToPlayTrump(game));
-		register(new SmallestOfAll(game));
-	}
+    /**
+     * Constructor.
+     * 
+     * @param game a BelotGame instance.
+     */
+    public ObligatoryAttackCardExecutor(final Game game) {
+        super(game);
+        // Register play card methods.
+        register(new ObligatoryTotalAttack(game));
+        register(new ObligatoryEnemyTotalAttack(game));
+        register(new ObligatoryDefenceAgainstForty(game));
+        register(new CoupleCard(game));
+        register(new ObligatoryDefenceInAttackWithoutLoose(game));
+        register(new ObligatorySingleHand(game));
+        register(new ObligatoryForceToPlayTrump(game));
+        register(new SmallestOfAll(game));
+    }
 }

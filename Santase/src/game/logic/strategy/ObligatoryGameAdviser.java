@@ -20,47 +20,47 @@ import game.logic.strategy.validator.ObligatoryGameValidator;
  * @author Dimitar Karamanov
  */
 public final class ObligatoryGameAdviser extends BasicGameAdviser {
-	
-	/**
-	 * ObligatoryAttackCardExecutor helper.
-	 */
-	private final PlayCardMethod obligatoryAttackCardExecutor;
 
-	/**
-	 * ObligatoryDefenceCardExecutor helper.
-	 */
-	private final PlayCardMethod obligatoryDefenceCardExecutor;
+    /**
+     * ObligatoryAttackCardExecutor helper.
+     */
+    private final PlayCardMethod obligatoryAttackCardExecutor;
 
-	/**
-	 * Constructor.
-	 * 
-	 * @param game SantaseGame.
-	 */
-	public ObligatoryGameAdviser(Game game) {
-		super(game, new ObligatoryGameValidator());
-		obligatoryAttackCardExecutor = new ObligatoryAttackCardExecutor(game);
-		obligatoryDefenceCardExecutor = new ObligatoryDefenceCardExecutor(game);
-	}
+    /**
+     * ObligatoryDefenceCardExecutor helper.
+     */
+    private final PlayCardMethod obligatoryDefenceCardExecutor;
 
-	/**
-	 * Returns an attack card.
-	 * 
-	 * @param aiPlayer
-	 * @param stPlayer
-	 * @return
-	 */
-	protected Card getAttackCard(final Player player) {
-		return obligatoryAttackCardExecutor.getPlayerCard(player);
-	}
+    /**
+     * Constructor.
+     * 
+     * @param game SantaseGame.
+     */
+    public ObligatoryGameAdviser(Game game) {
+        super(game, new ObligatoryGameValidator());
+        obligatoryAttackCardExecutor = new ObligatoryAttackCardExecutor(game);
+        obligatoryDefenceCardExecutor = new ObligatoryDefenceCardExecutor(game);
+    }
 
-	/**
-	 * Returns a defense card.
-	 * 
-	 * @param aiPlayer
-	 * @param stPlayer
-	 * @return
-	 */
-	protected Card getDefenseCard(final Player player) {
-		return obligatoryDefenceCardExecutor.getPlayerCard(player);
-	}
+    /**
+     * Returns an attack card.
+     * 
+     * @param aiPlayer
+     * @param stPlayer
+     * @return
+     */
+    protected Card getAttackCard(final Player player) {
+        return obligatoryAttackCardExecutor.getPlayerCard(player);
+    }
+
+    /**
+     * Returns a defense card.
+     * 
+     * @param aiPlayer
+     * @param stPlayer
+     * @return
+     */
+    protected Card getDefenseCard(final Player player) {
+        return obligatoryDefenceCardExecutor.getPlayerCard(player);
+    }
 }

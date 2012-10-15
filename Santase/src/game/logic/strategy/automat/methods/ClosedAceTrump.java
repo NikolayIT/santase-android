@@ -13,29 +13,28 @@ import game.beans.pack.card.rank.Rank;
 import game.logic.strategy.automat.methods.base.BaseMethod;
 
 /**
- * ClosedAceTrump class. PlayCardMethod which implements the logic of playing a
- * Ace trump card.
+ * ClosedAceTrump class. PlayCardMethod which implements the logic of playing a Ace trump card.
  * 
  * @author Dimitar Karamanov
  */
 public final class ClosedAceTrump extends BaseMethod {
-	/**
-	 * Constructor.
-	 * 
-	 * @param game SantaseGame instance.
-	 */
-	public ClosedAceTrump(final Game game) {
-		super(game);
-	}
+    /**
+     * Constructor.
+     * 
+     * @param game SantaseGame instance.
+     */
+    public ClosedAceTrump(final Game game) {
+        super(game);
+    }
 
-	/**
-	 * Returns player's card.
-	 * 
-	 * @param player AI player.
-	 * @param opposite player.
-	 * @return Card object instance or null.
-	 */
-	protected Card getPlayMethodCard(final Player player) {
-		return player.getCards().findCard(Rank.Ace, game.getTrumpSuit());
-	}
+    /**
+     * Returns player's card.
+     * 
+     * @param player AI player.
+     * @param opposite player.
+     * @return Card object instance or null.
+     */
+    protected Card getPlayMethodCard(final Player player) {
+        return player.getCards().findCard(Rank.Ace, game.getTrumpSuit());
+    }
 }

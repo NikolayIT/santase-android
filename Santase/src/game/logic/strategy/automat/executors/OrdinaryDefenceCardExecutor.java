@@ -24,23 +24,23 @@ import game.logic.strategy.automat.methods.SmallestOfAll;
  * @author Dimitar Karamanov
  */
 public final class OrdinaryDefenceCardExecutor extends PlayCardExecutor {
-	
-	/**
-	 * Constructor.
-	 * @param game a BelotGame instance.
-	 */
-	public OrdinaryDefenceCardExecutor(final Game game) {
-		super(game);
-		// Register play card methods.
-		register(new OrdinaryWinDefenceCard(game));
-		register(new OrdinaryMaxTrumpCard(game));
-		register(new OrdinaryWinWithPowerTrumpsHands(game));
-		register(new OrdinaryLeftTwoCard(game));
-		register(new OrdinaryHandCard(game));
-		register(new OrdinaryTenOrAce(game));
-		register(new OrdinaryTrump4Couple(game));
-		register(new OrdinarySmallCard(game));
-		register(new OrdinaryTrumpCard(game));
-		register(new SmallestOfAll(game));
-	}
+
+    /**
+     * Constructor.
+     * @param game a BelotGame instance.
+     */
+    public OrdinaryDefenceCardExecutor(final Game game) {
+        super(game);
+        // Register play card methods.
+        register(new OrdinaryWinDefenceCard(game));
+        register(new OrdinaryMaxTrumpCard(game));
+        register(new OrdinaryWinWithPowerTrumpsHands(game));
+        register(new OrdinaryLeftTwoCard(game));
+        register(new OrdinaryHandCard(game));
+        register(new OrdinaryTenOrAce(game));
+        register(new OrdinaryTrump4Couple(game));
+        register(new OrdinarySmallCard(game));
+        register(new OrdinaryTrumpCard(game));
+        register(new SmallestOfAll(game));
+    }
 }

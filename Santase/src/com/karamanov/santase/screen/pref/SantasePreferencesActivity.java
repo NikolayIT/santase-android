@@ -14,14 +14,13 @@ import android.preference.PreferenceActivity;
 
 public class SantasePreferencesActivity extends PreferenceActivity {
 
-	public SantasePreferencesActivity() {
+    public SantasePreferencesActivity() {
         super();
     }
 
     /**
      * Called when the activity is first created.
-     * @param saveInstanceState - Bundle contains the data it most recently supplied in
-     *            onSaveInstanceState(Bundle).
+     * @param saveInstanceState - Bundle contains the data it most recently supplied in onSaveInstanceState(Bundle).
      */
     @Override
     public void onCreate(Bundle savedInstanceState) {

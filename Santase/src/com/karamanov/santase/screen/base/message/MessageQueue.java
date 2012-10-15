@@ -40,12 +40,12 @@ public final class MessageQueue {
      * @param message new message.
      */
     public final void addMessage(final Message message) {
-    	synchronized (messageList) {
-			if (message != null) {
-				messageList.add(message);
-				messageList.notify();
-			}
-		}
+        synchronized (messageList) {
+            if (message != null) {
+                messageList.add(message);
+                messageList.notify();
+            }
+        }
     }
 
     /**
@@ -53,19 +53,19 @@ public final class MessageQueue {
      * @return Message extracted from queue.
      */
     private Message getMessage() {
-    	synchronized (messageList) {
-			while (messageList.size() == 0) {
-				try {
-					messageList.wait();
-				} catch (Exception e) {
-				}
-			}
-			if (messageList.size() > 0) {
-				final Message message = (Message) messageList.get(0);
-				messageList.remove(message);
-				return message;
-			}
-		}
+        synchronized (messageList) {
+            while (messageList.size() == 0) {
+                try {
+                    messageList.wait();
+                } catch (Exception e) {
+                }
+            }
+            if (messageList.size() > 0) {
+                final Message message = (Message) messageList.get(0);
+                messageList.remove(message);
+                return message;
+            }
+        }
         return null;
     }
 

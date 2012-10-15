@@ -20,46 +20,46 @@ import game.logic.strategy.validator.OrdinaryGameValidator;
  * @author Dimitar Karamanov
  */
 public final class OrdinaryGameAdviser extends BasicGameAdviser {
-	/**
-	 * OrdinaryAttackCardExecutor helper.
-	 */
-	private final PlayCardMethod ordinaryAttackCardExecutor;
+    /**
+     * OrdinaryAttackCardExecutor helper.
+     */
+    private final PlayCardMethod ordinaryAttackCardExecutor;
 
-	/**
-	 * OrdinaryDefenceCardExecutor helper.
-	 */
-	private final PlayCardMethod ordinaryDefenceCardExecutor;
+    /**
+     * OrdinaryDefenceCardExecutor helper.
+     */
+    private final PlayCardMethod ordinaryDefenceCardExecutor;
 
-	/**
-	 * Constructor.
-	 * 
-	 * @param game SantaseGame instance.
-	 */
-	public OrdinaryGameAdviser(Game game) {
-		super(game, new OrdinaryGameValidator());
-		ordinaryAttackCardExecutor = new OrdinaryAttackCardExecutor(game);
-		ordinaryDefenceCardExecutor = new OrdinaryDefenceCardExecutor(game);
-	}
+    /**
+     * Constructor.
+     * 
+     * @param game SantaseGame instance.
+     */
+    public OrdinaryGameAdviser(Game game) {
+        super(game, new OrdinaryGameValidator());
+        ordinaryAttackCardExecutor = new OrdinaryAttackCardExecutor(game);
+        ordinaryDefenceCardExecutor = new OrdinaryDefenceCardExecutor(game);
+    }
 
-	/**
-	 * Returns an attack card.
-	 * 
-	 * @param aiPlayer
-	 * @param stPlayer
-	 * @return
-	 */
-	protected Card getAttackCard(final Player player) {
-		return ordinaryAttackCardExecutor.getPlayerCard(player);
-	}
+    /**
+     * Returns an attack card.
+     * 
+     * @param aiPlayer
+     * @param stPlayer
+     * @return
+     */
+    protected Card getAttackCard(final Player player) {
+        return ordinaryAttackCardExecutor.getPlayerCard(player);
+    }
 
-	/**
-	 * Returns a defense card.
-	 * 
-	 * @param aiPlayer
-	 * @param stPlayer
-	 * @return
-	 */
-	protected Card getDefenseCard(final Player player) {
-		return ordinaryDefenceCardExecutor.getPlayerCard(player);
-	}
+    /**
+     * Returns a defense card.
+     * 
+     * @param aiPlayer
+     * @param stPlayer
+     * @return
+     */
+    protected Card getDefenseCard(final Player player) {
+        return ordinaryDefenceCardExecutor.getPlayerCard(player);
+    }
 }

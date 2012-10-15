@@ -6,7 +6,6 @@
  */
 package game.beans.pack.card.rank;
 
-
 import game.beans.pack.card.Card;
 
 import java.io.Serializable;
@@ -15,18 +14,18 @@ import java.util.Iterator;
 
 /**
  * Rank class Represents card's rank which has one of the following values 9, 10, J, Q, K, A.
- *
+ * 
  * @author Dimitar Karamanov
  * @see Card
  */
 public final class Rank implements Serializable {
-	
+
     /**
 	 * 
 	 */
-	private static final long serialVersionUID = -3769538778938708716L;
+    private static final long serialVersionUID = -3769538778938708716L;
 
-	/**
+    /**
      * Ranks constants.
      */
     private static final int NINE = 0;
@@ -73,7 +72,7 @@ public final class Rank implements Serializable {
 
     private final static ArrayList<Rank> rankList = new ArrayList<Rank>();
 
-    static{
+    static {
         rankList.add(Nine);
         rankList.add(Jack);
         rankList.add(Queen);
@@ -88,7 +87,7 @@ public final class Rank implements Serializable {
 
     /**
      * Constructor.
-     *
+     * 
      * @param rank internal rank value.
      * @param longName long name.
      * @param shortName short name.
@@ -103,7 +102,7 @@ public final class Rank implements Serializable {
 
     /**
      * Returns a string representation of the object.
-     *
+     * 
      * @return String a string representation of the object.
      */
     public String toString() {
@@ -112,7 +111,7 @@ public final class Rank implements Serializable {
 
     /**
      * Returns a rank's string sign representation.
-     *
+     * 
      * @return String a rank's string sign representation.
      */
     public String getRankSign() {
@@ -121,7 +120,7 @@ public final class Rank implements Serializable {
 
     /**
      * Returns hash code.
-     *
+     * 
      * @return hash code.
      */
     public int hashCode() {
@@ -130,7 +129,7 @@ public final class Rank implements Serializable {
 
     /**
      * The method checks if this rank and specified object (rank) are equal.
-     *
+     * 
      * @param obj specified object.
      * @return boolean true if this rank is equal to specified object and false otherwise.
      */
@@ -143,12 +142,10 @@ public final class Rank implements Serializable {
 
     /**
      * Compares this rank with the specified rank for order using standard rank's value.
-     *
+     * 
      * @param obj specified object.
-     * @return int value which may be:
-     *      = 0 if this rank and the specified rank are equal
-     *      > 0 if this rank is bigger than the specified rank
-     *      < 0 if this rank is less than the specified rank
+     * @return int value which may be: = 0 if this rank and the specified rank are equal > 0 if this rank is bigger than the specified rank < 0 if this rank is
+     *         less than the specified rank
      */
     public int compareTo(final Object obj) {
         final Rank compRank = (Rank) obj;
@@ -157,7 +154,7 @@ public final class Rank implements Serializable {
 
     /**
      * Returns rank points.
-     *
+     * 
      * @return int rank's points.
      */
     public int getPoints() {
@@ -166,7 +163,7 @@ public final class Rank implements Serializable {
 
     /**
      * Returns rank order.
-     *
+     * 
      * @return int rank's order.
      */
     public int getRankOrder() {
@@ -175,7 +172,7 @@ public final class Rank implements Serializable {
 
     /**
      * Returns rank iterator.
-     *
+     * 
      * @return RankIterator rank iterator.
      */
     public static RankIterator iterator() {
@@ -184,7 +181,7 @@ public final class Rank implements Serializable {
 
     /**
      * Returns rank count (6).
-     *
+     * 
      * @return int rank count.
      */
     public static int getRankCount() {
@@ -193,7 +190,7 @@ public final class Rank implements Serializable {
 
     /**
      * Returns next rank using rank order.
-     *
+     * 
      * @param rank specified rank.
      * @return Rank next rank.
      */
@@ -210,12 +207,12 @@ public final class Rank implements Serializable {
 
     /**
      * Returns previous rank using rank order.
-     *
+     * 
      * @param rank specified rank.
      * @return Rank previous rank.
      */
     public static Rank getPreviousRank(final Rank rank) {
-        for(final RankIterator rankIterator = iterator(); rankIterator.hasNext();) {
+        for (final RankIterator rankIterator = iterator(); rankIterator.hasNext();) {
             final Rank compRank = rankIterator.next();
             if (compRank.compareTo(rank) == -1) {
                 return compRank;
@@ -236,7 +233,7 @@ public final class Rank implements Serializable {
 
         /**
          * Constructor.
-         *
+         * 
          * @param enumerator the internal collection enumerator.
          */
         private RankIteratorImpl(final Iterator<Rank> enumeration) {
@@ -245,7 +242,7 @@ public final class Rank implements Serializable {
 
         /**
          * Returns true if the iteration has more elements.
-         *
+         * 
          * @return boolean true if the iteration has more elements false otherwise.
          */
         public boolean hasNext() {
@@ -254,7 +251,7 @@ public final class Rank implements Serializable {
 
         /**
          * Returns the next element in the iteration.
-         *
+         * 
          * @return Rank the next element in the iteration.
          */
         public Rank next() {

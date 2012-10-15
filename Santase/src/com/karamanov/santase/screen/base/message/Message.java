@@ -9,7 +9,6 @@
  */
 package com.karamanov.santase.screen.base.message;
 
-
 /**
  * Message class.
  * @author Dimitar Karamanov
@@ -40,7 +39,7 @@ public abstract class Message {
      * @param data message data.
      */
     public Message(final MessageType messageType, final Object data) {
-        //Assert.assertNotNull(messageType, MessageType.class);
+        // Assert.assertNotNull(messageType, MessageType.class);
 
         this.messageType = messageType;
         this.data = data;

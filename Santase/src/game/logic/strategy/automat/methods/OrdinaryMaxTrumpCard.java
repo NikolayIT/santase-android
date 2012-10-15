@@ -13,38 +13,37 @@ import game.logic.SantaseGame;
 import game.logic.strategy.automat.methods.base.BaseMethod;
 
 /**
- * OrdinaryMaxTrumpCard class. PlayCardMethod which implements the logic of
- * playing a max trump card to win the game.
+ * OrdinaryMaxTrumpCard class. PlayCardMethod which implements the logic of playing a max trump card to win the game.
  * 
  * @author Dimitar Karamanov
  */
 public final class OrdinaryMaxTrumpCard extends BaseMethod {
-	/**
-	 * Constructor.
-	 * 
-	 * @param game SantaseGame instance.
-	 */
-	public OrdinaryMaxTrumpCard(final Game game) {
-		super(game);
-	}
+    /**
+     * Constructor.
+     * 
+     * @param game SantaseGame instance.
+     */
+    public OrdinaryMaxTrumpCard(final Game game) {
+        super(game);
+    }
 
-	/**
-	 * Returns player's card.
-	 * 
-	 * @param player AI player.
-	 * @param opposite standard player.
-	 * @return Card object instance or null.
-	 */
-	protected Card getPlayMethodCard(final Player player) {
-		final Card result = player.getCards().findMaxSuitCard(game.getTrumpSuit());
+    /**
+     * Returns player's card.
+     * 
+     * @param player AI player.
+     * @param opposite standard player.
+     * @return Card object instance or null.
+     */
+    protected Card getPlayMethodCard(final Player player) {
+        final Card result = player.getCards().findMaxSuitCard(game.getTrumpSuit());
 
-		if (result != null
-				&& (getRival(player).getPlayedCard() != null && !getRival(player).getPlayedCard().getSuit().equals(game.getTrumpSuit()) || getRival(player).getPlayedCard().getRank().compareTo(
-						result.getRank()) < 0)) {
-			if (player.getPoints(game.getTrumpSuit()) + Card.getPoints(getRival(player).getPlayedCard()) + Card.getPoints(result) >= SantaseGame.END_GAME_POINTS) {
-				return result;
-			}
-		}
-		return null;
-	}
+        if (result != null
+                && (getRival(player).getPlayedCard() != null && !getRival(player).getPlayedCard().getSuit().equals(game.getTrumpSuit()) || getRival(player)
+                        .getPlayedCard().getRank().compareTo(result.getRank()) < 0)) {
+            if (player.getPoints(game.getTrumpSuit()) + Card.getPoints(getRival(player).getPlayedCard()) + Card.getPoints(result) >= SantaseGame.END_GAME_POINTS) {
+                return result;
+            }
+        }
+        return null;
+    }
 }

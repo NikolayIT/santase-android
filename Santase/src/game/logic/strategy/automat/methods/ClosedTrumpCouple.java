@@ -13,32 +13,31 @@ import game.beans.pack.card.rank.Rank;
 import game.logic.strategy.automat.methods.base.BaseMethod;
 
 /**
- * ClosedTrumpCouple class. PlayCardMethod which implements the logic of playing
- * a card ....
+ * ClosedTrumpCouple class. PlayCardMethod which implements the logic of playing a card ....
  * 
  * @author Dimitar Karamanov
  */
 public final class ClosedTrumpCouple extends BaseMethod {
-	/**
-	 * Constructor.
-	 * 
-	 * @param game SantaseGame instance.
-	 */
-	public ClosedTrumpCouple(final Game game) {
-		super(game);
-	}
+    /**
+     * Constructor.
+     * 
+     * @param game SantaseGame instance.
+     */
+    public ClosedTrumpCouple(final Game game) {
+        super(game);
+    }
 
-	/**
-	 * Returns player's card.
-	 * 
-	 * @param player AI player.
-	 * @param opposite player.
-	 * @return Card object instance or null.
-	 */
-	protected Card getPlayMethodCard(final Player player) {
-		if (player.hasCouple(game.getTrumpSuit())) {
-			return player.getCards().findCard(Rank.Queen, game.getTrumpSuit());
-		}
-		return null;
-	}
+    /**
+     * Returns player's card.
+     * 
+     * @param player AI player.
+     * @param opposite player.
+     * @return Card object instance or null.
+     */
+    protected Card getPlayMethodCard(final Player player) {
+        if (player.hasCouple(game.getTrumpSuit())) {
+            return player.getCards().findCard(Rank.Queen, game.getTrumpSuit());
+        }
+        return null;
+    }
 }

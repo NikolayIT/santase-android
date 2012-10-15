@@ -49,15 +49,15 @@ public abstract class BasicImageTransformer {
         } else {
             rectangle = rec;
         }
-        
+
         Bitmap result = Bitmap.createBitmap(image.getWidth(), image.getHeight(), Bitmap.Config.ARGB_8888);// .c .createBitmap(image);
-        
+
         for (int row = rectangle.y, endRow = rectangle.y + rectangle.height; row < endRow; row++) {
             for (int col = rectangle.x, endCol = rectangle.x + rectangle.width; col < endCol; col++) {
                 int pixel = image.getPixel(col, row);
                 final int RGB = pixel & 0xFFFFFFFF;
                 pixel = (pixel & 0xFF000000) | transformPixel(RGB);
-                //pixel = transformPixel(pixel);
+                // pixel = transformPixel(pixel);
                 result.setPixel(col, row, pixel);
             }
         }

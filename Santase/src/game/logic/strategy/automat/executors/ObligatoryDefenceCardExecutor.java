@@ -22,18 +22,18 @@ import game.logic.strategy.automat.methods.SmallestOfSuit;
  */
 public final class ObligatoryDefenceCardExecutor extends PlayCardExecutor {
 
-	/**
-	 * Constructor.
-	 * @param game a BelotGame instance.
-	 */
-	public ObligatoryDefenceCardExecutor(final Game game) {
-		super(game);
-		// Register play card methods.
-		register(new ObligatoryBiggerCard(game));
-		register(new SmallestOfSuit(game));
-		register(new ObligatoryTrumpCoupleCard(game));
-		register(new ObligatoryTrumpCard(game));
-		register(new ObligatoryNoNeed(game));
-		register(new SmallestOfAll(game));
-	}
+    /**
+     * Constructor.
+     * @param game a BelotGame instance.
+     */
+    public ObligatoryDefenceCardExecutor(final Game game) {
+        super(game);
+        // Register play card methods.
+        register(new ObligatoryBiggerCard(game));
+        register(new SmallestOfSuit(game));
+        register(new ObligatoryTrumpCoupleCard(game));
+        register(new ObligatoryTrumpCard(game));
+        register(new ObligatoryNoNeed(game));
+        register(new SmallestOfAll(game));
+    }
 }

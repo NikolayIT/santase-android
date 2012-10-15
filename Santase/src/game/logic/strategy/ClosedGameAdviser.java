@@ -20,46 +20,46 @@ import game.logic.strategy.validator.ObligatoryGameValidator;
  * @author Dimitar Karamanov
  */
 public final class ClosedGameAdviser extends BasicGameAdviser {
-	/**
-	 * ClosedAttackCardExecutor helper.
-	 */
-	private final PlayCardMethod closedAttackCardExecutor;
+    /**
+     * ClosedAttackCardExecutor helper.
+     */
+    private final PlayCardMethod closedAttackCardExecutor;
 
-	/**
-	 * ClosedDefenceCardExecutor helper.
-	 */
-	private final PlayCardMethod closedDefenceCardExecutor;
+    /**
+     * ClosedDefenceCardExecutor helper.
+     */
+    private final PlayCardMethod closedDefenceCardExecutor;
 
-	/**
-	 * Constructor.
-	 * 
-	 * @param game SantaseGame instance.
-	 */
-	public ClosedGameAdviser(Game game) {
-		super(game, new ObligatoryGameValidator());
-		closedAttackCardExecutor = new ClosedAttackCardExecutor(game);
-		closedDefenceCardExecutor = new ClosedDefenceCardExecutor(game);
-	}
+    /**
+     * Constructor.
+     * 
+     * @param game SantaseGame instance.
+     */
+    public ClosedGameAdviser(Game game) {
+        super(game, new ObligatoryGameValidator());
+        closedAttackCardExecutor = new ClosedAttackCardExecutor(game);
+        closedDefenceCardExecutor = new ClosedDefenceCardExecutor(game);
+    }
 
-	/**
-	 * Return an attack card.
-	 * 
-	 * @param aiPlayer
-	 * @param stPlayer
-	 * @return
-	 */
-	protected Card getAttackCard(final Player player) {
-		return closedAttackCardExecutor.getPlayerCard(player);
-	}
+    /**
+     * Return an attack card.
+     * 
+     * @param aiPlayer
+     * @param stPlayer
+     * @return
+     */
+    protected Card getAttackCard(final Player player) {
+        return closedAttackCardExecutor.getPlayerCard(player);
+    }
 
-	/**
-	 * Return a defense card.
-	 * 
-	 * @param aiPlayer
-	 * @param stPlayer
-	 * @return
-	 */
-	protected Card getDefenseCard(final Player player) {
-		return closedDefenceCardExecutor.getPlayerCard(player);
-	}
+    /**
+     * Return a defense card.
+     * 
+     * @param aiPlayer
+     * @param stPlayer
+     * @return
+     */
+    protected Card getDefenseCard(final Player player) {
+        return closedDefenceCardExecutor.getPlayerCard(player);
+    }
 }

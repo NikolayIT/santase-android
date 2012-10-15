@@ -13,39 +13,38 @@ import game.logic.SantaseGame;
 import game.logic.strategy.automat.methods.base.BaseMethod;
 
 /**
- * OrdinaryWinDefenceCard class. PlayCardMethod which implements the logic of
- * playing a win defence card.
+ * OrdinaryWinDefenceCard class. PlayCardMethod which implements the logic of playing a win defence card.
  * 
  * @author Dimitar Karamanov
  */
 public class OrdinaryWinDefenceCard extends BaseMethod {
-	final private BestHandCard bestHandCard;
+    final private BestHandCard bestHandCard;
 
-	/**
-	 * Constructor.
-	 * 
-	 * @param game SantaseGame instance.
-	 */
-	public OrdinaryWinDefenceCard(final Game game) {
-		super(game);
-		bestHandCard = new BestHandCard(game);
-	}
+    /**
+     * Constructor.
+     * 
+     * @param game SantaseGame instance.
+     */
+    public OrdinaryWinDefenceCard(final Game game) {
+        super(game);
+        bestHandCard = new BestHandCard(game);
+    }
 
-	/**
-	 * Returns player's card.
-	 * 
-	 * @param player AI player.
-	 * @param opposite player.
-	 * @return Card object instance or null.
-	 */
-	protected Card getPlayMethodCard(final Player player) {
-		final Card result = bestHandCard.getPlayMethodCard(player);
-		if (result != null) {
-			final int handPoints = Card.getPoints(result) + Card.getPoints(getRival(player).getPlayedCard());
-			if (handPoints + eventualCouplePoints(player.getCards()) + player.getPoints(game.getTrumpSuit()) >= SantaseGame.END_GAME_POINTS) {
-				return result;
-			}
-		}
-		return null;
-	}
+    /**
+     * Returns player's card.
+     * 
+     * @param player AI player.
+     * @param opposite player.
+     * @return Card object instance or null.
+     */
+    protected Card getPlayMethodCard(final Player player) {
+        final Card result = bestHandCard.getPlayMethodCard(player);
+        if (result != null) {
+            final int handPoints = Card.getPoints(result) + Card.getPoints(getRival(player).getPlayedCard());
+            if (handPoints + eventualCouplePoints(player.getCards()) + player.getPoints(game.getTrumpSuit()) >= SantaseGame.END_GAME_POINTS) {
+                return result;
+            }
+        }
+        return null;
+    }
 }

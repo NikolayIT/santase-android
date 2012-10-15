@@ -15,11 +15,11 @@ import game.beans.Player;
  * @author Dimitar Karamanov
  */
 public interface PlayCardMethod {
-	/**
-	 * Returns player's card.
-	 * 
-	 * @param player who is on turn.
-	 * @return Card object instance or null.
-	 */
-	Card getPlayerCard(final Player player);
+    /**
+     * Returns player's card.
+     * 
+     * @param player who is on turn.
+     * @return Card object instance or null.
+     */
+    Card getPlayerCard(final Player player);
 }

@@ -16,39 +16,38 @@ import game.beans.pack.card.suit.SuitIterator;
 import game.logic.strategy.automat.methods.base.BaseMethod;
 
 /**
- * RandomCoupleCard class. PlayCardMethod which implements the logic of playing
- * a random couple card.
+ * RandomCoupleCard class. PlayCardMethod which implements the logic of playing a random couple card.
  * 
  * @author Dimitar Karamanov
  */
 public final class RandomCoupleCard extends BaseMethod {
-	/**
-	 * Constructor.
-	 * 
-	 * @param game SantaseGame instance.
-	 */
-	public RandomCoupleCard(final Game game) {
-		super(game);
-	}
+    /**
+     * Constructor.
+     * 
+     * @param game SantaseGame instance.
+     */
+    public RandomCoupleCard(final Game game) {
+        super(game);
+    }
 
-	/**
-	 * Returns player's card.
-	 * 
-	 * @param player AI player.
-	 * @param opposite player.
-	 * @return Card object instance or null.
-	 */
-	protected Card getPlayMethodCard(final Player player) {
-		if (player.hasCouple(game.getTrumpSuit())) {
-			return player.getCards().findCard(Rank.Queen, game.getTrumpSuit());
-		}
+    /**
+     * Returns player's card.
+     * 
+     * @param player AI player.
+     * @param opposite player.
+     * @return Card object instance or null.
+     */
+    protected Card getPlayMethodCard(final Player player) {
+        if (player.hasCouple(game.getTrumpSuit())) {
+            return player.getCards().findCard(Rank.Queen, game.getTrumpSuit());
+        }
 
-		for (SuitIterator iterator = Suit.iterator(); iterator.hasNext();) {
-			final Suit suit = iterator.next();
-			if (!game.getTrumpSuit().equals(suit) && player.hasCouple(suit)) {
-				return player.getCards().findCard(Rank.Queen, suit);
-			}
-		}
-		return null;
-	}
+        for (SuitIterator iterator = Suit.iterator(); iterator.hasNext();) {
+            final Suit suit = iterator.next();
+            if (!game.getTrumpSuit().equals(suit) && player.hasCouple(suit)) {
+                return player.getCards().findCard(Rank.Queen, suit);
+            }
+        }
+        return null;
+    }
 }
