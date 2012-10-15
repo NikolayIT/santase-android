@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="SantaseTheme" parent="android:Theme">
+        <item name="android:windowTitleSize">44dip</item>
+    </style>
+
+    <style name="SantaseNoTitleTheme" parent="SantaseTheme">
+        <item name="android:windowNoTitle">true</item>
+    </style>
+    
+    <style name="SantaseDialogNoTitleTheme" parent="android:Theme.Dialog">
+        <item name="android:windowNoTitle">true</item>
+    </style>
+
+</resources>
