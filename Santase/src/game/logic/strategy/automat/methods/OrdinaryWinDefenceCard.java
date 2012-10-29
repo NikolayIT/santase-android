@@ -9,7 +9,7 @@ package game.logic.strategy.automat.methods;
 import game.beans.Game;
 import game.beans.Player;
 import game.beans.pack.card.Card;
-import game.logic.SantaseGame;
+import game.logic.SantaseFacade;
 import game.logic.strategy.automat.methods.base.BaseMethod;
 
 /**
@@ -41,7 +41,7 @@ public class OrdinaryWinDefenceCard extends BaseMethod {
         final Card result = bestHandCard.getPlayMethodCard(player);
         if (result != null) {
             final int handPoints = Card.getPoints(result) + Card.getPoints(getRival(player).getPlayedCard());
-            if (handPoints + eventualCouplePoints(player.getCards()) + player.getPoints(game.getTrumpSuit()) >= SantaseGame.END_GAME_POINTS) {
+            if (handPoints + eventualCouplePoints(player.getCards()) + player.getPoints(game.getTrumpSuit()) >= SantaseFacade.END_GAME_POINTS) {
                 return result;
             }
         }

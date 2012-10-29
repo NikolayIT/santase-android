@@ -9,7 +9,7 @@ package game.logic.strategy.automat.methods;
 import game.beans.Game;
 import game.beans.Player;
 import game.beans.pack.card.Card;
-import game.logic.SantaseGame;
+import game.logic.SantaseFacade;
 import game.logic.strategy.automat.methods.base.BaseMethod;
 
 /**
@@ -40,7 +40,7 @@ public final class OrdinaryMaxTrumpCard extends BaseMethod {
         if (result != null
                 && (getRival(player).getPlayedCard() != null && !getRival(player).getPlayedCard().getSuit().equals(game.getTrumpSuit()) || getRival(player)
                         .getPlayedCard().getRank().compareTo(result.getRank()) < 0)) {
-            if (player.getPoints(game.getTrumpSuit()) + Card.getPoints(getRival(player).getPlayedCard()) + Card.getPoints(result) >= SantaseGame.END_GAME_POINTS) {
+            if (player.getPoints(game.getTrumpSuit()) + Card.getPoints(getRival(player).getPlayedCard()) + Card.getPoints(result) >= SantaseFacade.END_GAME_POINTS) {
                 return result;
             }
         }

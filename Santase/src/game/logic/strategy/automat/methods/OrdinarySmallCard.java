@@ -11,7 +11,7 @@ import game.beans.Player;
 import game.beans.pack.PackIterator;
 import game.beans.pack.card.Card;
 import game.beans.pack.card.rank.Rank;
-import game.logic.SantaseGame;
+import game.logic.SantaseFacade;
 import game.logic.strategy.automat.methods.base.BaseMethod;
 
 /**
@@ -62,9 +62,9 @@ public final class OrdinarySmallCard extends BaseMethod {
         }
 
         // KOLIZIJA !!!
-        if (getRival(player).getPoints(game.getTrumpSuit()) < SantaseGame.END_GAME_POINTS) {
+        if (getRival(player).getPoints(game.getTrumpSuit()) < SantaseFacade.END_GAME_POINTS) {
             if (result != null
-                    && getRival(player).getPoints(game.getTrumpSuit()) + Card.getPoints(result) + Card.getPoints(getRival(player).getPlayedCard()) >= SantaseGame.END_GAME_POINTS) {
+                    && getRival(player).getPoints(game.getTrumpSuit()) + Card.getPoints(result) + Card.getPoints(getRival(player).getPlayedCard()) >= SantaseFacade.END_GAME_POINTS) {
                 final Card smallest = player.getCards().findMinAllCard();
                 if (smallest != null && smallest.getRank().compareTo(result.getRank()) < 0) {
                     return null;
@@ -84,8 +84,8 @@ public final class OrdinarySmallCard extends BaseMethod {
      * @return Card object.
      */
     private Card checkForExitResponse(final Player player, final Card card) {
-        if (player.getPoints(game.getTrumpSuit()) < SantaseGame.END_GAME_POINTS) {
-            if (player.getPoints(game.getTrumpSuit()) + Card.getPoints(card) + Card.getPoints(player.getPlayedCard()) >= SantaseGame.END_GAME_POINTS) {
+        if (player.getPoints(game.getTrumpSuit()) < SantaseFacade.END_GAME_POINTS) {
+            if (player.getPoints(game.getTrumpSuit()) + Card.getPoints(card) + Card.getPoints(player.getPlayedCard()) >= SantaseFacade.END_GAME_POINTS) {
                 return null;
             }
         }

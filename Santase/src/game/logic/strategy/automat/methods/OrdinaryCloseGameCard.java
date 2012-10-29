@@ -12,7 +12,7 @@ import game.beans.pack.Pack;
 import game.beans.pack.PackIterator;
 import game.beans.pack.card.Card;
 import game.beans.pack.card.rank.Rank;
-import game.logic.SantaseGame;
+import game.logic.SantaseFacade;
 import game.logic.strategy.automat.executors.ClosedAttackCardExecutor;
 import game.logic.strategy.automat.methods.base.BaseMethod;
 
@@ -83,7 +83,7 @@ public final class OrdinaryCloseGameCard extends BaseMethod {
      * @return boolean true if can, false otherwise.
      */
     private boolean isSuitableToCloseByForty(final Player player) {
-        if (getRival(player).getPoints(game.getTrumpSuit()) < SantaseGame.POINTS_ZONE) {
+        if (getRival(player).getPoints(game.getTrumpSuit()) < SantaseFacade.POINTS_ZONE) {
             final boolean AceTrump = player.getCards().findCard(Rank.Ace, game.getTrumpSuit()) != null;
             final boolean TenTrump = player.getCards().findCard(Rank.Ten, game.getTrumpSuit()) != null;
             final boolean hasCouple = player.getCards().hasCouple(game.getTrumpSuit());
@@ -110,7 +110,7 @@ public final class OrdinaryCloseGameCard extends BaseMethod {
      * @return boolean true if can, false otherwise.
      */
     private boolean hasPowerToClose(final Player player) {
-        return hasPowerTrumps(player, true) && getHandsPoints(player) >= (SantaseGame.END_GAME_POINTS - POSSIBLE_MORE_POINTS);
+        return hasPowerTrumps(player, true) && getHandsPoints(player) >= (SantaseFacade.END_GAME_POINTS - POSSIBLE_MORE_POINTS);
     }
 
     /**
@@ -181,7 +181,7 @@ public final class OrdinaryCloseGameCard extends BaseMethod {
      * @return boolean true if has, false otherwise.
      */
     private boolean hasLastCloseChance(final Player player) {
-        return getHandsPointsLastChance(player) >= SantaseGame.END_GAME_POINTS;
+        return getHandsPointsLastChance(player) >= SantaseFacade.END_GAME_POINTS;
     }
 
     /**

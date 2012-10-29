@@ -10,7 +10,7 @@ import game.beans.Game;
 import game.beans.Player;
 import game.beans.pack.Pack;
 import game.beans.pack.card.Card;
-import game.logic.SantaseGame;
+import game.logic.SantaseFacade;
 import game.logic.strategy.automat.methods.base.BaseMethod;
 
 /**
@@ -45,7 +45,7 @@ public final class ObligatoryTotalAttack extends BaseMethod {
         futurePoints += getHandsNoTrump(aiPack, stPack, hands);
 
         final int eventCouple = eventualCouplePoints(aiPack);
-        final boolean hasEnoughPoints = futurePoints + eventCouple + player.getPoints(game.getTrumpSuit()) >= SantaseGame.END_GAME_POINTS && !hands.isEmpty();
+        final boolean hasEnoughPoints = futurePoints + eventCouple + player.getPoints(game.getTrumpSuit()) >= SantaseFacade.END_GAME_POINTS && !hands.isEmpty();
 
         if (hasEnoughPoints || stPack.isEmpty()) {
             return getSuitableCard(hands);

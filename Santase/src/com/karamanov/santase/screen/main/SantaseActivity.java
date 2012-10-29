@@ -1,7 +1,8 @@
 package com.karamanov.santase.screen.main;
 
+import game.beans.Game;
 import game.beans.pack.card.Card;
-import game.logic.SantaseGame;
+import game.logic.SantaseFacade;
 
 import java.util.ArrayList;
 
@@ -26,11 +27,10 @@ import android.widget.RelativeLayout;
 import com.karamanov.santase.R;
 import com.karamanov.santase.Santase;
 import com.karamanov.santase.graphics.PictureDecorator;
+import com.karamanov.santase.message.Message;
+import com.karamanov.santase.message.MessageType;
+import com.karamanov.santase.message.Messageable;
 import com.karamanov.santase.screen.base.GameActivity;
-import com.karamanov.santase.screen.base.message.Message;
-import com.karamanov.santase.screen.base.message.Messageable;
-import com.karamanov.santase.screen.base.message.UserMessage;
-import com.karamanov.santase.screen.base.message.UserMessageType;
 import com.karamanov.santase.screen.main.message.MessageData;
 import com.karamanov.santase.screen.main.tip.TipScreen;
 import com.karamanov.santase.screen.pref.SantasePreferencesActivity;
@@ -57,26 +57,6 @@ public class SantaseActivity extends GameActivity implements OnSharedPreferenceC
     private static final int TIP_CARD_INDEX = 4;
     private static final int PREF_INDEX = 5;
 
-    /**
-     * User message type used from message which runs game.
-     */
-    public UserMessageType MT_KEY_PRESSED;
-
-    /**
-     * User message type used from message which runs game.
-     */
-    public UserMessageType MT_TOUCH_EVENT;
-
-    /**
-     * User message type exit.
-     */
-    public UserMessageType MT_PAINT_EVENT;
-
-    /**
-     * User message type exit.
-     */
-    public UserMessageType MT_EXIT_EVENT;
-
     private Bitmap bufferedImage;
 
     /**
@@ -84,24 +64,17 @@ public class SantaseActivity extends GameActivity implements OnSharedPreferenceC
      */
     public SantaseActivity() {
         super();
-
-        MT_KEY_PRESSED = initUserMessageType("MT_KEY_PRESSED");
-        addMessageListener(MT_KEY_PRESSED, new KeyPressedListener());
-
-        MT_TOUCH_EVENT = initUserMessageType("MT_TOUCH_EVENT");
-        addMessageListener(MT_TOUCH_EVENT, new TouchListener());
-
-        MT_EXIT_EVENT = initUserMessageType("MT_EXIT_EVENT");
-        addMessageListener(MT_EXIT_EVENT, new ExitListener());
-
-        MT_PAINT_EVENT = initUserMessageType("MT_PAINT_EVENT");
-        addMessageListener(MT_PAINT_EVENT, new PaintListener());
     }
 
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+        addMessageListener(MessageType.MT_KEY_PRESSED, new KeyPressedListener());
+        addMessageListener(MessageType.MT_TOUCH_EVENT, new TouchListener());
+        addMessageListener(MessageType.MT_EXIT_EVENT, new ExitListener());
+        addMessageListener(MessageType.MT_PAINT_EVENT, new PaintListener());
 
         buttons = new RelativeLayout(this);
         buttons.setId(1);
@@ -143,7 +116,7 @@ public class SantaseActivity extends GameActivity implements OnSharedPreferenceC
 
         santaseView = new SantaseView(this);
 
-        dealer = new Dealer(this, Santase.getGame(), santaseView);
+        dealer = new Dealer(this, Santase.getSantaseFacade(), santaseView);
         rlp = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
         rlp.addRule(RelativeLayout.ABOVE, buttons.getId());
         santaseView.setLayoutParams(rlp);
@@ -191,8 +164,8 @@ public class SantaseActivity extends GameActivity implements OnSharedPreferenceC
 
         int base = Menu.CATEGORY_SECONDARY;
 
-        SantaseGame game = Santase.getGame();
-        boolean showClose = game.canClose();
+        SantaseFacade santaseFacade = Santase.getSantaseFacade();
+        boolean showClose = santaseFacade.getGame().canClose();
 
         MenuItem showMenu = menu.findItem(base + CLOSE_GAME_INDEX);
         if (showClose) {
@@ -207,7 +180,7 @@ public class SantaseActivity extends GameActivity implements OnSharedPreferenceC
         }
 
         MenuItem historyMenu = menu.findItem(base + PLAYED_CARDS_INDEX);
-        if (game.getPlayer().getHands().getSize() > 0) {
+        if (santaseFacade.getGame().getHuman().getHands().getSize() > 0) {
             if (historyMenu == null) {
                 historyMenu = menu.add(base, base + PLAYED_CARDS_INDEX, base + PLAYED_CARDS_INDEX, getString(R.string.PastTricks));
                 historyMenu.setIcon(R.drawable.ic_menu_tricks);
@@ -219,7 +192,7 @@ public class SantaseActivity extends GameActivity implements OnSharedPreferenceC
         }
 
         MenuItem tipsMenu = menu.findItem(base + TIP_CARD_INDEX);
-        boolean showTips = game.isPlayerTurn(game.getPlayer()) && game.getPlayer().getPlayedCard() == null;
+        boolean showTips = santaseFacade.isHumanTurn() && santaseFacade.getGame().getHuman().getPlayedCard() == null;
         if (showTips) {
             if (tipsMenu == null) {
                 tipsMenu = menu.add(base, base + TIP_CARD_INDEX, base + TIP_CARD_INDEX, getString(R.string.Tip));
@@ -252,7 +225,7 @@ public class SantaseActivity extends GameActivity implements OnSharedPreferenceC
             myAlertDialog.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     Santase.resetGame(SantaseActivity.this);
-                    dealer = new Dealer(SantaseActivity.this, Santase.getGame(), santaseView);
+                    dealer = new Dealer(SantaseActivity.this, Santase.getSantaseFacade(), santaseView);
                     repaint();
                 }
             });
@@ -289,34 +262,34 @@ public class SantaseActivity extends GameActivity implements OnSharedPreferenceC
     }
 
     private void createTipDialog() {
-        SantaseGame game = Santase.getGame();
+        SantaseFacade santaseFacade = Santase.getSantaseFacade();
 
         ArrayList<MessageData> messages = new ArrayList<MessageData>();
-        Card card = game.getTipMessageCard(game.getPlayer());
+        Card card = santaseFacade.getTipMessageCard(santaseFacade.getGame().getHuman());
 
         if (card != null) {
             PictureDecorator decorator = new PictureDecorator(this);
 
             int i = 1;
-            if ((game.getGame().getGameActionStatus() & SantaseGame.GA_CHANGE) == SantaseGame.GA_CHANGE) {
+            if (santaseFacade.getGame().containActionStatus(Game.GA_CHANGE)) {
                 messages.add(new MessageData(addNumberToTip(i, getString(R.string.ChangeTrumpCard))));
                 i++;
             }
-            if ((game.getGame().getGameActionStatus() & SantaseGame.GA_CLOSE) == SantaseGame.GA_CLOSE) {
+            if (santaseFacade.getGame().containActionStatus(Game.GA_CLOSE)) {
                 messages.add(new MessageData(addNumberToTip(i, getString(R.string.CloseTheGame))));
                 i++;
             }
-            if ((game.getGame().getGameActionStatus() & SantaseGame.GA_COUPLE) == SantaseGame.GA_COUPLE) {
+            if (santaseFacade.getGame().containActionStatus(Game.GA_COUPLE)) {
                 TextDecorator textDecorator = new TextDecorator(this);
                 String message = getString(R.string.HumanHasCoupleOf);
                 message = textDecorator.replaceSuit(card.getSuit(), message);
-                message = textDecorator.translateCouple(card.getSuit(), game.getTrumpSuit(), message);
+                message = textDecorator.translateCouple(card.getSuit(), santaseFacade.getGame().getTrumpSuit(), message);
                 messages.add(new MessageData(decorator.getSuitImage(card.getSuit()), addNumberToTip(i, message)));
                 i++;
             }
             messages.add(new MessageData(decorator.getCardImage(card), addNumberToTip(i, getString(R.string.PlayCard))));
 
-            TipScreen tipScreen = new TipScreen(this, game.getPlayer(), messages);
+            TipScreen tipScreen = new TipScreen(this, santaseFacade.getGame().getHuman(), messages);
             tipScreen.show();
         }
     }
@@ -336,19 +309,19 @@ public class SantaseActivity extends GameActivity implements OnSharedPreferenceC
             myAlertDialog.setTitle(getString(R.string.Confirm));
             myAlertDialog.setMessage(getString(R.string.ExitQuestion));
             myAlertDialog.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface arg0, int arg1) {
-                    UserMessage tMessage = new UserMessage(MT_EXIT_EVENT);
+                public void onClick(DialogInterface dialog, int which) {
+                    Message tMessage = new Message(MessageType.MT_EXIT_EVENT);
                     triggerMessage(tMessage);
                 }
             });
             myAlertDialog.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-                public void onClick(DialogInterface arg0, int arg1) {
+                public void onClick(DialogInterface dialog, int which) {
                     //
                 }
             });
             myAlertDialog.show();
         } else {
-            UserMessage tMessage = new UserMessage(MT_EXIT_EVENT);
+            Message tMessage = new Message(MessageType.MT_EXIT_EVENT);
             triggerMessage(tMessage);
         }
     }
@@ -374,7 +347,7 @@ public class SantaseActivity extends GameActivity implements OnSharedPreferenceC
     }
 
     public void repaint() {
-        UserMessage tMessage = new UserMessage(MT_PAINT_EVENT);
+        Message tMessage = new Message(MessageType.MT_PAINT_EVENT);
         triggerMessage(tMessage);
     }
 
@@ -422,7 +395,7 @@ public class SantaseActivity extends GameActivity implements OnSharedPreferenceC
 
         @Override
         public void onClick(View view) {
-            UserMessage tMessage = new UserMessage(MT_KEY_PRESSED, i);
+            Message tMessage = new Message(MessageType.MT_KEY_PRESSED, i);
             triggerMessage(tMessage);
         }
     }

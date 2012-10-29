@@ -6,9 +6,9 @@ import game.beans.pack.Pack;
 import game.beans.pack.card.Card;
 import game.beans.pack.card.rank.Rank;
 import game.beans.pack.card.suit.Suit;
-import game.logic.SantaseGame;
+import game.logic.SantaseFacade;
 
-public class Game implements Serializable {
+public final class Game implements Serializable {
 
     /**
 	 * 
@@ -37,12 +37,12 @@ public class Game implements Serializable {
     /**
      * Computer player.
      */
-    public final Player computer = new Player();
+    private final Player computer = new Player();
 
     /**
      * Human player.
      */
-    public final Player human = new Player();
+    private final Player human = new Player();
 
     /**
      * Trump suit.
@@ -82,13 +82,8 @@ public class Game implements Serializable {
 
     private int gameActionStatus = GA_NONE;
 
-    /**
-     * Returns action status.
-     * 
-     * @return action status.
-     */
-    public int getGameActionStatus() {
-        return gameActionStatus;
+    public final boolean containActionStatus(int status) {
+        return (gameActionStatus & status) == status;
     }
 
     /**
@@ -96,14 +91,14 @@ public class Game implements Serializable {
      * 
      * @return action status.
      */
-    public void clearGameActionStatus() {
+    public final void clearGameActionStatus() {
         gameActionStatus = GA_NONE;
     }
 
     /**
      * Copies state.
      */
-    public void copyState() {
+    public final void copyState() {
         human.copyState();
         computer.copyState();
         copyGameCards.fill(gameCards);
@@ -114,7 +109,7 @@ public class Game implements Serializable {
     /**
      * Restores state.
      */
-    public void restoreState() {
+    public final void restoreState() {
         human.restoreState();
         computer.restoreState();
         gameCards.fill(copyGameCards);
@@ -125,7 +120,7 @@ public class Game implements Serializable {
     /**
      * New game.
      */
-    public void newGame() {
+    public final void newGame() {
         playerClosedGame = null;
         gameCards.fill(Pack.createFullPack());
         gameCards.shuffle();
@@ -138,6 +133,15 @@ public class Game implements Serializable {
             computer.newGame(gameCards);
             human.newGame(gameCards);
         }
+    }
+    
+    /**
+     * New game.
+     * @param player player.
+     */
+    public void newGame(final Player player) {
+        calculatePoints(player);
+        newGame();
     }
 
     /**
@@ -190,7 +194,7 @@ public class Game implements Serializable {
      * Next tour.
      * @return boolean.
      */
-    public boolean nextTour() {
+    public final boolean nextTour() {
         checkMove();
         addHand();
         fillOneCard();
@@ -207,7 +211,7 @@ public class Game implements Serializable {
      * 
      * @return trump suit.
      */
-    public Suit getTrumpSuit() {
+    public final Suit getTrumpSuit() {
         return trumpSuit;
     }
 
@@ -217,7 +221,7 @@ public class Game implements Serializable {
      * @param card instance.
      * @param gPlayer player.
      */
-    public void changeTrumpCard(final Card card, final Player gPlayer) {
+    public final void changeTrumpCard(final Card card, final Player gPlayer) {
         if (!gameCards.isEmpty() && isNotClosedGame()) {
             Card trumpCard = gameCards.remove(gameCards.getSize() - 1);
             gPlayer.getCards().remove(card);
@@ -257,7 +261,7 @@ public class Game implements Serializable {
         }
     }
 
-    public void calculateFuturePoints(final Player pMove) {
+    public final void calculateFuturePoints(final Player pMove) {
         computer.copyRealToFuturePoints();
         human.copyRealToFuturePoints();
         Player OldMove = getTrickAttackPlayer();
@@ -269,7 +273,7 @@ public class Game implements Serializable {
         setTrickAttackPlayer(OldMove);
     }
 
-    public void calculatePoints(final Player pMove) {
+    public final void calculatePoints(final Player pMove) {
         if (pMove == computer) {
             calculateGamePoints(computer, human);
         }
@@ -307,7 +311,7 @@ public class Game implements Serializable {
         return computer.getPlayedCard() == null && human.getPlayedCard() == null;
     }
 
-    public boolean isBothPlayed() {
+    public final boolean isBothPlayed() {
         return computer.getPlayedCard() != null && human.getPlayedCard() != null;
     }
 
@@ -315,47 +319,47 @@ public class Game implements Serializable {
         return gameCards.getSize() != 12 && gameCards.getSize() > 2;
     }
 
-    public boolean canClose() {
+    public final boolean canClose() {
         return isCloseGameZone() && isNobodyPlayed() && isNotClosedGame();
     }
 
-    public boolean canEndGame(final Player player) {
+    public final boolean canEndGame(final Player player) {
         if (player.equals(human)) {
-            return computer.getPlayedCard() == null && human.getPoints(trumpSuit) >= SantaseGame.END_GAME_POINTS;
+            return computer.getPlayedCard() == null && human.getPoints(trumpSuit) >= SantaseFacade.END_GAME_POINTS;
         }
         if (player.equals(computer)) {
-            return human.getPlayedCard() == null && computer.getPoints(trumpSuit) >= SantaseGame.END_GAME_POINTS;
+            return human.getPlayedCard() == null && computer.getPoints(trumpSuit) >= SantaseFacade.END_GAME_POINTS;
         }
         return false;
     }
 
     // changed 03.06.2005
-    public boolean isPlayerTurn(final Player player) {
+    public final boolean isPlayerTurn(final Player player) {
         return player.equals(trickAttackPlayer);
     }
 
-    public boolean isPlayerClosed(final Player player) {
+    public final boolean isPlayerClosed(final Player player) {
         return playerClosedGame == player;
     }
 
-    public boolean isClosedGame() {
+    public final boolean isClosedGame() {
         return playerClosedGame != null;
     }
 
-    public boolean isNotClosedGame() {
+    public final boolean isNotClosedGame() {
         return playerClosedGame == null;
     }
 
-    public void setClosedGame(final Player player) {
-        gameActionStatus = gameActionStatus | SantaseGame.GA_CLOSE;
+    public final void setClosedGame(final Player player) {
+        gameActionStatus = gameActionStatus | GA_CLOSE;
         playerClosedGame = player;
     }
 
-    public boolean isObligatoryMode() {
+    public final boolean isObligatoryMode() {
         return gameCards.isEmpty() || isClosedGame();
     }
 
-    public void changeTrumpCard(final Player player) {
+    public final void changeTrumpCard(final Player player) {
         if (!player.getHands().isEmpty() && getRival(player).getPlayedCard() == null && gameCards.getSize() > 2 && isNotClosedGame()) {
             Card card = player.getCards().findCard(Rank.Nine, getTrumpSuit());
             if (card != null) {
@@ -365,28 +369,28 @@ public class Game implements Serializable {
         }
     }
 
-    public void setCoupleMessage(final Player player, final Card card) {
+    public final void setCoupleMessage(final Player player, final Card card) {
         player.getCouples().setCouple(card.getSuit());
         gameActionStatus = gameActionStatus | GA_COUPLE;
     }
 
-    public Player getTrickAttackPlayer() {
+    public final Player getTrickAttackPlayer() {
         return trickAttackPlayer;
     }
 
-    public void setTrickAttackPlayer(Player trickAttackPlayer) {
+    public final void setTrickAttackPlayer(Player trickAttackPlayer) {
         this.trickAttackPlayer = trickAttackPlayer;
     }
 
-    public Player getPlayerClosedGame() {
+    public final Player getPlayerClosedGame() {
         return playerClosedGame;
     }
 
-    public void setPlayerClosedGame(Player player) {
+    public final void setPlayerClosedGame(Player player) {
         this.playerClosedGame = player;
     }
 
-    public Player getRival(Player player) {
+    public final Player getRival(Player player) {
         if (player.equals(human)) {
             return computer;
         }
@@ -394,7 +398,19 @@ public class Game implements Serializable {
         return human;
     }
 
-    public Pack getGameCards() {
+    public final Pack getGameCards() {
         return gameCards;
+    }
+    
+    public final boolean isBigNewGame() {
+        return (human.getBigGames() != 0 || computer.getBigGames() != 0) && (human.getLittleGames() == 0 && computer.getLittleGames() == 0);
+    }
+
+    public Player getComputer() {
+        return computer;
+    }
+
+    public Player getHuman() {
+        return human;
     }
 }

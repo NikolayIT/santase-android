@@ -81,7 +81,7 @@ public class LogoActivity extends Activity {
         if (!send) {
             send = true;
             if (!Santase.loadGame(this)) {
-                Santase.getGame().newGame();
+                Santase.getSantaseFacade().getGame().newGame();
             }
             Intent i = new Intent(this, SantaseActivity.class);
             startActivity(i);
