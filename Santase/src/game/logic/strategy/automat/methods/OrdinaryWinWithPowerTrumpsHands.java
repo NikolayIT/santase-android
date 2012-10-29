@@ -11,7 +11,7 @@ import game.beans.Player;
 import game.beans.pack.Pack;
 import game.beans.pack.PackIterator;
 import game.beans.pack.card.Card;
-import game.logic.SantaseGame;
+import game.logic.SantaseFacade;
 import game.logic.strategy.automat.methods.base.BaseMethod;
 
 /**
@@ -39,7 +39,7 @@ public final class OrdinaryWinWithPowerTrumpsHands extends BaseMethod {
      * @return Card object instance or null.
      */
     protected Card getPlayMethodCard(final Player player) {
-        if (hasPowerTrumps(player, false) && getPowerTrumpHandsPoints(player) >= (SantaseGame.END_GAME_POINTS - POSSIBLE_MORE_POINTS)) {
+        if (hasPowerTrumps(player, false) && getPowerTrumpHandsPoints(player) >= (SantaseFacade.END_GAME_POINTS - POSSIBLE_MORE_POINTS)) {
             return player.getCards().findMaxSuitCard(game.getTrumpSuit());
         }
         return null;

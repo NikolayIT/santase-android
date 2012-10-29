@@ -15,7 +15,7 @@ import game.beans.pack.card.rank.Rank;
 import game.beans.pack.card.rank.RankIterator;
 import game.beans.pack.card.suit.Suit;
 import game.beans.pack.card.suit.SuitIterator;
-import game.logic.SantaseGame;
+import game.logic.SantaseFacade;
 import game.logic.strategy.automat.base.PlayCardMethod;
 
 /**
@@ -183,7 +183,7 @@ public abstract class BaseMethod implements PlayCardMethod {
      * @return boolean true if can play without loose (check opposite player) or false.
      */
     protected boolean canPlayWithoutLoose(final Player opposite, final Card card) {
-        return opposite.getPoints(game.getTrumpSuit()) + Card.getPoints(card) + Card.getPoints(opposite.getPlayedCard()) < SantaseGame.END_GAME_POINTS;
+        return opposite.getPoints(game.getTrumpSuit()) + Card.getPoints(card) + Card.getPoints(opposite.getPlayedCard()) < SantaseFacade.END_GAME_POINTS;
     }
 
     /**

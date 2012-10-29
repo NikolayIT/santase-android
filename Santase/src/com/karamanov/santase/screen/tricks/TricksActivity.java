@@ -3,7 +3,7 @@ package com.karamanov.santase.screen.tricks;
 import game.beans.pack.Pack;
 import game.beans.pack.PackIterator;
 import game.beans.pack.card.Card;
-import game.logic.SantaseGame;
+import game.logic.SantaseFacade;
 
 import com.karamanov.santase.R;
 import com.karamanov.santase.Santase;
@@ -36,8 +36,8 @@ public class TricksActivity extends Activity {
         LinearLayout vertical = new LinearLayout(this);
         vertical.setOrientation(LinearLayout.VERTICAL);
 
-        SantaseGame game = Santase.getGame();
-        Pack hands = game.getPlayer().getHands();
+        SantaseFacade game = Santase.getSantaseFacade();
+        Pack hands = game.getGame().getHuman().getHands();
 
         for (PackIterator i = hands.iterator(); i.hasNext();) {
             Card pCard = i.next();

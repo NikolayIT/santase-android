@@ -11,7 +11,8 @@ import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
-import com.karamanov.santase.screen.base.message.UserMessage;
+import com.karamanov.santase.message.Message;
+import com.karamanov.santase.message.MessageType;
 
 public final class SantaseView extends SurfaceView implements SurfaceHolder.Callback {
 
@@ -112,7 +113,7 @@ public final class SantaseView extends SurfaceView implements SurfaceHolder.Call
 
     public boolean onTouchEvent(MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
-            UserMessage tMessage = new UserMessage(activity.MT_TOUCH_EVENT, new PointF(event.getX(), event.getY()));
+            Message tMessage = new Message(MessageType.MT_TOUCH_EVENT, new PointF(event.getX(), event.getY()));
             activity.triggerMessage(tMessage);
             return true;
         }

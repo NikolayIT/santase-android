@@ -12,7 +12,7 @@ import game.beans.pack.Pack;
 import game.beans.pack.card.Card;
 import game.beans.pack.card.rank.Rank;
 import game.beans.pack.card.rank.RankIterator;
-import game.logic.SantaseGame;
+import game.logic.SantaseFacade;
 import game.logic.strategy.automat.methods.base.BaseMethod;
 
 /**
@@ -46,7 +46,7 @@ public final class ClosedTrumpCard extends BaseMethod {
             final int eventCouple = eventualCouplePoints(player.getCards());
             final int futurePoints = Card.getPoints(getRival(player).getPlayedCard()) + Card.getPoints(playerCard);
 
-            final boolean hasEnoughPoints = eventCouple + futurePoints + player.getPoints(game.getTrumpSuit()) >= SantaseGame.END_GAME_POINTS;
+            final boolean hasEnoughPoints = eventCouple + futurePoints + player.getPoints(game.getTrumpSuit()) >= SantaseFacade.END_GAME_POINTS;
 
             if (hasEnoughPoints) {
                 return playerCard;

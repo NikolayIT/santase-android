@@ -10,7 +10,7 @@ import game.beans.Game;
 import game.beans.Player;
 import game.beans.pack.Pack;
 import game.beans.pack.card.Card;
-import game.logic.SantaseGame;
+import game.logic.SantaseFacade;
 import game.logic.strategy.automat.methods.base.BaseMethod;
 
 /**
@@ -45,7 +45,7 @@ public final class OrdinaryWinBestTrumpCard extends BaseMethod {
 
             final int cardsPoints = Card.getPoints(result) + Card.getPoints(card) + Card.getPoints(smallestCard);
 
-            if (cardsPoints + eventualCouplePoints(player.getCards()) + player.getPoints(game.getTrumpSuit()) >= SantaseGame.END_GAME_POINTS) {
+            if (cardsPoints + eventualCouplePoints(player.getCards()) + player.getPoints(game.getTrumpSuit()) >= SantaseFacade.END_GAME_POINTS) {
                 return result;
             }
         }

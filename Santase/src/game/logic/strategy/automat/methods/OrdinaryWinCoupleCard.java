@@ -9,7 +9,7 @@ package game.logic.strategy.automat.methods;
 import game.beans.Game;
 import game.beans.Player;
 import game.beans.pack.card.Card;
-import game.logic.SantaseGame;
+import game.logic.SantaseFacade;
 import game.logic.strategy.automat.methods.base.BaseMethod;
 
 /**
@@ -42,7 +42,7 @@ public final class OrdinaryWinCoupleCard extends BaseMethod {
      */
     protected Card getPlayMethodCard(final Player player) {
         Card result = null;
-        if (eventualCouplePoints(player.getCards()) + player.getPoints(game.getTrumpSuit()) >= SantaseGame.END_GAME_POINTS) {
+        if (eventualCouplePoints(player.getCards()) + player.getPoints(game.getTrumpSuit()) >= SantaseFacade.END_GAME_POINTS) {
             result = randomCoupleCard.getPlayMethodCard(player);
         }
         return result;

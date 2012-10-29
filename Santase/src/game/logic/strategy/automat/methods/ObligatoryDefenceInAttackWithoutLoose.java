@@ -11,7 +11,7 @@ import game.beans.Player;
 import game.beans.pack.Pack;
 import game.beans.pack.PackIterator;
 import game.beans.pack.card.Card;
-import game.logic.SantaseGame;
+import game.logic.SantaseFacade;
 import game.logic.strategy.automat.base.PlayCardMethod;
 import game.logic.strategy.automat.executors.ObligatoryDefenceCardExecutor;
 import game.logic.strategy.automat.methods.base.BaseMethod;
@@ -128,7 +128,7 @@ public final class ObligatoryDefenceInAttackWithoutLoose extends BaseMethod {
                     final int eventCouple = eventualCouplePoints(getRival(player).getCards());
                     int futurePoints = Card.getPoints(futureCard) + Card.getPoints(card) + eventCouple;
 
-                    if (futurePoints + getRival(player).getPoints(game.getTrumpSuit()) >= SantaseGame.END_GAME_POINTS) {
+                    if (futurePoints + getRival(player).getPoints(game.getTrumpSuit()) >= SantaseFacade.END_GAME_POINTS) {
                         return false;
                     }
 
@@ -139,7 +139,7 @@ public final class ObligatoryDefenceInAttackWithoutLoose extends BaseMethod {
                     futurePoints += sureHandsPoints(getRival(player).getCards(), player.getCards(), hands);
                     futurePoints += getHandsNoTrump(getRival(player).getCards(), player.getCards(), hands);
 
-                    return futurePoints + getRival(player).getPoints(game.getTrumpSuit()) < SantaseGame.END_GAME_POINTS;
+                    return futurePoints + getRival(player).getPoints(game.getTrumpSuit()) < SantaseFacade.END_GAME_POINTS;
                 }
                 return true;
             } finally {
