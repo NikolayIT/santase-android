@@ -25,35 +25,19 @@
  */
 package com.karamanov.santase.screen.base;
 
-import com.karamanov.santase.screen.base.message.MessageQueue;
-import com.karamanov.santase.screen.base.message.MessageTypeRegister;
-import com.karamanov.santase.screen.base.message.Messageable;
-import com.karamanov.santase.screen.base.message.UserMessage;
-import com.karamanov.santase.screen.base.message.UserMessageType;
-
 import android.app.Activity;
 import android.os.Bundle;
+
+import com.karamanov.santase.Santase;
+import com.karamanov.santase.message.Message;
+import com.karamanov.santase.message.MessageType;
+import com.karamanov.santase.message.Messageable;
 
 /**
  * FrameGameCanvas class.
  * @author Dimitar Karamanov
  */
-public class GameActivity extends Activity implements Runnable {
-
-    /**
-     * Used to indicate if the working thread was interrupted.
-     */
-    private boolean interrupted;
-
-    /**
-     * Working thread.
-     */
-    private Thread thread;
-
-    /**
-     * Message queue.
-     */
-    private final MessageQueue messageQueue = new MessageQueue();
+public class GameActivity extends Activity {
 
     /**
      * Constructor.
@@ -61,13 +45,11 @@ public class GameActivity extends Activity implements Runnable {
      */
     public GameActivity() {
         super();
-        thread = new Thread(this);
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        thread.start();
     }
 
     /**
@@ -83,29 +65,7 @@ public class GameActivity extends Activity implements Runnable {
      * 
      * return result; }
      */
-
-    /**
-     * Inits user message type.
-     * @param messageTypeID id of the message type.
-     * @return UserMessageType instance.
-     */
-    protected final UserMessageType initUserMessageType(String messageTypeID) {
-        UserMessageType result = MessageTypeRegister.getRegister().getUserMessageType(messageTypeID);
-
-        if (result == null) {
-            result = MessageTypeRegister.getRegister().registerUserMessageType(messageTypeID);
-        }
-
-        return result;
-    }
-
-    /**
-     * Stops the main game loop.
-     */
-    public final void stop() {
-        this.interrupted = true;
-    }
-
+    
     /**
      * The canvas is being displayed. Stop the event handling and animation thread.
      */
@@ -118,21 +78,6 @@ public class GameActivity extends Activity implements Runnable {
      */
     protected void onPause() {
         super.onPause();
-    }
-
-    /**
-     * Working thread run method.
-     */
-    public final void run() {
-        try {
-            final Thread mythread = Thread.currentThread();
-
-            while (!interrupted && mythread == thread) {
-                messageQueue.processMessage();
-            }
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        }
     }
 
     /**
@@ -153,8 +98,11 @@ public class GameActivity extends Activity implements Runnable {
      * Adds user message to the end of the queue.
      * @param message new message.
      */
-    public final void triggerMessage(final UserMessage message) {
-        messageQueue.addMessage(message);
+    public final void triggerMessage(final Message message) {
+        if (getApplication() instanceof Santase) {
+            Santase santase = (Santase) getApplication();
+            santase.getMessageProcessor().sendMessage(message);
+        }
     }
 
     /**
@@ -162,15 +110,21 @@ public class GameActivity extends Activity implements Runnable {
      * @param messageType concrete user message type.
      * @param messageable message listener.
      */
-    public final void addMessageListener(final UserMessageType messageType, final Messageable messageable) {
-        messageQueue.addMessageListener(messageType, messageable);
+    public final void addMessageListener(final MessageType messageType, final Messageable messageable) {
+        if (getApplication() instanceof Santase) {
+            Santase santase = (Santase) getApplication();
+            santase.getMessageProcessor().addMessageListener(messageType, messageable);
+        }
     }
 
     /**
      * Removes message listener for the concrete message type.
      * @param messageType concrete user message type.
      */
-    public final void removeMessageListener(final UserMessageType messageType) {
-        messageQueue.removeMessageListener(messageType);
+    public final void removeMessageListener(final MessageType messageType) {
+        if (getApplication() instanceof Santase) {
+            Santase santase = (Santase) getApplication();
+            santase.getMessageProcessor().removeMessageListener(messageType);
+        }
     }
 }

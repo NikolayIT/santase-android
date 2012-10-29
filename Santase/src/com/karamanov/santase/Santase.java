@@ -1,7 +1,7 @@
 package com.karamanov.santase;
 
 import game.beans.Game;
-import game.logic.SantaseGame;
+import game.logic.SantaseFacade;
 
 import java.io.BufferedWriter;
 import java.io.File;
@@ -15,6 +15,8 @@ import java.io.ObjectOutputStream;
 import java.io.StreamCorruptedException;
 import java.util.ArrayList;
 
+import com.karamanov.santase.message.MessageProcessor;
+
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -26,30 +28,38 @@ import android.util.TypedValue;
 public class Santase extends Application {
 
     private static final String SANTASE_DAT = "santase.dat";
+    
+    private final MessageProcessor messageProcessor;
 
-    private static SantaseGame game;
+    private static SantaseFacade santaseFacade;
 
     public Santase() {
         super();
+        messageProcessor = new MessageProcessor();
     }
 
     @Override
     public void onCreate() {
         super.onCreate();
+        messageProcessor.start();
+    }
+    
+    public final MessageProcessor getMessageProcessor() {
+        return messageProcessor;
     }
 
-    public static SantaseGame getGame() {
-        if (game != null) {
-            return game;
+    public static SantaseFacade getSantaseFacade() {
+        if (santaseFacade != null) {
+            return santaseFacade;
         }
 
-        game = new SantaseGame();
-        return game;
+        santaseFacade = new SantaseFacade();
+        return santaseFacade;
     }
 
     public static void resetGame(Context context) {
-        game = new SantaseGame();
-        game.newGame();
+        santaseFacade = new SantaseFacade();
+        santaseFacade.getGame().newGame();
         context.deleteFile(SANTASE_DAT);
     }
 
@@ -66,7 +76,7 @@ public class Santase extends Application {
                     try {
                         Object object = ois.readObject();
                         if (object instanceof Game) {
-                            getGame().setGame((Game) object);
+                            getSantaseFacade().setGame((Game) object);
                             return true;
                         }
                     } finally {
@@ -99,7 +109,7 @@ public class Santase extends Application {
                 try {
                     ObjectOutputStream oos = new ObjectOutputStream(fos);
                     try {
-                        oos.writeObject(game.getGame());
+                        oos.writeObject(santaseFacade.getGame());
                     } finally {
                         oos.close();
                     }
@@ -111,7 +121,7 @@ public class Santase extends Application {
             } catch (IOException e) {
             }
         }
-        game = null;
+        santaseFacade = null;
     }
 
     public static void _saveLog(ArrayList<String> log) {

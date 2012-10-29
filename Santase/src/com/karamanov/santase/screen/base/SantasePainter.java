@@ -9,9 +9,9 @@
  */
 package com.karamanov.santase.screen.base;
 
+import game.beans.Game;
 import game.beans.pack.card.Card;
 import game.beans.pack.card.suit.Suit;
-import game.logic.SantaseGame;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
@@ -146,21 +146,21 @@ public final class SantasePainter extends BasePainter {
         return new Rectangle(x, y, cardWidth, cardHeight);
     }
 
-    public Rectangle getPlayerCardRectangle(SantaseGame game, final int index, View view) {
+    public Rectangle getPlayerCardRectangle(Game game, final int index, View view) {
         int x = getFirstCardPosXX(view) + index * (cardWidth - PlayerCardsOverlapped);
         int y = view.getHeight() - (int) new TextPaint().getTextSize() - cardHeight;
-        if (index == PLAYER_CARD_COUNT - 1 || index == game.getPlayer().getCards().getSize() - 1) {
+        if (index == PLAYER_CARD_COUNT - 1 || index == game.getHuman().getCards().getSize() - 1) {
             return new Rectangle(x, y, cardWidth, cardHeight);
         }
         return new Rectangle(x, y, cardWidth - PlayerCardsOverlapped, cardHeight);
     }
 
-    private void drawPlayedCards(Canvas g, View view, SantaseGame game) {
+    private void drawPlayedCards(Canvas g, View view, Game game) {
         final int x1 = getFirstCardPosXX(view) + 3 * (cardWidth - PlayerCardsOverlapped);
         final int x2 = x1 + cardWidth + SPACE;
         final int y = getMiddleCardY(view);
 
-        drawCardOrEmpty(game.getPlayer().getPlayedCard(), g, x1, y);
+        drawCardOrEmpty(game.getHuman().getPlayedCard(), g, x1, y);
         drawCardOrEmpty(game.getComputer().getPlayedCard(), g, x2, y);
     }
 
@@ -176,21 +176,21 @@ public final class SantasePainter extends BasePainter {
         // g.drawBitmap(pictureDecorator.getEmpty(), x, y, null);
     }
 
-    public void drawGame(Canvas graphics, SantaseGame game, SantaseView view, long delay) {
+    public void drawGame(Canvas graphics, Game game, SantaseView view, long delay) {
         drawTable(graphics);
         drawScore(graphics, game);
         drawCompCards(graphics, game, view, delay);
         drawTrumpCard(graphics, view, game);
         drawPlayedCards(graphics, view, game);
-        drawPlayerCards(graphics, game, view, game.getPlayer().getSelectedCard(), delay);
+        drawPlayerCards(graphics, game, view, game.getHuman().getSelectedCard(), delay);
     }
 
-    private void drawPlayerCards(Canvas g, SantaseGame game, SantaseView view, Card PlayerSelectedCard, long delay) {
+    private void drawPlayerCards(Canvas g, Game game, SantaseView view, Card PlayerSelectedCard, long delay) {
         for (int i = 0; i < PLAYER_CARD_COUNT; i++) {
             Rectangle rec = getPlayerCardRectangle(game, i, view);
 
-            if (i < game.getPlayer().getCards().getSize()) {
-                Card card = game.getPlayer().getCards().getCard(i);
+            if (i < game.getHuman().getCards().getSize()) {
+                Card card = game.getHuman().getCards().getCard(i);
                 drawCard(card, g, rec.x, rec.y);
                 if (card.equals(PlayerSelectedCard)) {
                     drawDarkenedCard(card, g, rec.x, rec.y);
@@ -206,7 +206,7 @@ public final class SantasePainter extends BasePainter {
         }
     }
 
-    private void drawCompCards(Canvas graphics, SantaseGame game, SantaseView view, long delay) {
+    private void drawCompCards(Canvas graphics, Game game, SantaseView view, long delay) {
         final int fx = getFirstCardPosX(graphics);
 
         Paint p = new Paint();
@@ -243,7 +243,7 @@ public final class SantasePainter extends BasePainter {
         }
     }
 
-    private void drawTrumpCard(Canvas graphics, View view, SantaseGame game) {
+    private void drawTrumpCard(Canvas graphics, View view, Game game) {
         Rectangle rec = getTrumpCardRectangle(view);
 
         if (!game.getGameCards().isEmpty() && game.isNotClosedGame()) {
@@ -275,7 +275,7 @@ public final class SantasePainter extends BasePainter {
         }
     }
 
-    private void drawCloseString(Canvas canvas, int x, int y, SantaseGame game) {
+    private void drawCloseString(Canvas canvas, int x, int y, Game game) {
         if (game.isNotClosedGame()) {
             return;
         }
@@ -283,7 +283,7 @@ public final class SantasePainter extends BasePainter {
         Context context = getContext();
 
         Drawable player;
-        if (game.isPlayerClosed(game.getPlayer())) {
+        if (game.isPlayerClosed(game.getHuman())) {
             player = context.getResources().getDrawable(R.drawable.human);
         } else {
             player = context.getResources().getDrawable(R.drawable.android);
@@ -314,16 +314,16 @@ public final class SantasePainter extends BasePainter {
         if (points == 0) {
             return Color.clGreen.getRGB();
         }
-        if (points < SantaseGame.POINTS_ZONE) {
+        if (points < Game.POINTS_ZONE) {
             return Color.clLightGreen.getRGB();
         }
-        if (points < SantaseGame.END_GAME_POINTS) {
+        if (points < Game.END_GAME_POINTS) {
             return Color.clLightRed.getRGB();
         }
         return Color.clRed.getRGB();
     }
 
-    private void drawScore(Canvas graphics, SantaseGame game) {
+    private void drawScore(Canvas graphics, Game game) {
         int x = 1;
         int y = 0;
         Paint p = new Paint();
@@ -361,9 +361,9 @@ public final class SantasePainter extends BasePainter {
         human.setBounds(x + d, y, x + d + human.getMinimumWidth(), y + human.getMinimumHeight());
         human.draw(graphics);
 
-        String humanPoints = String.valueOf(game.getPlayer().getPoints(game.getTrumpSuit())); // Refactored !!!
+        String humanPoints = String.valueOf(game.getHuman().getPoints(game.getTrumpSuit())); // Refactored !!!
         p.getTextBounds(humanPoints, 0, humanPoints.length(), pointsBounds);
-        p.setColor(getPointsColor(game.getPlayer().getPoints(game.getTrumpSuit())));
+        p.setColor(getPointsColor(game.getHuman().getPoints(game.getTrumpSuit())));
         graphics.drawText(humanPoints, x + maxWidth + (bounds.width() - pointsBounds.width()), y + pointsBounds.height()
                 + (human.getMinimumHeight() - pointsBounds.height()) / 2, p);
 
@@ -391,7 +391,7 @@ public final class SantasePainter extends BasePainter {
         human.setBounds(x + d, y, x + d + human.getMinimumWidth(), y + human.getMinimumHeight());
         human.draw(graphics);
 
-        humanPoints = String.valueOf(game.getPlayer().getLittleGames());
+        humanPoints = String.valueOf(game.getHuman().getLittleGames());
         p.getTextBounds(humanPoints, 0, humanPoints.length(), pointsBounds);
         p.setColor(Color.clLightGreen.getRGB());
         graphics.drawText(humanPoints, x + maxWidth + (bounds.width() - pointsBounds.width()), y + pointsBounds.height()
