@@ -17,12 +17,11 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.os.Handler;
 
+import com.karamanov.framework.MessageActivity;
+import com.karamanov.framework.graphics.ImageUtil;
+import com.karamanov.framework.graphics.Rectangle;
 import com.karamanov.santase.R;
 import com.karamanov.santase.Santase;
-import com.karamanov.santase.graphics.ImagePosition;
-import com.karamanov.santase.graphics.ImageUtil;
-import com.karamanov.santase.graphics.Rectangle;
-import com.karamanov.santase.screen.base.GameActivity;
 import com.karamanov.santase.screen.base.SantasePainter;
 import com.karamanov.santase.screen.main.message.MessageData;
 import com.karamanov.santase.screen.main.message.MessageScreen;
@@ -40,7 +39,7 @@ public class Dealer {
     public static final int STANDARD_CARD_DELAY = 30;
 
     /**
-     * Belot painter. (All drawing functionality is in it).
+     * Santase painter. (All drawing functionality is in it).
      */
     public final SantasePainter santasePainter;
 
@@ -52,7 +51,7 @@ public class Dealer {
 
     private static final long PLAY_DELAY = 200;
 
-    private final GameActivity context;
+    private final MessageActivity context;
 
     private final SantaseFacade santaseFacade;
 
@@ -62,7 +61,7 @@ public class Dealer {
 
     public boolean endGameActivity = true;
 
-    public Dealer(GameActivity context, SantaseFacade santaseFacade, SantaseView belotPanel) {
+    public Dealer(MessageActivity context, SantaseFacade santaseFacade, SantaseView belotPanel) {
         this.context = context;
         this.santaseFacade = santaseFacade;
         this.santasePanel = belotPanel;
@@ -106,7 +105,7 @@ public class Dealer {
     }
 
     private void showCloseGameDialog() {
-        final com.karamanov.santase.screen.base.BooleanFlag wait = new com.karamanov.santase.screen.base.BooleanFlag();
+        final com.karamanov.framework.BooleanFlag wait = new com.karamanov.framework.BooleanFlag();
         handler.post(new Runnable() {
             public void run() {
                 AlertDialog.Builder myAlertDialog = new AlertDialog.Builder(context);
@@ -238,7 +237,7 @@ public class Dealer {
      * @param card played by player.
      */
     private void displayMessage(final ArrayList<MessageData> messages) {
-        final com.karamanov.santase.screen.base.BooleanFlag wait = new com.karamanov.santase.screen.base.BooleanFlag();
+        final com.karamanov.framework.BooleanFlag wait = new com.karamanov.framework.BooleanFlag();
         handler.post(new Runnable() {
             public void run() {
                 messageScreen = new MessageScreen(context, messages, wait);
@@ -363,10 +362,10 @@ public class Dealer {
     }
 
     private void showInfo(String infoString) {
-        showInfo(infoString, null, null);
+        showInfo(infoString, null);
     }
 
-    private void showInfo(String infoString, Bitmap image, ImagePosition position) {
+    private void showInfo(String infoString, Bitmap image) {
         ArrayList<MessageData> list = new ArrayList<MessageData>();
         list.add(new MessageData(null, infoString));
         displayMessage(list);
@@ -417,28 +416,28 @@ public class Dealer {
         String message = context.getString(R.string.AndroidHasACoupleExit);
         message = textDecorator.replaceSuit(suit, message);
         message = textDecorator.translateCouple(suit, santaseFacade.getGame().getTrumpSuit(), message);
-        showInfo(message, ImageUtil.transformToDisabledImage(santasePainter.getSuitImage(suit)), ImagePosition.Right);
+        showInfo(message, ImageUtil.transformToDisabledImage(santasePainter.getSuitImage(suit)));
     }
 
     private void displayPlayerCoupleMessageExit(Suit suit) {
         String message = context.getString(R.string.HumanHasACoupleExit);
         message = textDecorator.replaceSuit(suit, message);
         message = textDecorator.translateCouple(suit, santaseFacade.getGame().getTrumpSuit(), message);
-        showInfo(message, ImageUtil.transformToDisabledImage(santasePainter.getSuitImage(suit)), ImagePosition.Right);
+        showInfo(message, ImageUtil.transformToDisabledImage(santasePainter.getSuitImage(suit)));
     }
 
     private void displayCoupleMessagePlayer(Suit suit) {
         String message = context.getString(R.string.HumanHasCoupleOf);
         message = textDecorator.replaceSuit(suit, message);
         message = textDecorator.translateCouple(suit, santaseFacade.getGame().getTrumpSuit(), message);
-        showInfo(message, ImageUtil.transformToDisabledImage(santasePainter.getSuitImage(suit)), ImagePosition.Right);
+        showInfo(message, ImageUtil.transformToDisabledImage(santasePainter.getSuitImage(suit)));
     }
 
     private void displayCoupleMessage(Suit suit) {
         String message = context.getString(R.string.AndroidHasCoupleOf);
         message = textDecorator.replaceSuit(suit, message);
         message = textDecorator.translateCouple(suit, santaseFacade.getGame().getTrumpSuit(), message);
-        showInfo(message, ImageUtil.transformToDisabledImage(santasePainter.getSuitImage(suit)), ImagePosition.Right);
+        showInfo(message, ImageUtil.transformToDisabledImage(santasePainter.getSuitImage(suit)));
     }
 
     private Card getHumanCardUnderPointer(final float x, final float y) {
