@@ -9,8 +9,8 @@ import android.view.MotionEvent;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.karamanov.framework.BooleanFlag;
 import com.karamanov.santase.R;
-import com.karamanov.santase.screen.base.BooleanFlag;
 
 public class MessageScreen extends Dialog {
 
