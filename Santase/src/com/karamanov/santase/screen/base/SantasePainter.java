@@ -22,11 +22,11 @@ import android.graphics.drawable.GradientDrawable;
 import android.text.TextPaint;
 import android.view.View;
 
+import com.karamanov.framework.graphics.Color;
+import com.karamanov.framework.graphics.ImageUtil;
+import com.karamanov.framework.graphics.Rectangle;
 import com.karamanov.santase.R;
 import com.karamanov.santase.Santase;
-import com.karamanov.santase.graphics.Color;
-import com.karamanov.santase.graphics.ImageUtil;
-import com.karamanov.santase.graphics.Rectangle;
 import com.karamanov.santase.screen.main.SantaseView;
 
 /**
