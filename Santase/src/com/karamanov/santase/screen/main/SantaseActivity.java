@@ -24,20 +24,19 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.ImageButton;
 import android.widget.RelativeLayout;
 
+import com.karamanov.framework.MessageActivity;
+import com.karamanov.framework.message.Message;
+import com.karamanov.framework.message.Messageable;
 import com.karamanov.santase.R;
 import com.karamanov.santase.Santase;
 import com.karamanov.santase.graphics.PictureDecorator;
-import com.karamanov.santase.message.Message;
-import com.karamanov.santase.message.MessageType;
-import com.karamanov.santase.message.Messageable;
-import com.karamanov.santase.screen.base.GameActivity;
 import com.karamanov.santase.screen.main.message.MessageData;
 import com.karamanov.santase.screen.main.tip.TipScreen;
 import com.karamanov.santase.screen.pref.SantasePreferencesActivity;
 import com.karamanov.santase.screen.tricks.TricksActivity;
 import com.karamanov.santase.text.TextDecorator;
 
-public class SantaseActivity extends GameActivity implements OnSharedPreferenceChangeListener {
+public class SantaseActivity extends MessageActivity implements OnSharedPreferenceChangeListener {
 
     private Dealer dealer;
 
@@ -71,10 +70,10 @@ public class SantaseActivity extends GameActivity implements OnSharedPreferenceC
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         
-        addMessageListener(MessageType.MT_KEY_PRESSED, new KeyPressedListener());
-        addMessageListener(MessageType.MT_TOUCH_EVENT, new TouchListener());
-        addMessageListener(MessageType.MT_EXIT_EVENT, new ExitListener());
-        addMessageListener(MessageType.MT_PAINT_EVENT, new PaintListener());
+        addMessageListener(Santase.MT_KEY_PRESSED, new KeyPressedListener());
+        addMessageListener(Santase.MT_TOUCH_EVENT, new TouchListener());
+        addMessageListener(Santase.MT_EXIT_EVENT, new ExitListener());
+        addMessageListener(Santase.MT_PAINT_EVENT, new PaintListener());
 
         buttons = new RelativeLayout(this);
         buttons.setId(1);
@@ -310,7 +309,7 @@ public class SantaseActivity extends GameActivity implements OnSharedPreferenceC
             myAlertDialog.setMessage(getString(R.string.ExitQuestion));
             myAlertDialog.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
-                    Message tMessage = new Message(MessageType.MT_EXIT_EVENT);
+                    Message tMessage = new Message(Santase.MT_EXIT_EVENT);
                     triggerMessage(tMessage);
                 }
             });
@@ -321,7 +320,7 @@ public class SantaseActivity extends GameActivity implements OnSharedPreferenceC
             });
             myAlertDialog.show();
         } else {
-            Message tMessage = new Message(MessageType.MT_EXIT_EVENT);
+            Message tMessage = new Message(Santase.MT_EXIT_EVENT);
             triggerMessage(tMessage);
         }
     }
@@ -347,7 +346,7 @@ public class SantaseActivity extends GameActivity implements OnSharedPreferenceC
     }
 
     public void repaint() {
-        Message tMessage = new Message(MessageType.MT_PAINT_EVENT);
+        Message tMessage = new Message(Santase.MT_PAINT_EVENT);
         triggerMessage(tMessage);
     }
 
@@ -395,7 +394,7 @@ public class SantaseActivity extends GameActivity implements OnSharedPreferenceC
 
         @Override
         public void onClick(View view) {
-            Message tMessage = new Message(MessageType.MT_KEY_PRESSED, i);
+            Message tMessage = new Message(Santase.MT_KEY_PRESSED, i);
             triggerMessage(tMessage);
         }
     }
