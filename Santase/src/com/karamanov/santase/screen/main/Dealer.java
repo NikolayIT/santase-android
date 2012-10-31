@@ -171,13 +171,15 @@ public class Dealer {
         if (santaseFacade.getGame().isBigNewGame()) {
             String message;
             Bitmap bitmap;
-            if (santaseFacade.getGame().getComputer().equals(player)) {
-                message = context.getString(R.string.AndroidWinSeries);
-                bitmap = santasePainter.getUnhappy();
-            } else {
+            
+            if (santaseFacade.getGame().getComputer().equals(santaseFacade.getGame().getTrickAttackPlayer())) {
                 message = context.getString(R.string.PlayerWinSeries);
                 bitmap = santasePainter.getHappy();
+            } else {
+                message = context.getString(R.string.AndroidWinSeries);
+                bitmap = santasePainter.getUnhappy();
             }
+            
             ArrayList<MessageData> list = new ArrayList<MessageData>();
             list.add(new MessageData(bitmap, message));
             displayMessage(list);
