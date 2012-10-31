@@ -17,6 +17,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.os.Handler;
 
+import com.karamanov.framework.BooleanFlag;
 import com.karamanov.framework.MessageActivity;
 import com.karamanov.framework.graphics.ImageUtil;
 import com.karamanov.framework.graphics.Rectangle;
@@ -94,9 +95,9 @@ public class Dealer {
             return;
         }
 
-        Card card = null;
-        if (santaseFacade.isHumanTurn() && (card = getHumanCardUnderPointer(x, y)) != null) {
-            if (santaseFacade.validatePlayerMove(santaseFacade.getGame().getHuman(), santaseFacade.getGame().getComputer(), card).equals(ValidateCode.PLAYER_CAN_PLAY)) {
+        if (santaseFacade.isHumanTurn()) {
+            Card card = getHumanCardUnderPointer(x, y);
+            if (card != null && santaseFacade.validatePlayerMove(santaseFacade.getGame().getHuman(), santaseFacade.getGame().getComputer(), card).equals(ValidateCode.PLAYER_CAN_PLAY)) {
                 santaseFacade.getGame().getHuman().setSelectedCard(card);
                 invalidateGame();
                 return;
@@ -105,7 +106,7 @@ public class Dealer {
     }
 
     private void showCloseGameDialog() {
-        final com.karamanov.framework.BooleanFlag wait = new com.karamanov.framework.BooleanFlag();
+        final BooleanFlag wait = new BooleanFlag();
         handler.post(new Runnable() {
             public void run() {
                 AlertDialog.Builder myAlertDialog = new AlertDialog.Builder(context);
@@ -185,10 +186,6 @@ public class Dealer {
         invalidateGame();
     }
 
-    private void newPlayerGame() {
-        newGame(santaseFacade.getGame().getHuman());
-    }
-
     public boolean playerCanChangeTrumpCard(ArrayList<MessageData> result, Card PlayerCheckedCard) {
         if (PlayerCheckedCard == null || !PlayerCheckedCard.getSuit().equals(santaseFacade.getGame().getTrumpSuit()) || !PlayerCheckedCard.getRank().equals(Rank.Nine)) {
             String errorStr = context.getString(R.string.YouCanChangeWith9Trump);
@@ -237,7 +234,7 @@ public class Dealer {
      * @param card played by player.
      */
     private void displayMessage(final ArrayList<MessageData> messages) {
-        final com.karamanov.framework.BooleanFlag wait = new com.karamanov.framework.BooleanFlag();
+        final BooleanFlag wait = new BooleanFlag();
         handler.post(new Runnable() {
             public void run() {
                 messageScreen = new MessageScreen(context, messages, wait);
@@ -253,13 +250,14 @@ public class Dealer {
 
     private void playSelectedPlayerCard() {
         if (endGameWithCouple()) {
-            // moveSelectedPlayerCard();
-            newPlayerGame();
+            Player human = santaseFacade.getGame().getHuman();
+            newGame(human);
         } else {
+            Player computer = santaseFacade.getGame().getComputer();
             moveSelectedPlayerCard();
-            santaseFacade.getGame().setTrickAttackPlayer(santaseFacade.getGame().getComputer());
+            santaseFacade.getGame().setTrickAttackPlayer(computer);
 
-            if (santaseFacade.getGame().getComputer().getPlayedCard() == null) {
+            if (computer.getPlayedCard() == null) {
                 getAICard();
             }
 
@@ -281,9 +279,10 @@ public class Dealer {
     }
 
     private boolean playCoupleAndStop(Card pc) {
-        santaseFacade.getGame().getHuman().getCouples().setCouple(pc.getSuit());
-
-        boolean result = santaseFacade.getGame().getHuman().getPoints(santaseFacade.getGame().getTrumpSuit()) >= SantaseFacade.END_GAME_POINTS;
+        Player human = santaseFacade.getGame().getHuman();
+        
+        human.getCouples().setCouple(pc.getSuit());
+        boolean result = human.getPoints(santaseFacade.getGame().getTrumpSuit()) >= SantaseFacade.END_GAME_POINTS;
 
         if (result) {
             moveSelectedPlayerCard(); // Refactor
@@ -298,7 +297,9 @@ public class Dealer {
     }
 
     private boolean validatePlayerMove() {
-        return santaseFacade.validatePlayerMove(santaseFacade.getGame().getHuman(), santaseFacade.getGame().getComputer(), santaseFacade.getGame().getHuman().getSelectedCard()).equals(ValidateCode.PLAYER_CAN_PLAY);
+        Player human = santaseFacade.getGame().getHuman();
+        Player computer = santaseFacade.getGame().getComputer();
+        return santaseFacade.validatePlayerMove(human, computer, human.getSelectedCard()).equals(ValidateCode.PLAYER_CAN_PLAY);
     }
 
     private boolean checkClickForPlay() {
@@ -320,29 +321,29 @@ public class Dealer {
 
     private boolean checkClickForNextTour() {
         invalidateGame();
+        
+        Player human = santaseFacade.getGame().getHuman();
+        Player computer = santaseFacade.getGame().getComputer();
 
-        if (santaseFacade.getGame().getHuman().equals(santaseFacade.getGame().getTrickAttackPlayer())) {
-            if (santaseFacade.getGame().canEndGame(santaseFacade.getGame().getHuman())) {
-                displayEndGameMessage(santaseFacade.getGame().getHuman());
-                newPlayerGame();
+        if (human.equals(santaseFacade.getGame().getTrickAttackPlayer())) {
+            if (santaseFacade.getGame().canEndGame(human)) {
+                displayEndGameMessage(human);
+                newGame(human);
                 return true;
             }
         }
 
-        if (santaseFacade.getGame().getComputer().equals(santaseFacade.getGame().getTrickAttackPlayer())) {
-            if (santaseFacade.getGame().canEndGame(santaseFacade.getGame().getComputer())) {
-                displayEndGameMessage(santaseFacade.getGame().getComputer());
-                newComputerGame();
+        if (computer.equals(santaseFacade.getGame().getTrickAttackPlayer())) {
+            if (santaseFacade.getGame().canEndGame(computer)) {
+                displayEndGameMessage(computer);
+                newGame(computer);
                 return true;
             }
 
             getAICard();
             // Check for end with couple
-            if (santaseFacade.getGame().canEndGame(santaseFacade.getGame().getComputer()))// ??? I think is necessary ||
-            // game.player.cards.getSize()
-            // == 0)
-            {
-                newComputerGame();
+            if (santaseFacade.getGame().canEndGame(computer)) {
+                newGame(computer);
                 return true;
             }
 
@@ -369,10 +370,6 @@ public class Dealer {
         ArrayList<MessageData> list = new ArrayList<MessageData>();
         list.add(new MessageData(null, infoString));
         displayMessage(list);
-    }
-
-    private void newComputerGame() {
-        newGame(santaseFacade.getGame().getComputer());
     }
 
     private void getAICard() {
