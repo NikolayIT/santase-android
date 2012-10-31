@@ -261,18 +261,6 @@ public final class Game implements Serializable {
         }
     }
 
-    public final void calculateFuturePoints(final Player pMove) {
-        computer.copyRealToFuturePoints();
-        human.copyRealToFuturePoints();
-        Player OldMove = getTrickAttackPlayer();
-
-        calculatePoints(pMove);
-
-        human.replacePoints();
-        computer.replacePoints();
-        setTrickAttackPlayer(OldMove);
-    }
-
     public final void calculatePoints(final Player pMove) {
         if (pMove == computer) {
             calculateGamePoints(computer, human);

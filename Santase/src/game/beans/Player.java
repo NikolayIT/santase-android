@@ -60,16 +60,6 @@ public final class Player implements Serializable {
     private int bigGames = 0;
 
     /**
-     * Player's future little games
-     */
-    private int futLittleGames = 0;
-
-    /**
-     * Player's future big games
-     */
-    private int futBigGames = 0;
-
-    /**
      * Player's played card
      */
     private Card playedCard = null;
@@ -147,26 +137,6 @@ public final class Player implements Serializable {
      */
     public boolean hasCouple(final Suit suit) {
         return getCards().hasCouple(suit);
-    }
-
-    /**
-     * Copies from real to future points.
-     */
-    public void copyRealToFuturePoints() {
-        futLittleGames = getLittleGames();
-        futBigGames = getBigGames();
-    }
-
-    /**
-     * Replays points.
-     */
-    public void replacePoints() {
-        int rep = futLittleGames;
-        futLittleGames = getLittleGames();
-        setLittleGames(rep);
-        rep = futBigGames;
-        futBigGames = getBigGames();
-        setBigGames(rep);
     }
 
     public Pack getCards() {
