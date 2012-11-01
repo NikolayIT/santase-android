@@ -115,7 +115,7 @@ public final class SantaseFacade {
         }
     }
 
-    public ValidateCode validatePlayerMove(Player player, Player attackPlayer, Card card) {
+    public ValidateCode validatePlayerCard(Player player, Player attackPlayer, Card card) {
         return getGameAdviser().validatePlayerCard(player, card, attackPlayer.getPlayedCard(), game.getTrumpSuit());
     }
 

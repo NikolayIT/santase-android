@@ -85,17 +85,18 @@ public class MessagePanel extends LinearLayout {
             imageView.setImageBitmap(image);
             TableRow.LayoutParams trp = new TableRow.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
             trp.rightMargin = dip5;
+            trp.gravity = Gravity.CENTER_VERTICAL;
             imageView.setLayoutParams(trp);
             row.addView(imageView);
         }
 
         TextView message = new TextView(getContext());
         message.setText(text);
-        // message.setTextSize(TypedValue.COMPLEX_UNIT_SP, 12);
         message.setTextColor(Color.DKGRAY);
         message.setTypeface(Typeface.DEFAULT_BOLD);
         TableRow.LayoutParams trp = new TableRow.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
         trp.weight = 1;
+        trp.gravity = Gravity.CENTER_VERTICAL;
         message.setLayoutParams(trp);
         row.addView(message);
 
