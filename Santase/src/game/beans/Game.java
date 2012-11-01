@@ -189,12 +189,8 @@ public final class Game implements Serializable {
             }
         }
     }
-
-    /**
-     * Next tour.
-     * @return boolean.
-     */
-    public final boolean nextTour() {
+    
+    public final void processTrick() {
         checkMove();
         addHand();
         fillOneCard();
@@ -202,7 +198,13 @@ public final class Game implements Serializable {
         computer.setPlayedCard(null);
         human.setPlayedCard(null);
         human.getCards().arrange();
+    }
 
+    /**
+     * Next tour.
+     * @return boolean.
+     */
+    public final boolean hasMoreTricks() {
         return !(computer.getCards().isEmpty() && human.getCards().isEmpty());
     }
 
@@ -230,69 +232,81 @@ public final class Game implements Serializable {
             gameCards.add(card);
         }
     }
+    
+    public int calculateCurrentGamePlayerPoints(final Player lastHandPlayer, final Player player) {
+        if (isNotClosedGame()) {
+            final Player opposite = getRival(lastHandPlayer);
+            return lastHandPlayer.equals(player) ? calculateRegularGamePoints(opposite) : 0;
+        } else {
+            return calculateClosedGamePoints(lastHandPlayer, player);
+        }
+    }
+    
+    private int calculateClosedGamePoints(Player lastHandPlayer, Player player) {
+        Player opposite = getRival(lastHandPlayer);
+        if (lastHandPlayer.equals(playerClosedGame)) {
+            if (lastHandPlayer.getPoints(trumpSuit) >= END_GAME_POINTS) {
+                return lastHandPlayer.equals(player) ? calculateRegularGamePoints(opposite) : 0;
+            } else {
+                return lastHandPlayer.equals(player) ? 0 : 3;
+            }
+        } else {
+            return lastHandPlayer.equals(player) ? 3 : 0;
+        }
+    }
+    
+    private int calculateRegularGamePoints(final Player loser) {
+        if (loser.getPoints(trumpSuit) >= POINTS_ZONE) {
+            return 1;
+        } else if (loser.getHands().isEmpty()) {
+            return 3;
+        } else {
+            return 2;
+        }
+    }
 
     /**
      * Calculate game points.
      * 
-     * @param playerOne player.
-     * @param playerTwo player.
+     * @param lastHandPlayer player.
+     * @param player player.
      */
-    private void calculateGamePoints(Player playerOne, Player playerTwo) {
+    public final void calculatePoints(final Player lastHandPlayer) {
+        int humanPoints;
+        int computerPoints;
         if (isNotClosedGame()) {
-            checkNormalPoints(playerOne, playerTwo);
-            setTrickAttackPlayer(playerTwo);
-            return;
+            humanPoints = calculateCurrentGamePlayerPoints(lastHandPlayer, human);
+            computerPoints = calculateCurrentGamePlayerPoints(lastHandPlayer, computer);
+        } else {
+            humanPoints = calculateClosedGamePoints(lastHandPlayer, human);
+            computerPoints = calculateClosedGamePoints(lastHandPlayer, computer);
         }
-
-        if (playerOne.equals(playerClosedGame)) {
-            if (playerOne.getPoints(trumpSuit) >= END_GAME_POINTS) {
-                checkNormalPoints(playerOne, playerTwo);
-                setTrickAttackPlayer(playerTwo);
-            } else {
-                playerTwo.setLittleGames(playerTwo.getLittleGames() + 3);
-                setTrickAttackPlayer(playerOne);
-            }
+        
+        if (humanPoints > 0) {
+            human.setLittleGames(human.getLittleGames() + humanPoints);
+            setTrickAttackPlayer(computer);
         }
-
-        if (playerTwo.equals(playerClosedGame)) {
-            playerOne.setLittleGames(playerOne.getLittleGames() + 3);
-            setTrickAttackPlayer(playerTwo);
-            return;
+        
+        if (computerPoints > 0) {
+            computer.setLittleGames(computer.getLittleGames() + computerPoints);
+            setTrickAttackPlayer(human);
         }
-    }
-
-    public final void calculatePoints(final Player pMove) {
-        if (pMove == computer) {
-            calculateGamePoints(computer, human);
-        }
-        if (pMove == human) {
-            calculateGamePoints(human, computer);
-        }
-
+        
         checkLittleGames();
     }
 
-    private void checkNormalPoints(final Player winner, final Player loser) {
-        if (loser.getPoints(trumpSuit) >= POINTS_ZONE) {
-            winner.setLittleGames(winner.getLittleGames() + 1);
-        } else if (loser.getHands().isEmpty()) {
-            winner.setLittleGames(winner.getLittleGames() + 3);
-        } else {
-            winner.setLittleGames(winner.getLittleGames() + 2);
-        }
-    }
-
-    private void checkLittleGames(final Player p1, final Player p2) {
-        if (p1.getLittleGames() >= MAX_LITTLE_GAMES) {
-            p1.setLittleGames(0);
-            p2.setLittleGames(0);
-            p1.setBigGames(p1.getBigGames() + 1);
-        }
-    }
-
     private void checkLittleGames() {
-        checkLittleGames(computer, human);
-        checkLittleGames(human, computer);
+        if (human.getLittleGames() >= MAX_LITTLE_GAMES) {
+            human.setLittleGames(0);
+            computer.setLittleGames(0);
+            human.setBigGames(human.getBigGames() + 1);
+        }
+        
+        if (computer.getLittleGames() >= MAX_LITTLE_GAMES) {
+            human.setLittleGames(0);
+            computer.setLittleGames(0);
+            computer.setBigGames(computer.getBigGames() + 1);
+        }
     }
 
     private boolean isNobodyPlayed() {
@@ -378,7 +392,7 @@ public final class Game implements Serializable {
         this.playerClosedGame = player;
     }
 
-    public final Player getRival(Player player) {
+    public final Player getRival(final Player player) {
         if (player.equals(human)) {
             return computer;
         }
