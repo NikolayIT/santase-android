@@ -67,6 +67,6 @@
     <string name="CoupleTwenty">twenty</string>
     <string name="CoupleForty">forty</string>
     <string name="CloseGameQuestion">Are you sure you want to close the game ?</string>
-    <string name="AndroidWinSeries">Android win series of 11</string>
-    <string name="PlayerWinSeries">Player win series of 11</string>
+    <string name="AndroidWinSeries">Android wins series of 11 games</string>
+    <string name="PlayerWinSeries">You win series of 11 games</string>
 </resources>
