@@ -549,6 +549,9 @@ public class Dealer {
         Card card;
         do {
             index = getNextRightCardIndex(index);
+            if (index == -1) {
+                return null;
+            }
             card = santaseFacade.getGame().getHuman().getCards().getCard(index);
         } while (!santaseFacade.validatePlayerCard(santaseFacade.getGame().getHuman(), santaseFacade.getGame().getComputer(), card).equals(ValidateCode.PLAYER_CAN_PLAY));
 
@@ -605,6 +608,9 @@ public class Dealer {
         Card card;
         do {
             index = getNextLeftCardIndex(index);
+            if (index == -1) {
+                return null;
+            }
             card = santaseFacade.getGame().getHuman().getCards().getCard(index);
         } while (!santaseFacade.validatePlayerCard(santaseFacade.getGame().getHuman(), santaseFacade.getGame().getComputer(), card).equals(ValidateCode.PLAYER_CAN_PLAY));
 
