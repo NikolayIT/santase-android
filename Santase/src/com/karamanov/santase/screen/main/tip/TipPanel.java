@@ -97,6 +97,7 @@ public class TipPanel extends TableLayout {
             imageView.setImageBitmap(image);
             TableRow.LayoutParams trp = new TableRow.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
             trp.rightMargin = dip3;
+            trp.gravity = Gravity.CENTER_VERTICAL;
             imageView.setLayoutParams(trp);
             row.addView(imageView);
         }

@@ -19,6 +19,7 @@ import game.logic.strategy.automat.methods.base.BaseMethod;
  * @author Dimitar Karamanov
  */
 public final class ObligatoryNoNeed extends BaseMethod {
+    
     private final PlayCardMethod obligatoryFindSingleLoose;
 
     /**

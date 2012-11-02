@@ -13,6 +13,7 @@ import game.logic.strategy.automat.methods.ObligatoryDefenceAgainstForty;
 import game.logic.strategy.automat.methods.ObligatoryDefenceInAttackWithoutLoose;
 import game.logic.strategy.automat.methods.ObligatoryEnemyTotalAttack;
 import game.logic.strategy.automat.methods.ObligatoryForceToPlayTrump;
+import game.logic.strategy.automat.methods.ObligatoryGetLastHandAttack;
 import game.logic.strategy.automat.methods.ObligatorySingleHand;
 import game.logic.strategy.automat.methods.ObligatoryTotalAttack;
 import game.logic.strategy.automat.methods.SmallestOfAll;
@@ -33,6 +34,7 @@ public final class ObligatoryAttackCardExecutor extends PlayAttackCardExecutor {
         // Register play card methods.
         register(new ObligatoryTotalAttack(game));
         register(new ObligatoryEnemyTotalAttack(game));
+        register(new ObligatoryGetLastHandAttack(game));
         register(new ObligatoryDefenceAgainstForty(game));
         register(new CoupleCard(game));
         register(new ObligatoryDefenceInAttackWithoutLoose(game));
