@@ -60,11 +60,11 @@ public abstract class PlayCardExecutor implements PlayCardMethod {
     }
 
     /**
-     * Handler method providing the user facility to check custom condtion for methods executions.
+     * Handler method providing the user facility to check custom condition for methods executions.
      * 
      * @param player for which is called the executor
      * @param opposite player.
-     * @return true to process method execuution false to not.
+     * @return true to process method execution false to not.
      */
     protected boolean fitPreCondition(final Player player) {
         return true; // Override to check own condition for processing

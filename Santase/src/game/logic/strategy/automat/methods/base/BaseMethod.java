@@ -25,7 +25,7 @@ import game.logic.strategy.automat.base.PlayCardMethod;
  */
 public abstract class BaseMethod implements PlayCardMethod {
     /**
-     * Belot game internal object.
+     * Santase game internal object.
      */
     protected final Game game;
 
@@ -63,7 +63,7 @@ public abstract class BaseMethod implements PlayCardMethod {
     /**
      * Returns eventual couple points.
      * 
-     * @param pack players plack.
+     * @param pack players pack.
      * @return 0 or the max eventual couple points.
      */
     protected int eventualCouplePoints(Pack pack) {
@@ -298,8 +298,8 @@ public abstract class BaseMethod implements PlayCardMethod {
         for (RankIterator iterator = Rank.iterator(); iterator.hasNext();) {
             final Rank rank = iterator.next();
             if (rank.compareTo(card.getRank()) > 0) {
-                final Card last = game.getGameCards().getCard(game.getGameCards().getSize() - 1);
-                final boolean isTheLastCard = last.getRank().equals(rank) && last.getSuit().equals(card.getSuit());
+                final Card last = game.getGameCards().getSize() == 0 ? null : game.getGameCards().getCard(game.getGameCards().getSize() - 1);
+                final boolean isTheLastCard = last != null && last.getRank().equals(rank) && last.getSuit().equals(card.getSuit());
 
                 if (!isTheLastCard && getRival(player).getHands().findCard(rank, card.getSuit()) == null
                         && player.getHands().findCard(rank, card.getSuit()) == null) {

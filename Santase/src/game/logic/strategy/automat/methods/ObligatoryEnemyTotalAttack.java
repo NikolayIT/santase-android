@@ -48,7 +48,7 @@ public final class ObligatoryEnemyTotalAttack extends BaseMethod {
      */
     protected Card getPlayMethodCard(final Player player) {
         Card card = null;
-        if (obligatoryTotalAttack.getPlayerCard(player) != null) {
+        if (obligatoryTotalAttack.getPlayerCard(game.getRival(player)) != null) {
             card = obligatorySingleHand.getPlayerCard(player);
         }
         return card;

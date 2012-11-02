@@ -9,6 +9,7 @@ import game.logic.SantaseFacade;
 import game.logic.strategy.validator.ValidateCode;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -19,7 +20,6 @@ import android.os.Handler;
 
 import com.karamanov.framework.BooleanFlag;
 import com.karamanov.framework.MessageActivity;
-import com.karamanov.framework.graphics.ImageUtil;
 import com.karamanov.framework.graphics.Rectangle;
 import com.karamanov.santase.R;
 import com.karamanov.santase.Santase;
@@ -340,7 +340,7 @@ public class Dealer {
 
     private void showInfo(String infoString, Bitmap image) {
         ArrayList<MessageData> list = new ArrayList<MessageData>();
-        list.add(new MessageData(null, infoString));
+        list.add(new MessageData(image, infoString));
         displayMessage(list);
     }
 
@@ -352,30 +352,56 @@ public class Dealer {
     }
 
     private void checkGameActionStatus(final Player player) {
+        ArrayList<MessageData> list = new ArrayList<MessageData>();
+
         if (santaseFacade.getGame().containActionStatus(Game.GA_CHANGE)) {
-            displayChangeTrumpCard();
+            list.add(new MessageData(context.getString(R.string.AnnounceChangeTrumpCard)));    
         }
 
         if (santaseFacade.getGame().containActionStatus(Game.GA_CLOSE)) {
-            displayCloseGame();
+            list.add(new MessageData(context.getString(R.string.AnnounceCloseGame)));
         }
 
         if (santaseFacade.getGame().containActionStatus(Game.GA_COUPLE)) {
             if (player.getPoints(santaseFacade.getGame().getTrumpSuit()) >= SantaseFacade.END_GAME_POINTS) {
-                newGame(player, getComputerCoupleMessageExit(player.getPlayedCard().getSuit()));
+                list.add(new MessageData(getComputerCoupleMessageExit(player.getPlayedCard().getSuit())));
+                
+                StringBuffer message = new StringBuffer();
+                for (Iterator<MessageData> iterator = list.iterator(); iterator.hasNext();) {
+                    if (message.length() != 0) {
+                        message.append("\n");
+                    }
+                    MessageData data = iterator.next();
+                    message.append(data.getMessage());
+                }
+                
+                list.clear();
+                
+                newGame(player, message.toString());
             } else {
-                displayCoupleMessage(player.getPlayedCard().getSuit());
+                String message = context.getString(R.string.AndroidHasCoupleOf);
+                message = textDecorator.replaceSuit(player.getPlayedCard().getSuit(), message);
+                message = textDecorator.translateCouple(player.getPlayedCard().getSuit(), santaseFacade.getGame().getTrumpSuit(), message);
+                list.add(new MessageData(santasePainter.getSuitImage(player.getPlayedCard().getSuit()), message));
             }
+        }
+        
+        if (list.size() > 0) {
+            displayMessage(list);
         }
     }
 
+    /*
     public void displayChangeTrumpCard() {
         showInfo(context.getString(R.string.AnnounceChangeTrumpCard));
     }
+    */
 
+    /*
     private void displayCloseGame() {
         showInfo(context.getString(R.string.AnnounceCloseGame));
     }
+    */
 
     private String getComputerCoupleMessageExit(Suit suit) {
         String message = context.getString(R.string.AndroidHasACoupleExit);
@@ -395,15 +421,17 @@ public class Dealer {
         String message = context.getString(R.string.HumanHasCoupleOf);
         message = textDecorator.replaceSuit(suit, message);
         message = textDecorator.translateCouple(suit, santaseFacade.getGame().getTrumpSuit(), message);
-        showInfo(message, ImageUtil.transformToDisabledImage(santasePainter.getSuitImage(suit)));
+        showInfo(message, santasePainter.getSuitImage(suit));
     }
 
+    /*
     private void displayCoupleMessage(Suit suit) {
         String message = context.getString(R.string.AndroidHasCoupleOf);
         message = textDecorator.replaceSuit(suit, message);
         message = textDecorator.translateCouple(suit, santaseFacade.getGame().getTrumpSuit(), message);
-        showInfo(message, ImageUtil.transformToDisabledImage(santasePainter.getSuitImage(suit)));
+        showInfo(message, santasePainter.getSuitImage(suit));
     }
+    */
 
     private Card getHumanCardUnderPointer(final float x, final float y) {
         Player player = santaseFacade.getGame().getHuman();
