@@ -112,7 +112,7 @@ public class SantaseActivity extends MessageActivity implements OnSharedPreferen
 
         santaseView = new SantaseView(this);
 
-        dealer = new Dealer(this, Santase.getSantaseFacade(), santaseView);
+        dealer = new Dealer(this, santaseView);
         rlp = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT);
         rlp.addRule(RelativeLayout.ABOVE, buttons.getId());
         santaseView.setLayoutParams(rlp);
@@ -160,7 +160,7 @@ public class SantaseActivity extends MessageActivity implements OnSharedPreferen
 
         int base = Menu.CATEGORY_SECONDARY;
 
-        SantaseFacade santaseFacade = Santase.getSantaseFacade();
+        SantaseFacade santaseFacade = Santase.getSantaseFacade(this);
         boolean showClose = santaseFacade.getGame().canClose();
 
         MenuItem showMenu = menu.findItem(base + CLOSE_GAME_INDEX);
@@ -259,7 +259,7 @@ public class SantaseActivity extends MessageActivity implements OnSharedPreferen
     }
 
     private void createTipDialog() {
-        SantaseFacade santaseFacade = Santase.getSantaseFacade();
+        SantaseFacade santaseFacade = Santase.getSantaseFacade(this);
 
         ArrayList<MessageData> messages = new ArrayList<MessageData>();
         Card card = santaseFacade.getTipMessageCard(santaseFacade.getGame().getHuman());

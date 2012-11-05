@@ -80,9 +80,7 @@ public class LogoActivity extends Activity {
     private void startSantaseActivity() {
         if (!send) {
             send = true;
-            if (!Santase.loadGame(this)) {
-                Santase.getSantaseFacade().getGame().newGame();
-            }
+            Santase.initSantaseFacade(this);
             Intent i = new Intent(this, SantaseActivity.class);
             startActivity(i);
         }

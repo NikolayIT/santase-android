@@ -36,7 +36,7 @@ public class TricksActivity extends Activity {
         LinearLayout vertical = new LinearLayout(this);
         vertical.setOrientation(LinearLayout.VERTICAL);
 
-        SantaseFacade game = Santase.getSantaseFacade();
+        SantaseFacade game = Santase.getSantaseFacade(this);
         Pack hands = game.getGame().getHuman().getHands();
 
         for (PackIterator i = hands.iterator(); i.hasNext();) {

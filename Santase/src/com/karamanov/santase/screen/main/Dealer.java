@@ -22,6 +22,7 @@ import com.karamanov.framework.BooleanFlag;
 import com.karamanov.framework.MessageActivity;
 import com.karamanov.framework.graphics.Rectangle;
 import com.karamanov.santase.R;
+import com.karamanov.santase.Santase;
 import com.karamanov.santase.screen.base.SantasePainter;
 import com.karamanov.santase.screen.main.message.MessageData;
 import com.karamanov.santase.screen.main.message.MessageScreen;
@@ -61,9 +62,9 @@ public class Dealer {
 
     public boolean endGameActivity = true;
 
-    public Dealer(MessageActivity context, SantaseFacade santaseFacade, SantaseView belotPanel) {
+    public Dealer(MessageActivity context, SantaseView belotPanel) {
         this.context = context;
-        this.santaseFacade = santaseFacade;
+        this.santaseFacade = Santase.getSantaseFacade(context);
         this.santasePanel = belotPanel;
 
         handler = new Handler();
