@@ -15,6 +15,7 @@ import java.io.ObjectOutputStream;
 import java.io.StreamCorruptedException;
 import java.util.ArrayList;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Environment;
@@ -35,26 +36,33 @@ public class Santase extends MessageApplication {
 
     private static final String SANTASE_DAT = "santase.dat";
     
-    private static SantaseFacade santaseFacade;
+    private final SantaseFacade santaseFacade;
 
     public Santase() {
         super();
+        santaseFacade = new SantaseFacade();
     }
 
-    public static synchronized SantaseFacade getSantaseFacade() {
-        if (santaseFacade == null) {
-            santaseFacade = new SantaseFacade();
+    public static synchronized SantaseFacade getSantaseFacade(Activity context) {
+        if (context.getApplication() instanceof Santase) {
+            return ((Santase) context.getApplication()).santaseFacade;
         }
-        return santaseFacade;
+        return new SantaseFacade();
+    }
+    
+    public static synchronized void initSantaseFacade(Activity context) {
+        if (!Santase.loadGame(context)) {
+            getSantaseFacade(context).getGame().newGame();
+        }
     }
 
-    public static void resetGame(Context context) {
-        santaseFacade.setGame(new Game());
-        santaseFacade.getGame().newGame();
+    public static void resetGame(Activity context) {
+        getSantaseFacade(context).setGame(new Game());
+        getSantaseFacade(context).getGame().newGame();
         context.deleteFile(SANTASE_DAT);
     }
 
-    public static boolean loadGame(Context context) {
+    public static boolean loadGame(Activity context) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         String key = context.getString(R.string.prefStoreGame);
         boolean storeGame = preferences.getBoolean(key, Boolean.FALSE);
@@ -67,7 +75,7 @@ public class Santase extends MessageApplication {
                     try {
                         Object object = ois.readObject();
                         if (object instanceof Game) {
-                            getSantaseFacade().setGame((Game) object);
+                            getSantaseFacade(context).setGame((Game) object);
                             return true;
                         }
                     } finally {
@@ -89,7 +97,7 @@ public class Santase extends MessageApplication {
         return false;
     }
 
-    public static void terminate(Context context) {
+    public static void terminate(Activity context) {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
         String key = context.getString(R.string.prefStoreGame);
         boolean storeGame = preferences.getBoolean(key, Boolean.FALSE);
@@ -100,7 +108,7 @@ public class Santase extends MessageApplication {
                 try {
                     ObjectOutputStream oos = new ObjectOutputStream(fos);
                     try {
-                        oos.writeObject(santaseFacade.getGame());
+                        oos.writeObject(getSantaseFacade(context).getGame());
                     } finally {
                         oos.close();
                     }
@@ -112,7 +120,6 @@ public class Santase extends MessageApplication {
             } catch (IOException e) {
             }
         }
-        santaseFacade = null;
     }
 
     public static void _saveLog(ArrayList<String> log) {
