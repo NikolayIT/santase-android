@@ -12,7 +12,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.content.res.Configuration;
-import android.graphics.Bitmap;
 import android.graphics.PointF;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -55,8 +54,6 @@ public class SantaseActivity extends MessageActivity implements OnSharedPreferen
     private static final int PLAYED_CARDS_INDEX = 3;
     private static final int TIP_CARD_INDEX = 4;
     private static final int PREF_INDEX = 5;
-
-    private Bitmap bufferedImage;
 
     /**
      * Constructor.
@@ -137,9 +134,9 @@ public class SantaseActivity extends MessageActivity implements OnSharedPreferen
     protected void onDestroy() {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         preferences.unregisterOnSharedPreferenceChangeListener(this);
-        if (bufferedImage != null) {
-            bufferedImage.recycle();
-        }
+        
+        Santase.terminate(this);
+        
         super.onDestroy();
     }
 
@@ -221,19 +218,20 @@ public class SantaseActivity extends MessageActivity implements OnSharedPreferen
             AlertDialog.Builder myAlertDialog = new AlertDialog.Builder(this);
             myAlertDialog.setTitle(getString(R.string.Confirm));
             myAlertDialog.setMessage(getString(R.string.NewEraseQuestion));
+            
             myAlertDialog.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                 public void onClick(DialogInterface dialog, int which) {
                     Santase.resetGame(SantaseActivity.this);
-                    dealer = new Dealer(SantaseActivity.this, Santase.getSantaseFacade(), santaseView);
                     repaint();
                 }
             });
+            
             myAlertDialog.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-
-                public void onClick(DialogInterface dialog, int which) {
+               public void onClick(DialogInterface dialog, int which) {
                     //
                 }
             });
+            
             myAlertDialog.show();
             return true;
         }

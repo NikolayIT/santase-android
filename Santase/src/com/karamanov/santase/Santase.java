@@ -41,17 +41,15 @@ public class Santase extends MessageApplication {
         super();
     }
 
-    public static SantaseFacade getSantaseFacade() {
-        if (santaseFacade != null) {
-            return santaseFacade;
+    public static synchronized SantaseFacade getSantaseFacade() {
+        if (santaseFacade == null) {
+            santaseFacade = new SantaseFacade();
         }
-
-        santaseFacade = new SantaseFacade();
         return santaseFacade;
     }
 
     public static void resetGame(Context context) {
-        santaseFacade = new SantaseFacade();
+        santaseFacade.setGame(new Game());
         santaseFacade.getGame().newGame();
         context.deleteFile(SANTASE_DAT);
     }
