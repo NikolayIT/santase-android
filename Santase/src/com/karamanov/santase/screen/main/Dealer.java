@@ -22,7 +22,6 @@ import com.karamanov.framework.BooleanFlag;
 import com.karamanov.framework.MessageActivity;
 import com.karamanov.framework.graphics.Rectangle;
 import com.karamanov.santase.R;
-import com.karamanov.santase.Santase;
 import com.karamanov.santase.screen.base.SantasePainter;
 import com.karamanov.santase.screen.main.message.MessageData;
 import com.karamanov.santase.screen.main.message.MessageScreen;
@@ -277,7 +276,10 @@ public class Dealer {
                             
         removeSelectedHumanCard();
         santaseFacade.getGame().setTrickAttackPlayer(computer);
-
+        invalidateGame();
+        
+        sleep(PLAY_DELAY);
+        
         if (computer.getPlayedCard() == null) {
             performComputerCard();
         }
@@ -659,7 +661,6 @@ public class Dealer {
     }
 
     public void onExit() {
-        Santase.terminate(context);
         context.finish();
     }
 
