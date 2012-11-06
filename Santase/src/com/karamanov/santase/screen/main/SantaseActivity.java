@@ -126,7 +126,6 @@ public class SantaseActivity extends MessageActivity implements OnSharedPreferen
         buttons.setVisibility(showBtns ? View.VISIBLE : View.GONE);
 
         repaint();
-
         preferences.registerOnSharedPreferenceChangeListener(this);
     }
 

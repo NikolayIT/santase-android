@@ -3,32 +3,35 @@ package com.karamanov.santase.screen.main.message;
 import java.util.ArrayList;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.karamanov.framework.BooleanFlag;
+import com.karamanov.framework.MessageActivity;
 import com.karamanov.santase.R;
+import com.karamanov.santase.Santase;
 
 public class MessageScreen extends Dialog {
 
-    private final BooleanFlag flag;
-
-    public MessageScreen(Context context, ArrayList<MessageData> messages, BooleanFlag flag) {
+    private final MessageActivity activity;
+    
+    public MessageScreen(MessageActivity context, ArrayList<MessageData> messages) {
         super(context);
+        
+        activity = context;
+        
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
         getWindow().setBackgroundDrawableResource(R.drawable.message_dialog_shape);
 
-        this.flag = flag;
         MessagePanel messagePanel = new MessagePanel(context, messages);
         setContentView(messagePanel);
     }
 
     protected void onStop() {
-        flag.setFalse();
+        Santase santase = (Santase) activity.getApplication();
+        santase.getMessageProcessor().unlock();
     }
 
     public boolean onKeyDown(int keyCode, KeyEvent event) {

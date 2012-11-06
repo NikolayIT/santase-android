@@ -18,7 +18,6 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.os.Handler;
 
-import com.karamanov.framework.BooleanFlag;
 import com.karamanov.framework.MessageActivity;
 import com.karamanov.framework.graphics.Rectangle;
 import com.karamanov.santase.R;
@@ -108,7 +107,6 @@ public class Dealer {
     }
 
     private void showCloseGameDialog() {
-        final BooleanFlag wait = new BooleanFlag();
         handler.post(new Runnable() {
             public void run() {
                 AlertDialog.Builder myAlertDialog = new AlertDialog.Builder(context);
@@ -117,22 +115,22 @@ public class Dealer {
                 myAlertDialog.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         turnToPlayerClosedMode();
-                        wait.setFalse();
+                        Santase santase = (Santase) context.getApplication();
+                        santase.getMessageProcessor().unlock();
                     }
                 });
                 myAlertDialog.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        wait.setFalse();
+                        Santase santase = (Santase) context.getApplication();
+                        santase.getMessageProcessor().unlock();
                     }
                 });
                 myAlertDialog.show();
             }
         });
 
-        while (wait.getValue()) {
-            invalidateGame();
-            sleep(PLAY_DELAY);
-        }
+        Santase santase = (Santase) context.getApplication();
+        santase.getMessageProcessor().lock();
     }
 
     private boolean isMouseOverTrumpCard(float x, float y) {
@@ -241,18 +239,15 @@ public class Dealer {
      * @param card played by player.
      */
     private void displayMessage(final ArrayList<MessageData> messages) {
-        final BooleanFlag wait = new BooleanFlag();
         handler.post(new Runnable() {
             public void run() {
-                messageScreen = new MessageScreen(context, messages, wait);
+                messageScreen = new MessageScreen(context, messages);
                 messageScreen.show();
             }
         });
 
-        while (wait.getValue()) {
-            invalidateGame();
-            sleep(PLAY_DELAY);
-        }
+        Santase santase = (Santase) context.getApplication();
+        santase.getMessageProcessor().lock();
     }
 
     private void playSelectedHumanCard() {
