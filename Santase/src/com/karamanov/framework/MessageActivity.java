@@ -50,6 +50,33 @@ public class MessageActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (getApplication() instanceof Santase) {
+            Santase santase = (Santase) getApplication();
+            santase.getMessageProcessor().runMessaging();
+        }
+    }
+
+    /**
+     * The canvas is being displayed. Stop the event handling and animation thread.
+     */
+    protected void onResume() {
+        super.onResume();
+        if (getApplication() instanceof Santase) {
+            Santase santase = (Santase) getApplication();
+            santase.getMessageProcessor().unlock();
+            santase.getMessageProcessor().runMessaging();
+        }
+    }
+
+    /**
+     * The canvas is being removed from the screen. Stop the event handling and animation thread.
+     */
+    protected void onPause() {
+        if (getApplication() instanceof Santase) {
+            Santase santase = (Santase) getApplication();
+            santase.getMessageProcessor().stopMessaging();
+        }
+        super.onPause();
     }
 
     /**

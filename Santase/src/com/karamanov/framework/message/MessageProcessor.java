@@ -10,6 +10,8 @@ public final class MessageProcessor implements Processor {
 
     private boolean processMessages = true;
     
+    private final Object locker = new Object();
+    
     /**
      * Hash table which maps messages with handlers.
      */
@@ -22,6 +24,11 @@ public final class MessageProcessor implements Processor {
 
     public final void start() {
         messageThread.start();
+    }
+    
+    public final void stop() {
+        messageThread.setSuspended(true);
+        messageQueue.clearAll();
     }
 
     /**
@@ -51,6 +58,21 @@ public final class MessageProcessor implements Processor {
         processMessages = true;
     }
     
+    public void lock() {
+        synchronized (locker) {
+            try {
+                locker.wait();
+            } catch (InterruptedException e) {
+            }
+        }
+    }
+
+    public void unlock() {
+        synchronized (locker) {
+            locker.notify();
+        }
+    }
+    
     /**
      * Adds message listener for the concrete message type.
      * @param messageType concrete message type.
@@ -75,11 +97,13 @@ public final class MessageProcessor implements Processor {
      * Process one message.
      */
     public final void process() {
-        final Message message = messageQueue.getMessage();
-        if (message != null) {
-            final Messageable messageable = (Messageable) listenersHash.get(message.getMessageType());
-            if (messageable != null) {
-                messageable.performMessage(message);
+        if (processMessages) {
+            final Message message = messageQueue.getMessage();
+            if (message != null) {
+                final Messageable messageable = (Messageable) listenersHash.get(message.getMessageType());
+                if (messageable != null) {
+                    messageable.performMessage(message);
+                }
             }
         }
     }
