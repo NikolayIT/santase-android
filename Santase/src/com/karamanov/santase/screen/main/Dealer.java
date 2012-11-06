@@ -116,13 +116,13 @@ public class Dealer {
                     public void onClick(DialogInterface dialog, int which) {
                         turnToPlayerClosedMode();
                         Santase santase = (Santase) context.getApplication();
-                        santase.getMessageProcessor().unlock();
+                        santase.getMessageProcessor().runMessaging();
                     }
                 });
                 myAlertDialog.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         Santase santase = (Santase) context.getApplication();
-                        santase.getMessageProcessor().unlock();
+                        santase.getMessageProcessor().runMessaging();
                     }
                 });
                 myAlertDialog.show();
@@ -130,7 +130,7 @@ public class Dealer {
         });
 
         Santase santase = (Santase) context.getApplication();
-        santase.getMessageProcessor().lock();
+        santase.getMessageProcessor().stopMessaging();
     }
 
     private boolean isMouseOverTrumpCard(float x, float y) {
@@ -247,7 +247,7 @@ public class Dealer {
         });
 
         Santase santase = (Santase) context.getApplication();
-        santase.getMessageProcessor().lock();
+        santase.getMessageProcessor().stopMessaging();
     }
 
     private void playSelectedHumanCard() {

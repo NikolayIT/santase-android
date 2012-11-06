@@ -63,7 +63,6 @@ public class MessageActivity extends Activity {
         super.onResume();
         if (getApplication() instanceof Santase) {
             Santase santase = (Santase) getApplication();
-            santase.getMessageProcessor().unlock();
             santase.getMessageProcessor().runMessaging();
         }
     }
@@ -97,9 +96,17 @@ public class MessageActivity extends Activity {
      * @param message new message.
      */
     public final void triggerMessage(final Message message) {
+        triggerMessage(message, false);
+    }
+    
+    /**
+     * Adds user message to the end of the queue.
+     * @param message new message.
+     */
+    public final void triggerMessage(final Message message, boolean always) {
         if (getApplication() instanceof Santase) {
             Santase santase = (Santase) getApplication();
-            santase.getMessageProcessor().sendMessage(message);
+            santase.getMessageProcessor().sendMessage(message, always);
         }
     }
 
