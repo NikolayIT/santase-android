@@ -43,7 +43,7 @@ public class Dealer {
      */
     public final SantasePainter santasePainter;
 
-    private MessageScreen messageScreen;
+    private final MessageScreen messageScreen;
 
     public static final int NAV_PRESS = -1;
     public static final int NAV_LEFT = -2;
@@ -69,6 +69,8 @@ public class Dealer {
         handler = new Handler();
         santasePainter = new SantasePainter(context);
         textDecorator = new TextDecorator(context);
+        
+        messageScreen = new MessageScreen(context);
     }
 
     public void checkClick(float x, float y) {
@@ -239,9 +241,9 @@ public class Dealer {
      * @param card played by player.
      */
     private void displayMessage(final ArrayList<MessageData> messages) {
+        messageScreen.setMessage(messages);
         handler.post(new Runnable() {
             public void run() {
-                messageScreen = new MessageScreen(context, messages);
                 messageScreen.show();
             }
         });
