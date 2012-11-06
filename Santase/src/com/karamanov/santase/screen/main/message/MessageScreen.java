@@ -10,16 +10,13 @@ import android.view.WindowManager;
 
 import com.karamanov.framework.MessageActivity;
 import com.karamanov.santase.R;
-import com.karamanov.santase.Santase;
 
 public class MessageScreen extends Dialog {
 
-    private final MessageActivity activity;
+    private boolean value = true;
     
     public MessageScreen(MessageActivity context, ArrayList<MessageData> messages) {
         super(context);
-        
-        activity = context;
         
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
@@ -30,8 +27,7 @@ public class MessageScreen extends Dialog {
     }
 
     protected void onStop() {
-        Santase santase = (Santase) activity.getApplication();
-        santase.getMessageProcessor().runMessaging();
+        value = false;
     }
 
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -47,5 +43,9 @@ public class MessageScreen extends Dialog {
     public boolean onTouchEvent(MotionEvent event) {
         dismiss();
         return true;
+    }
+    
+    public boolean getValue() {
+        return value;
     }
 }
