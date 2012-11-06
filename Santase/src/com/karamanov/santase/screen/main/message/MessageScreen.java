@@ -14,15 +14,18 @@ import com.karamanov.santase.R;
 public class MessageScreen extends Dialog {
 
     private boolean value = true;
-    
-    public MessageScreen(MessageActivity context, ArrayList<MessageData> messages) {
+
+    public MessageScreen(MessageActivity context) {
         super(context);
-        
+
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
         getWindow().setBackgroundDrawableResource(R.drawable.message_dialog_shape);
+    }
 
-        MessagePanel messagePanel = new MessagePanel(context, messages);
+    public final void setMessage(ArrayList<MessageData> messages) {
+        value = true;
+        MessagePanel messagePanel = new MessagePanel(getContext(), messages);
         setContentView(messagePanel);
     }
 
@@ -44,7 +47,7 @@ public class MessageScreen extends Dialog {
         dismiss();
         return true;
     }
-    
+
     public boolean getValue() {
         return value;
     }
