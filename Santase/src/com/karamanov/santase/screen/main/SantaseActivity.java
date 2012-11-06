@@ -344,7 +344,7 @@ public class SantaseActivity extends MessageActivity implements OnSharedPreferen
 
     public void repaint() {
         Message tMessage = new Message(Santase.MT_PAINT_EVENT);
-        triggerMessage(tMessage);
+        triggerMessage(tMessage, true);
     }
 
     private class KeyPressedListener implements Messageable {

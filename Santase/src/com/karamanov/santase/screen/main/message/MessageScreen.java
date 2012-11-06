@@ -31,7 +31,7 @@ public class MessageScreen extends Dialog {
 
     protected void onStop() {
         Santase santase = (Santase) activity.getApplication();
-        santase.getMessageProcessor().unlock();
+        santase.getMessageProcessor().runMessaging();
     }
 
     public boolean onKeyDown(int keyCode, KeyEvent event) {
