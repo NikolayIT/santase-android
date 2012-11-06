@@ -18,6 +18,7 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.os.Handler;
 
+import com.karamanov.framework.BooleanFlag;
 import com.karamanov.framework.MessageActivity;
 import com.karamanov.framework.graphics.Rectangle;
 import com.karamanov.santase.R;
@@ -43,7 +44,7 @@ public class Dealer {
      */
     public final SantasePainter santasePainter;
 
-    private final MessageScreen messageScreen;
+    private MessageScreen messageScreen;
 
     public static final int NAV_PRESS = -1;
     public static final int NAV_LEFT = -2;
@@ -69,8 +70,6 @@ public class Dealer {
         handler = new Handler();
         santasePainter = new SantasePainter(context);
         textDecorator = new TextDecorator(context);
-        
-        messageScreen = new MessageScreen(context);
     }
 
     public void checkClick(float x, float y) {
@@ -241,14 +240,15 @@ public class Dealer {
      * @param card played by player.
      */
     private void displayMessage(final ArrayList<MessageData> messages) {
-        messageScreen.setMessage(messages);
+        final BooleanFlag flag = new BooleanFlag();
         handler.post(new Runnable() {
             public void run() {
+                messageScreen = new MessageScreen(context, messages, flag);
                 messageScreen.show();
             }
         });
 
-        while (messageScreen.getValue()) {
+        while (flag.getValue()) {
             invalidateGame();
             sleep(PLAY_DELAY);
         }

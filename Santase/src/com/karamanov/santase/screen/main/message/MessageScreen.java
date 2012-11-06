@@ -3,34 +3,32 @@ package com.karamanov.santase.screen.main.message;
 import java.util.ArrayList;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.Window;
 import android.view.WindowManager;
 
-import com.karamanov.framework.MessageActivity;
+import com.karamanov.framework.BooleanFlag;
 import com.karamanov.santase.R;
 
 public class MessageScreen extends Dialog {
 
-    private boolean value = true;
+    private final BooleanFlag flag;
 
-    public MessageScreen(MessageActivity context) {
+    public MessageScreen(Context context, ArrayList<MessageData> messages, BooleanFlag flag) {
         super(context);
-
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
         getWindow().setBackgroundDrawableResource(R.drawable.message_dialog_shape);
-    }
 
-    public final void setMessage(ArrayList<MessageData> messages) {
-        value = true;
-        MessagePanel messagePanel = new MessagePanel(getContext(), messages);
+        this.flag = flag;
+        MessagePanel messagePanel = new MessagePanel(context, messages);
         setContentView(messagePanel);
     }
 
     protected void onStop() {
-        value = false;
+        flag.setFalse();
     }
 
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -46,9 +44,5 @@ public class MessageScreen extends Dialog {
     public boolean onTouchEvent(MotionEvent event) {
         dismiss();
         return true;
-    }
-
-    public boolean getValue() {
-        return value;
     }
 }
