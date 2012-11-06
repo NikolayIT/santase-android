@@ -246,8 +246,10 @@ public class Dealer {
             }
         });
 
-        Santase santase = (Santase) context.getApplication();
-        santase.getMessageProcessor().stopMessaging();
+        while (messageScreen.getValue()) {
+            invalidateGame();
+            sleep(PLAY_DELAY);
+        }
     }
 
     private void playSelectedHumanCard() {
