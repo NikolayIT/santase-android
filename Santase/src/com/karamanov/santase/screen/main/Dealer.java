@@ -79,9 +79,9 @@ public class Dealer {
             checkHumanTurnClick(x, y);
         }
     }
-    
+
     private void checkHumanTurnClick(float x, float y) {
-        if (santaseFacade.isHumanTurn()) {
+        if (santaseFacade.isHumanTurn() && santaseFacade.getGame().getHuman().getPlayedCard() == null) {
             if (isClickedSelectedCard(x, y)) {
                 if (canHumanPlaySelectedCard()) {
                     playSelectedHumanCard();
@@ -95,16 +95,16 @@ public class Dealer {
             }
         }
     }
-    
+
     private void checkCardToSelect(float x, float y) {
         Card card = getHumanCardUnderPointer(x, y);
         Player computer = santaseFacade.getGame().getComputer();
         Player human = santaseFacade.getGame().getHuman();
-        
+
         if (card != null && santaseFacade.validatePlayerCard(human, computer, card).equals(ValidateCode.PLAYER_CAN_PLAY)) {
             human.setSelectedCard(card);
             invalidateGame();
-        }        
+        }
     }
 
     private void showCloseGameDialog() {
@@ -116,22 +116,15 @@ public class Dealer {
                 myAlertDialog.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         turnToPlayerClosedMode();
-                        Santase santase = (Santase) context.getApplication();
-                        santase.getMessageProcessor().runMessaging();
                     }
                 });
                 myAlertDialog.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
-                        Santase santase = (Santase) context.getApplication();
-                        santase.getMessageProcessor().runMessaging();
                     }
                 });
                 myAlertDialog.show();
             }
         });
-
-        Santase santase = (Santase) context.getApplication();
-        santase.getMessageProcessor().stopMessaging();
     }
 
     private boolean isMouseOverTrumpCard(float x, float y) {
@@ -143,7 +136,8 @@ public class Dealer {
     }
 
     private boolean isClickedSelectedCard(float x, float y) {
-        return santaseFacade.getGame().getHuman().getSelectedCard() != null && santaseFacade.getGame().getHuman().getSelectedCard().equals(getHumanCardUnderPointer(x, y));
+        return santaseFacade.getGame().getHuman().getSelectedCard() != null
+                && santaseFacade.getGame().getHuman().getSelectedCard().equals(getHumanCardUnderPointer(x, y));
     }
 
     public void turnToPlayerClosedMode() {
@@ -156,20 +150,20 @@ public class Dealer {
         Player human = santaseFacade.getGame().getHuman();
         int humanPoints = santaseFacade.getGame().calculateCurrentGamePlayerPoints(lastHandPlayer, human);
         int computerPoints = santaseFacade.getGame().calculateCurrentGamePlayerPoints(lastHandPlayer, computer);
-        
+
         Player seriesWinner = null;
         if (humanPoints + human.getLittleGames() >= Game.MAX_LITTLE_GAMES) {
             seriesWinner = human;
         }
-        
+
         if (computerPoints + computer.getLittleGames() >= Game.MAX_LITTLE_GAMES) {
             seriesWinner = computer;
         }
-        
+
         if (seriesWinner != null) {
             String message;
             Bitmap bitmap;
-            
+
             if (santaseFacade.getGame().getHuman().equals(seriesWinner)) {
                 message = context.getString(R.string.PlayerWinSeries);
                 bitmap = santasePainter.getHappy();
@@ -177,15 +171,15 @@ public class Dealer {
                 message = context.getString(R.string.AndroidWinSeries);
                 bitmap = santasePainter.getUnhappy();
             }
-            
+
             ArrayList<MessageData> list = new ArrayList<MessageData>();
-            //list.add(new MessageData(endGameMessage));
+            // list.add(new MessageData(endGameMessage));
             list.add(new MessageData(bitmap, endGameMessage + "\n" + message));
             displayMessage(list);
         } else {
             showInfo(endGameMessage);
         }
-                
+
         human.setSelectedCard(null);
         santaseFacade.getGame().newGame(lastHandPlayer);
 
@@ -197,7 +191,8 @@ public class Dealer {
     }
 
     public boolean playerCanChangeTrumpCard(ArrayList<MessageData> result, Card PlayerCheckedCard) {
-        if (PlayerCheckedCard == null || !PlayerCheckedCard.getSuit().equals(santaseFacade.getGame().getTrumpSuit()) || !PlayerCheckedCard.getRank().equals(Rank.Nine)) {
+        if (PlayerCheckedCard == null || !PlayerCheckedCard.getSuit().equals(santaseFacade.getGame().getTrumpSuit())
+                || !PlayerCheckedCard.getRank().equals(Rank.Nine)) {
             String errorStr = context.getString(R.string.YouCanChangeWith9Trump);
             result.add(new MessageData(null, errorStr.replace(TRUMP, textDecorator.getSuit(santaseFacade.getGame().getTrumpSuit()))));
 
@@ -242,7 +237,7 @@ public class Dealer {
     private void displayMessage(final ArrayList<MessageData> messages) {
         Santase santase = (Santase) context.getApplication();
         santase.getMessageProcessor().stopMessaging();
-        
+
         final BooleanFlag flag = new BooleanFlag();
         handler.post(new Runnable() {
             public void run() {
@@ -255,16 +250,16 @@ public class Dealer {
             invalidateGame();
             sleep(PLAY_DELAY);
         }
-        
+
         santase.getMessageProcessor().runMessaging();
     }
 
     private void playSelectedHumanCard() {
         Player computer = santaseFacade.getGame().getComputer();
         Player human = santaseFacade.getGame().getHuman();
-            
+
         if (computer.getPlayedCard() == null && human.getSelectedCard() != null && human.getCards().hasCouple(human.getSelectedCard())) {
-        	human.getCouples().setCouple(human.getSelectedCard().getSuit());
+            human.getCouples().setCouple(human.getSelectedCard().getSuit());
             boolean result = human.getPoints(santaseFacade.getGame().getTrumpSuit()) >= SantaseFacade.END_GAME_POINTS;
 
             if (result) {
@@ -278,17 +273,17 @@ public class Dealer {
                 displayCoupleMessagePlayer(human.getSelectedCard().getSuit());
             }
         }
-                            
+
         removeSelectedHumanCard();
         santaseFacade.getGame().setTrickAttackPlayer(computer);
         invalidateGame();
-        
+
         sleep(PLAY_DELAY);
-        
+
         if (computer.getPlayedCard() == null) {
             performComputerCard();
         }
-                    
+
         invalidateGame();
     }
 
@@ -308,7 +303,7 @@ public class Dealer {
     private void performClickForNextTrickOrEndGame() {
         santaseFacade.getGame().processTrick();
         invalidateGame();
-            
+
         if (santaseFacade.getGame().hasMoreTricks()) {
             performClickForNextTrick();
         } else {
@@ -362,7 +357,7 @@ public class Dealer {
         ArrayList<MessageData> list = new ArrayList<MessageData>();
 
         if (santaseFacade.getGame().containActionStatus(Game.GA_CHANGE)) {
-            list.add(new MessageData(context.getString(R.string.AnnounceChangeTrumpCard)));    
+            list.add(new MessageData(context.getString(R.string.AnnounceChangeTrumpCard)));
         }
 
         if (santaseFacade.getGame().containActionStatus(Game.GA_CLOSE)) {
@@ -372,7 +367,7 @@ public class Dealer {
         if (santaseFacade.getGame().containActionStatus(Game.GA_COUPLE)) {
             if (player.getPoints(santaseFacade.getGame().getTrumpSuit()) >= SantaseFacade.END_GAME_POINTS) {
                 list.add(new MessageData(getComputerCoupleMessageExit(player.getPlayedCard().getSuit())));
-                
+
                 StringBuffer message = new StringBuffer();
                 for (Iterator<MessageData> iterator = list.iterator(); iterator.hasNext();) {
                     if (message.length() != 0) {
@@ -381,9 +376,9 @@ public class Dealer {
                     MessageData data = iterator.next();
                     message.append(data.getMessage());
                 }
-                
+
                 list.clear();
-                
+
                 newGame(player, message.toString());
             } else {
                 String message = context.getString(R.string.AndroidHasCoupleOf);
@@ -392,23 +387,19 @@ public class Dealer {
                 list.add(new MessageData(santasePainter.getSuitImage(player.getPlayedCard().getSuit()), message));
             }
         }
-        
+
         if (list.size() > 0) {
             displayMessage(list);
         }
     }
 
     /*
-    public void displayChangeTrumpCard() {
-        showInfo(context.getString(R.string.AnnounceChangeTrumpCard));
-    }
-    */
+     * public void displayChangeTrumpCard() { showInfo(context.getString(R.string.AnnounceChangeTrumpCard)); }
+     */
 
     /*
-    private void displayCloseGame() {
-        showInfo(context.getString(R.string.AnnounceCloseGame));
-    }
-    */
+     * private void displayCloseGame() { showInfo(context.getString(R.string.AnnounceCloseGame)); }
+     */
 
     private String getComputerCoupleMessageExit(Suit suit) {
         String message = context.getString(R.string.AndroidHasACoupleExit);
@@ -432,13 +423,10 @@ public class Dealer {
     }
 
     /*
-    private void displayCoupleMessage(Suit suit) {
-        String message = context.getString(R.string.AndroidHasCoupleOf);
-        message = textDecorator.replaceSuit(suit, message);
-        message = textDecorator.translateCouple(suit, santaseFacade.getGame().getTrumpSuit(), message);
-        showInfo(message, santasePainter.getSuitImage(suit));
-    }
-    */
+     * private void displayCoupleMessage(Suit suit) { String message = context.getString(R.string.AndroidHasCoupleOf); message = textDecorator.replaceSuit(suit,
+     * message); message = textDecorator.translateCouple(suit, santaseFacade.getGame().getTrumpSuit(), message); showInfo(message,
+     * santasePainter.getSuitImage(suit)); }
+     */
 
     private Card getHumanCardUnderPointer(final float x, final float y) {
         Player player = santaseFacade.getGame().getHuman();
@@ -560,7 +548,8 @@ public class Dealer {
                 return null;
             }
             card = santaseFacade.getGame().getHuman().getCards().getCard(index);
-        } while (!santaseFacade.validatePlayerCard(santaseFacade.getGame().getHuman(), santaseFacade.getGame().getComputer(), card).equals(ValidateCode.PLAYER_CAN_PLAY));
+        } while (!santaseFacade.validatePlayerCard(santaseFacade.getGame().getHuman(), santaseFacade.getGame().getComputer(), card).equals(
+                ValidateCode.PLAYER_CAN_PLAY));
 
         return card;
     }
@@ -619,7 +608,8 @@ public class Dealer {
                 return null;
             }
             card = santaseFacade.getGame().getHuman().getCards().getCard(index);
-        } while (!santaseFacade.validatePlayerCard(santaseFacade.getGame().getHuman(), santaseFacade.getGame().getComputer(), card).equals(ValidateCode.PLAYER_CAN_PLAY));
+        } while (!santaseFacade.validatePlayerCard(santaseFacade.getGame().getHuman(), santaseFacade.getGame().getComputer(), card).equals(
+                ValidateCode.PLAYER_CAN_PLAY));
 
         return card;
     }
@@ -637,11 +627,12 @@ public class Dealer {
     }
 
     private boolean canSelectPlayersCard() {
-        return santaseFacade.isHumanTurn();
+        return santaseFacade.isHumanTurn() && santaseFacade.getGame().getHuman().getPlayedCard() == null;
     }
 
     private boolean canPlayerPlaySelectedCard() {
-        return santaseFacade.getGame().getHuman().getSelectedCard() != null && santaseFacade.isHumanTurn();
+        return santaseFacade.getGame().getHuman().getSelectedCard() != null && santaseFacade.isHumanTurn()
+                && santaseFacade.getGame().getHuman().getPlayedCard() == null;
     }
 
     private void performClickForEndGame() {
