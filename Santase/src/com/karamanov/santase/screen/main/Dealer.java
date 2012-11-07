@@ -241,7 +241,7 @@ public class Dealer {
      */
     private void displayMessage(final ArrayList<MessageData> messages) {
         Santase santase = (Santase) context.getApplication();
-        santase.getMessageProcessor().runMessaging();
+        santase.getMessageProcessor().stopMessaging();
         
         final BooleanFlag flag = new BooleanFlag();
         handler.post(new Runnable() {
