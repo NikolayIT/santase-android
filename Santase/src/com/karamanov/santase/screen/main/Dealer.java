@@ -240,6 +240,9 @@ public class Dealer {
      * @param card played by player.
      */
     private void displayMessage(final ArrayList<MessageData> messages) {
+        Santase santase = (Santase) context.getApplication();
+        santase.getMessageProcessor().runMessaging();
+        
         final BooleanFlag flag = new BooleanFlag();
         handler.post(new Runnable() {
             public void run() {
@@ -252,6 +255,8 @@ public class Dealer {
             invalidateGame();
             sleep(PLAY_DELAY);
         }
+        
+        santase.getMessageProcessor().runMessaging();
     }
 
     private void playSelectedHumanCard() {
