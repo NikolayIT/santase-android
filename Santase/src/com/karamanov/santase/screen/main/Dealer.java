@@ -122,6 +122,8 @@ public class Dealer {
                     public void onClick(DialogInterface dialog, int which) {
                     }
                 });
+                
+                myAlertDialog.setCancelable(false);
                 myAlertDialog.show();
             }
         });

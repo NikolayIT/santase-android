@@ -24,6 +24,9 @@ public class TipScreen extends Dialog {
 
         TipPanel tipPanel = new TipPanel(context, player, messages);
         setContentView(tipPanel);
+        
+        setCancelable(true);
+        setCanceledOnTouchOutside(true);
     }
 
     protected void onStop() {

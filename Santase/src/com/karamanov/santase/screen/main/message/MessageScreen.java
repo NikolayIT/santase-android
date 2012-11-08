@@ -25,6 +25,9 @@ public class MessageScreen extends Dialog {
         this.flag = flag;
         MessagePanel messagePanel = new MessagePanel(context, messages);
         setContentView(messagePanel);
+        
+        setCancelable(true);
+        setCanceledOnTouchOutside(true);
     }
 
     protected void onStop() {

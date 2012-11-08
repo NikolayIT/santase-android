@@ -231,6 +231,7 @@ public class SantaseActivity extends MessageActivity implements OnSharedPreferen
                 }
             });
             
+            myAlertDialog.setCancelable(false);
             myAlertDialog.show();
             return true;
         }
@@ -315,6 +316,8 @@ public class SantaseActivity extends MessageActivity implements OnSharedPreferen
                     //
                 }
             });
+            
+            myAlertDialog.setCancelable(false);
             myAlertDialog.show();
         } else {
             Message tMessage = new Message(Santase.MT_EXIT_EVENT);
