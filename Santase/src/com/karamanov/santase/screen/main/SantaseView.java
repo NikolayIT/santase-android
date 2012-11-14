@@ -16,8 +16,6 @@ import com.karamanov.santase.Santase;
 
 public final class SantaseView extends SurfaceView implements SurfaceHolder.Callback {
 
-    private final Object _lock = new Object();
-
     private boolean active = false;
 
     private final SantaseActivity activity;
@@ -43,28 +41,20 @@ public final class SantaseView extends SurfaceView implements SurfaceHolder.Call
 
     private Bitmap getBufferBitmap(int width, int height) {
         Bitmap bitmap = null;
-        synchronized (_lock) {
-            Point point = new Point(width, height);
-            bitmap = bitmaps.get(point);
-            if (bitmap == null) {
-                bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-                bitmaps.put(point, bitmap);
-            }
+        Point point = new Point(width, height);
+        bitmap = bitmaps.get(point);
+        if (bitmap == null) {
+            bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
+            bitmaps.put(point, bitmap);
         }
         return bitmap;
-    }
-
-    public final void draw(Canvas canvas) {
-        synchronized (_lock) {
-            canvas.drawBitmap(getBufferBitmap(canvas.getWidth(), canvas.getHeight()), 0, 0, mSmooth);
-        }
     }
 
     public final Canvas getBufferedCanvas() {
         Canvas canvas = null;
 
         if (oldWidth > 0 && oldHeight > 0) {
-            canvas = new SantaseCanvas(getBufferBitmap(oldWidth, oldHeight), oldWidth, oldHeight, _lock);
+            canvas = new Canvas(getBufferBitmap(oldWidth, oldHeight));
         }
         return canvas;
     }
@@ -99,7 +89,9 @@ public final class SantaseView extends SurfaceView implements SurfaceHolder.Call
             Canvas canvas = null;
             try {
                 canvas = getHolder().lockCanvas(null);
-                draw(canvas);
+                if (canvas != null) {
+                    canvas.drawBitmap(getBufferBitmap(canvas.getWidth(), canvas.getHeight()), 0, 0, mSmooth);
+                }
             } finally {
                 // do this in a finally so that if an exception is thrown
                 // during the above, we don't leave the Surface in an

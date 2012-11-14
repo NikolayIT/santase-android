@@ -326,7 +326,12 @@ public final class SantasePainter extends BasePainter {
     private void drawScore(Canvas graphics, Game game) {
         int x = 1;
         int y = 0;
+        int dip12 = Santase.fromPixelToDip(getContext(), 13);
         Paint p = new Paint();
+        p.setTextSize(dip12);
+        p.setFakeBoldText(true);
+        p.setAntiAlias(true);
+        p.setDither(true);
         p.setColor(Color.clLightYellow.getRGB());
         Context context = getContext();
         String str = context.getString(R.string.Points);
@@ -345,14 +350,11 @@ public final class SantasePainter extends BasePainter {
         andro.setBounds(x + d, y, x + d + andro.getMinimumWidth(), y + andro.getMinimumHeight());
         andro.draw(graphics);
 
-        String scoreMask = "000";
-        Rect bounds = new Rect();
-        p.getTextBounds(scoreMask, 0, scoreMask.length(), bounds);
         Rect pointsBounds = new Rect();
         String compPoints = String.valueOf(game.getComputer().getPoints(game.getTrumpSuit()));
         p.getTextBounds(compPoints, 0, compPoints.length(), pointsBounds);
         p.setColor(getPointsColor(game.getComputer().getPoints(game.getTrumpSuit())));
-        graphics.drawText(compPoints, x + maxWidth + (bounds.width() - pointsBounds.width()), y + pointsBounds.height()
+        graphics.drawText(compPoints, x + maxWidth + getZeroDistance(p, compPoints), y + pointsBounds.height()
                 + (andro.getMinimumHeight() - pointsBounds.height()) / 2, p);
 
         y = y + andro.getMinimumHeight() + dip2;
@@ -364,7 +366,7 @@ public final class SantasePainter extends BasePainter {
         String humanPoints = String.valueOf(game.getHuman().getPoints(game.getTrumpSuit())); // Refactored !!!
         p.getTextBounds(humanPoints, 0, humanPoints.length(), pointsBounds);
         p.setColor(getPointsColor(game.getHuman().getPoints(game.getTrumpSuit())));
-        graphics.drawText(humanPoints, x + maxWidth + (bounds.width() - pointsBounds.width()), y + pointsBounds.height()
+        graphics.drawText(humanPoints, x + maxWidth + getZeroDistance(p, humanPoints), y + pointsBounds.height()
                 + (human.getMinimumHeight() - pointsBounds.height()) / 2, p);
 
         // SCORE
@@ -382,7 +384,7 @@ public final class SantasePainter extends BasePainter {
         compPoints = String.valueOf(game.getComputer().getLittleGames());
         p.getTextBounds(compPoints, 0, compPoints.length(), pointsBounds);
         p.setColor(Color.clLightGreen.getRGB());
-        graphics.drawText(compPoints, x + maxWidth + (bounds.width() - pointsBounds.width()), y + pointsBounds.height()
+        graphics.drawText(compPoints, x + maxWidth + getZeroDistance(p, compPoints), y + pointsBounds.height()
                 + (andro.getMinimumHeight() - pointsBounds.height()) / 2, p);
 
         y = y + andro.getMinimumHeight() + dip2;
@@ -394,8 +396,25 @@ public final class SantasePainter extends BasePainter {
         humanPoints = String.valueOf(game.getHuman().getLittleGames());
         p.getTextBounds(humanPoints, 0, humanPoints.length(), pointsBounds);
         p.setColor(Color.clLightGreen.getRGB());
-        graphics.drawText(humanPoints, x + maxWidth + (bounds.width() - pointsBounds.width()), y + pointsBounds.height()
+        graphics.drawText(humanPoints, x + maxWidth + getZeroDistance(p, humanPoints), y + pointsBounds.height()
                 + (human.getMinimumHeight() - pointsBounds.height()) / 2, p);
+    }
+    
+    private int getZeroDistance(Paint p, String points) {
+        String s = null;
+        if (points.length() == 1) {
+            s = "00";
+        } else if (points.length() == 2) {
+            s = "0";
+        }
+        
+        if (s != null) {
+            Rect bounds = new Rect();
+            p.getTextBounds(s, 0, s.length(), bounds);
+            return bounds.width();
+        }
+        
+        return 0;
     }
 
     /**
