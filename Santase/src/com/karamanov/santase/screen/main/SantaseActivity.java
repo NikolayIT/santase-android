@@ -133,9 +133,7 @@ public class SantaseActivity extends MessageActivity implements OnSharedPreferen
     protected void onDestroy() {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         preferences.unregisterOnSharedPreferenceChangeListener(this);
-        
-        Santase.terminate(this);
-        
+              
         super.onDestroy();
     }
 
@@ -373,6 +371,7 @@ public class SantaseActivity extends MessageActivity implements OnSharedPreferen
 
         @Override
         public void performMessage(Message message) {
+            Santase.terminate(SantaseActivity.this);
             dealer.onExit();
         }
     }
