@@ -10,8 +10,6 @@ public final class MessageProcessor implements Processor {
 
     private boolean processMessages = true;
     
-    //private final Object locker = new Object();
-    
     /**
      * Hash table which maps messages with handlers.
      */
@@ -26,11 +24,6 @@ public final class MessageProcessor implements Processor {
         messageThread.start();
     }
     
-    public final void stop() {
-        messageThread.setSuspended(true);
-        messageQueue.clearAll();
-    }
-
     /**
      * Sends message.
      * @param message - to be send.

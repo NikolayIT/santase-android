@@ -659,8 +659,6 @@ public class Dealer {
     }
 
     public void onExit() {
-        Santase santase = (Santase) context.getApplication();
-        santase.getMessageProcessor().stop();
         context.finish();
     }
 
