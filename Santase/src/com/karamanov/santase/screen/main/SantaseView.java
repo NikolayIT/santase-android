@@ -72,7 +72,7 @@ public final class SantaseView extends SurfaceView implements SurfaceHolder.Call
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
         active = true;
-        refresh();
+        activity.repaint();
     }
 
     @Override
