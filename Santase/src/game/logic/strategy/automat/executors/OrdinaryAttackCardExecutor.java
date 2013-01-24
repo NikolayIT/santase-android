@@ -43,7 +43,7 @@ public final class OrdinaryAttackCardExecutor extends PlayAttackCardExecutor {
     }
 
     /**
-     * Handler method providing the user facility to check custom condtion for methods executions.
+     * Handler method providing the user facility to check custom condition for methods executions.
      * 
      * @param player for which is called the executor.
      * @param opposite for which is called the executor.
