@@ -40,14 +40,14 @@ public class TricksActivity extends Activity {
         Pack hands = game.getGame().getHuman().getHands();
 
         for (PackIterator i = hands.iterator(); i.hasNext();) {
-            Card pCard = i.next();
+            Card winnerCard = i.next();
             if (i.hasNext()) {
-                Card cCard = i.next();
-                HandView tv = new HandView(this, pCard, cCard);
-                LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-                lp.gravity = Gravity.CENTER_HORIZONTAL;
-                tv.setLayoutParams(lp);
-                vertical.addView(tv);
+                Card loserCard = i.next();
+                HandView handView = new HandView(this, winnerCard, loserCard);
+                LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+                params.gravity = Gravity.CENTER_HORIZONTAL;
+                handView.setLayoutParams(params);
+                vertical.addView(handView);
             }
         }
 
@@ -65,24 +65,24 @@ public class TricksActivity extends Activity {
 }
 
 class HandView extends LinearLayout {
-    public HandView(Context context, Card pCard, Card cCard) {
+    public HandView(Context context, Card winnerCard, Card loserCard) {
         super(context);
 
         int dip1 = Santase.fromPixelToDip(context, 2);
         setOrientation(LinearLayout.HORIZONTAL);
 
-        PictureDecorator pd = new PictureDecorator(context);
+        PictureDecorator pictureDecorator = new PictureDecorator(context);
 
-        Card[] cards = new Card[] { pCard, cCard };
+        Card[] cards = new Card[] { winnerCard, loserCard };
         for (Card card : cards) {
-            ImageView iv = new ImageView(context);
-            Bitmap picture = pd.getCardImage(card);
-            iv.setImageBitmap(picture);
+            ImageView imageView = new ImageView(context);
+            Bitmap picture = pictureDecorator.getCardImage(card);
+            imageView.setImageBitmap(picture);
 
-            LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-            lp.setMargins(dip1, dip1, dip1, dip1);
-            iv.setLayoutParams(lp);
-            addView(iv);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+            params.setMargins(dip1, dip1, dip1, dip1);
+            imageView.setLayoutParams(params);
+            addView(imageView);
         }
     }
 }
