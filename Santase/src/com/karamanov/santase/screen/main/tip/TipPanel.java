@@ -39,18 +39,21 @@ public class TipPanel extends TableLayout {
      */
     public TipPanel(Context context, Player player, ArrayList<MessageData> messages) {
         super(context);
-
+        
+        TextView textView = new TextView(context);
+        textView.setText(R.string.Tip);
+        textView.setTextColor(Color.WHITE);
+        textView.setGravity(Gravity.CENTER_HORIZONTAL);
+        textView.setTypeface(Typeface.DEFAULT_BOLD);
+        
+        TableRow.LayoutParams params = new TableRow.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+        params.span = 2;
+        textView.setLayoutParams(params);
+        
         TableRow row = new TableRow(context);
-        TableRow.LayoutParams trp = new TableRow.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-        trp.span = 2;
-        TextView tv = new TextView(context);
-        tv.setText(R.string.Tip);
-        tv.setTextColor(Color.WHITE);
-        tv.setGravity(Gravity.CENTER_HORIZONTAL);
-        tv.setTypeface(Typeface.DEFAULT_BOLD);
-        row.addView(tv);
+        row.addView(textView);
         row.setBackgroundResource(R.drawable.message_title);
-        tv.setLayoutParams(trp);
+        
         addView(row);
 
         for (MessageData data : messages) {
@@ -72,7 +75,6 @@ public class TipPanel extends TableLayout {
      */
     private void addMessage(final Bitmap image, final String text) {
         int dip3 = Santase.fromPixelToDip(getContext(), 3);
-        TableRow row = new TableRow(getContext());
 
         TextView message = new TextView(getContext());
         message.setText(text);
@@ -80,12 +82,13 @@ public class TipPanel extends TableLayout {
         message.setTypeface(Typeface.DEFAULT_BOLD);
 
         if (image != null) {
-            TableRow.LayoutParams trp = new TableRow.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-            trp.rightMargin = dip3;
-            trp.gravity = Gravity.CENTER_VERTICAL;
-            message.setLayoutParams(trp);
+            TableRow.LayoutParams params = new TableRow.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+            params.rightMargin = dip3;
+            params.gravity = Gravity.CENTER_VERTICAL;
+            message.setLayoutParams(params);
         }
 
+        TableRow row = new TableRow(getContext());
         row.addView(message);
         row.setPadding(dip3, dip3, dip3, dip3);
         addView(row);
@@ -95,10 +98,10 @@ public class TipPanel extends TableLayout {
         } else {
             ImageView imageView = new ImageView(getContext());
             imageView.setImageBitmap(image);
-            TableRow.LayoutParams trp = new TableRow.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-            trp.rightMargin = dip3;
-            trp.gravity = Gravity.CENTER_VERTICAL;
-            imageView.setLayoutParams(trp);
+            TableRow.LayoutParams params = new TableRow.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
+            params.rightMargin = dip3;
+            params.gravity = Gravity.CENTER_VERTICAL;
+            imageView.setLayoutParams(params);
             row.addView(imageView);
         }
     }
