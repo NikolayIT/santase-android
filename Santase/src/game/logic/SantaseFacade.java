@@ -84,21 +84,19 @@ public final class SantaseFacade {
 
     /**
      * Returns play card for a player.
-     * 
      * @param player for which returns card.
-     * @param stPlayer opposite player.
      * @return Card instance.
      */
     public Card getAICard(final Player player) {
-        player.setPlayedCard(null);
-        player.setPlayedCard(getCard(player));
+        Card card = getCard(player);
+        player.getCards().remove(card);
+        player.setPlayedCard(card);
         checkGameActionStatus(player);
-        return player.getCards().remove(player.getPlayedCard());
+        return card;
     }
 
     /**
      * Checks game action status for provided player.
-     * 
      * @param player player.
      */
     private void checkGameActionStatus(final Player player) {
@@ -119,18 +117,17 @@ public final class SantaseFacade {
         return getGameAdviser().validatePlayerCard(player, card, attackPlayer.getPlayedCard(), game.getTrumpSuit());
     }
 
-    // changed 03.06.2005
     private Card getCard(final Player player) {
         Card result = null;
         game.clearGameActionStatus();
 
-        game.copyState(); // ???
+        game.copyState();
         try {
             if (!player.getCards().isEmpty()) {
                 result = getGameAdviser().getCard(player);
             }
         } finally {
-            game.restoreState(); // /???
+            game.restoreState();
         }
         return result;
     }
