@@ -14,9 +14,8 @@ import game.beans.pack.card.suit.SuitIterator;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Collections;
 import java.util.Iterator;
-import java.util.Random;
 
 /**
  * Pack class. Represents a collection of cards objects.
@@ -32,7 +31,7 @@ public final class Pack implements Serializable {
     /**
      * Shuffle count.
      */
-    private static final int SHUFFLE_COUNT = 1000;
+    //private static final int SHUFFLE_COUNT = 1000;
 
     /**
      * Internal container collection.
@@ -167,6 +166,8 @@ public final class Pack implements Serializable {
      * Shuffles the pack.
      */
     public void shuffle() {
+        Collections.shuffle(cards);
+        /*
         final long milliseconds = new Date().getTime();
         final Random random = new Random(milliseconds);
 
@@ -178,6 +179,7 @@ public final class Pack implements Serializable {
                 cards.add(indexCard);
             }
         }
+        */
     }
 
     /**
