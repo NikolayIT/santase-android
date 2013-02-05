@@ -19,6 +19,7 @@ import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.view.View;
 
+import com.karamanov.framework.graphics.ImageUtil;
 import com.karamanov.santase.R;
 import com.karamanov.santase.Santase;
 import com.karamanov.santase.screen.base.SantasePainter;
@@ -31,7 +32,7 @@ class LogoView extends View {
     private final Bitmap desk;
 
     /**
-     * Card widrh.
+     * Card width.
      */
     private final int CardWidth;
 
@@ -136,22 +137,23 @@ class LogoView extends View {
     }
 
     private void drawSuitsCorners(Canvas canvas) {
-        SantasePainter bp = new SantasePainter(getContext());
+        SantasePainter santasePainter = new SantasePainter(getContext());
         Paint paint = new Paint();
 
         int dip5 = Santase.fromPixelToDip(getContext(), 5);
 
-        Bitmap b = bp.getSuitImage(Suit.Spade);
+        Bitmap b = santasePainter.getSuitImage(Suit.Spade);
         canvas.drawBitmap(b, dip5, dip5, paint);
-        b = bp.getSuitImage(Suit.Heart);
+        b = santasePainter.getSuitImage(Suit.Heart);
         canvas.drawBitmap(b, getWidth() - dip5 - b.getWidth(), dip5, paint);
-        b = bp.getSuitImage(Suit.Diamond);
+        b = santasePainter.getSuitImage(Suit.Diamond);
         canvas.drawBitmap(b, dip5, getHeight() - dip5 - b.getHeight(), paint);
-        b = bp.getSuitImage(Suit.Club);
+        b = santasePainter.getSuitImage(Suit.Club);
+        b = ImageUtil.transformToDisabledImage(b);
         canvas.drawBitmap(b, getWidth() - dip5 - b.getWidth(), getHeight() - dip5 - b.getHeight(), paint);
     }
 
-    private static float _getAdvance(Paint paint, String text) {
+    private float getTextWidth(Paint paint, String text) {
         float result = 0;
         float[] widths = new float[text.length()];
         paint.getTextWidths(text, widths);
@@ -178,7 +180,7 @@ class LogoView extends View {
         String santase = getContext().getString(R.string.santase);
         paint.getTextBounds(santase, 0, santase.length(), rect);
 
-        int santaseWidth = Math.round(_getAdvance(paint, santase));
+        int santaseWidth = Math.round(getTextWidth(paint, santase));
 
         Bitmap gradientBitmap = Bitmap.createBitmap(santaseWidth, rect.height(), Bitmap.Config.ARGB_8888);
         Canvas gradientCanvas = new Canvas(gradientBitmap);

@@ -114,7 +114,7 @@ public final class PictureDecorator {
     }
 
     /**
-     * Returns the image of crad desk.
+     * Returns the image of card desk.
      * @return desk image.
      */
     public Bitmap getCardBackImage() {
@@ -122,7 +122,7 @@ public final class PictureDecorator {
     }
 
     /**
-     * Returns the image of crad desk.
+     * Returns the image of card desk.
      * @return desk image.
      */
     public Bitmap getCardBackSmallImage() {
@@ -135,10 +135,6 @@ public final class PictureDecorator {
 
     public Bitmap getMask() {
         return ((BitmapDrawable) context.getResources().getDrawable(R.drawable.mask)).getBitmap();
-    }
-
-    public Bitmap getEmpty() {
-        return ((BitmapDrawable) context.getResources().getDrawable(R.drawable.empty)).getBitmap();
     }
 
     public Bitmap getHappy() {
