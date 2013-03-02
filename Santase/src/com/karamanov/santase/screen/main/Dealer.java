@@ -349,8 +349,8 @@ public class Dealer {
     }
 
     private void performComputerCard() {
-        santaseFacade.getAICard(santaseFacade.getGame().getComputer());
         santaseFacade.getGame().setTrickAttackPlayer(santaseFacade.getGame().getHuman());
+        santaseFacade.getAICard(santaseFacade.getGame().getComputer());
         checkGameActionStatus(santaseFacade.getGame().getComputer());
         invalidateGame();
     }
