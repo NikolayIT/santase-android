@@ -88,11 +88,10 @@ public final class SantaseFacade {
      * @return Card instance.
      */
     public Card getAICard(final Player player) {
-        Card card = getCard(player);
-        player.getCards().remove(card);
-        player.setPlayedCard(card);
+        player.setPlayedCard(null);//first null -> getCard() ?
+        player.setPlayedCard(getCard(player));
         checkGameActionStatus(player);
-        return card;
+        return player.getCards().remove(player.getPlayedCard());
     }
 
     /**
