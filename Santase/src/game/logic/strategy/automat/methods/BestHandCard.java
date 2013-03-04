@@ -36,18 +36,18 @@ public final class BestHandCard extends BaseMethod {
      */
     protected Card getPlayMethodCard(final Player player) {
         Card result = null;
+        Card rivalCard = getRival(player).getPlayedCard();
 
-        if (getRival(player).getPlayedCard() != null) {
-            final Card trumpCard = player.getCards().findMaxSuitCard(game.getTrumpSuit());
-            final Card suitCard = player.getCards().findMaxSuitCard(getRival(player).getPlayedCard().getSuit());
+        if (rivalCard != null) {
+            final Card maxTrumpCard = player.getCards().findMaxSuitCard(game.getTrumpSuit());
+            final Card maxSuitCard = player.getCards().findMaxSuitCard(getRival(player).getPlayedCard().getSuit());
 
-            if (suitCard == null || suitCard.getRank().compareTo(getRival(player).getPlayedCard().getRank()) < 0) {
-                result = trumpCard;
-            } else {
-                result = suitCard;
-                if (trumpCard != null) {
-                    result = trumpCard.getRank().compareTo(suitCard.getRank()) > 0 ? trumpCard : suitCard;
-                }
+            if (maxSuitCard != null && maxSuitCard.getRank().compareTo(rivalCard.getRank()) > 0) {
+                result = maxSuitCard;
+            }
+            
+            if (!rivalCard.getSuit().equals(game.getTrumpSuit()) && maxTrumpCard != null && (maxSuitCard == null || maxSuitCard.getRank().compareTo(maxTrumpCard.getRank()) < 0)) {
+                result = maxTrumpCard;
             }
         }
         return result;
