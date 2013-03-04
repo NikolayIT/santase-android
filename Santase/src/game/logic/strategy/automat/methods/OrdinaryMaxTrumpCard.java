@@ -36,11 +36,10 @@ public final class OrdinaryMaxTrumpCard extends BaseMethod {
      */
     protected Card getPlayMethodCard(final Player player) {
         final Card result = player.getCards().findMaxSuitCard(game.getTrumpSuit());
+        final Card rivalCard = getRival(player).getPlayedCard();
 
-        if (result != null
-                && (getRival(player).getPlayedCard() != null && !getRival(player).getPlayedCard().getSuit().equals(game.getTrumpSuit()) || getRival(player)
-                        .getPlayedCard().getRank().compareTo(result.getRank()) < 0)) {
-            if (player.getPoints(game.getTrumpSuit()) + Card.getPoints(getRival(player).getPlayedCard()) + Card.getPoints(result) >= SantaseFacade.END_GAME_POINTS) {
+        if (result != null && rivalCard != null && (!rivalCard.getSuit().equals(game.getTrumpSuit()) || rivalCard.getRank().compareTo(result.getRank()) < 0)) {
+            if (player.getPoints(game.getTrumpSuit()) + Card.getPoints(rivalCard) + Card.getPoints(result) >= SantaseFacade.END_GAME_POINTS) {
                 return result;
             }
         }
