@@ -48,7 +48,7 @@ public final class ObligatoryBiggerCard extends BaseMethod {
                 }
             }
 
-            if (getRival(player).getCards().getSuitCount(rivalCard.getSuit()) >= 1) {
+            if (getRival(player).getCards().getSuitCount(rivalCard.getSuit()) >= ONE_CARD) {
                 if (result.getRank().compareTo(getRival(player).getCards().findMaxSuitCard(getRival(player).getPlayedCard().getSuit()).getRank()) > 0) {
                     final Card bcSecond = player.getCards().findMaxUnderCard(result);
                     if (bcSecond != null && bcSecond.getRank().compareTo(rivalCard.getRank()) > 0) {
@@ -56,7 +56,7 @@ public final class ObligatoryBiggerCard extends BaseMethod {
                     }
                 } else {
                     boolean hook = getRival(player).getCards().hasPrevFromSameSuit(result) && getRival(player).getCards().hasNextFromSameSuit(result);
-                    if (hook || player.getCards().getSuitCount(rivalCard.getSuit()) == 2) {
+                    if (hook || player.getCards().getSuitCount(rivalCard.getSuit()) == TWO_CARDS) {
                         if (result.getRank().compareTo(rivalCard.getRank()) > 0) {
                             return result;
                         }
