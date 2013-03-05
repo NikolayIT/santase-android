@@ -34,6 +34,10 @@ public final class SmallestOfSuit extends BaseMethod {
      * @return Card object instance or null.
      */
     protected Card getPlayMethodCard(final Player player) {
-        return player.getCards().findMinSuitCard(getRival(player).getPlayedCard().getSuit());
+        final Card rivalCard = getRival(player).getPlayedCard();
+        if (rivalCard != null) {
+            return player.getCards().findMinSuitCard(rivalCard.getSuit());
+        }
+        return null;
     }
 }
