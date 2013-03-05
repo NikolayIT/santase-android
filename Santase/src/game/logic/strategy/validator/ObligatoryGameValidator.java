@@ -4,7 +4,7 @@ import game.beans.Player;
 import game.beans.pack.card.Card;
 import game.beans.pack.card.suit.Suit;
 
-public class ObligatoryGameValidator extends BasicGameValidator {
+public final class ObligatoryGameValidator extends BasicGameValidator {
 
     @Override
     public ValidateCode validatePlayerCard(Player player, Card ownCard, Card rivalCard, Suit trumpSuit) {
