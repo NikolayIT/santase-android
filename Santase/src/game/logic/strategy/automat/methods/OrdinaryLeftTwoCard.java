@@ -17,6 +17,7 @@ import game.logic.strategy.automat.methods.base.BaseMethod;
  * @author Dimitar Karamanov
  */
 public final class OrdinaryLeftTwoCard extends BaseMethod {
+    
     private final OrdinarySingleLoose ordinarySingleLoose;
 
     /**
@@ -37,7 +38,7 @@ public final class OrdinaryLeftTwoCard extends BaseMethod {
      * @return Card object instance or null.
      */
     protected Card getPlayMethodCard(final Player player) {
-        if (game.getGameCards().getSize() == 2) {
+        if (game.getGameCards().getSize() == TWO_CARDS) {
             final Card result = ordinarySingleLoose.getPlayMethodCard(player);
             if (result != null && result.getSuit().equals(game.getTrumpSuit())) {
                 return null;
