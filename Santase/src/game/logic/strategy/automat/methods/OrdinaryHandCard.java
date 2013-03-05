@@ -19,9 +19,9 @@ import game.logic.strategy.automat.methods.base.BaseMethod;
  * @author Dimitar Karamanov
  */
 public final class OrdinaryHandCard extends BaseMethod {
+    
     /**
      * Constructor.
-     * 
      * @param game SantaseGame instance.
      */
     public OrdinaryHandCard(final Game game) {
@@ -36,8 +36,11 @@ public final class OrdinaryHandCard extends BaseMethod {
      * @return Card object instance or null.
      */
     protected Card getPlayMethodCard(final Player player) {
-        if (!getRival(player).getPlayedCard().getSuit().equals(game.getTrumpSuit()) || getRival(player).getPlayedCard().getRank().equals(Rank.Ten)) {
-            return getBiggerCard(player);
+        final Card rivalCard = getRival(player).getPlayedCard();
+        if (rivalCard != null) {
+            if (!rivalCard.getSuit().equals(game.getTrumpSuit()) || rivalCard.getRank().equals(Rank.Ten)) {
+                return getBiggerCard(player);
+            }
         }
         return null;
     }
