@@ -26,6 +26,11 @@ import game.logic.strategy.automat.base.PlayCardMethod;
 public abstract class BaseMethod implements PlayCardMethod {
     
     /**
+     * ONE_CARD constant.
+     */
+    protected static final int ONE_CARD = 1;
+    
+    /**
      * TWO_CARDS constant.
      */
     protected static final int TWO_CARDS = 2;
