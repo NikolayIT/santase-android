@@ -24,6 +24,12 @@ import game.logic.strategy.automat.base.PlayCardMethod;
  * @author Dimitar Karamanov
  */
 public abstract class BaseMethod implements PlayCardMethod {
+    
+    /**
+     * TWO_CARDS constant.
+     */
+    protected static final int TWO_CARDS = 2;
+    
     /**
      * Santase game internal object.
      */
