@@ -35,34 +35,35 @@ public final class ObligatoryBiggerCard extends BaseMethod {
      */
     protected Card getPlayMethodCard(final Player player) {
         Card result;
+        final Card rivalCard = getRival(player).getPlayedCard();
 
-        if (getRival(player).getPlayedCard() != null) {
-            if ((result = player.getCards().findMaxSuitCard(getRival(player).getPlayedCard().getSuit())) == null) {
+        if (rivalCard != null) {
+            if ((result = player.getCards().findMaxSuitCard(rivalCard.getSuit())) == null) {
                 return null;
             }
 
-            if (getRival(player).getCards().getSuitCount(getRival(player).getPlayedCard().getSuit()) == 0) {
-                if (result.getRank().compareTo(getRival(player).getPlayedCard().getRank()) > 0) {
+            if (getRival(player).getCards().getSuitCount(rivalCard.getSuit()) == 0) {
+                if (result.getRank().compareTo(rivalCard.getRank()) > 0) {
                     return result;
                 }
             }
 
-            if (getRival(player).getCards().getSuitCount(getRival(player).getPlayedCard().getSuit()) >= 1) {
+            if (getRival(player).getCards().getSuitCount(rivalCard.getSuit()) >= 1) {
                 if (result.getRank().compareTo(getRival(player).getCards().findMaxSuitCard(getRival(player).getPlayedCard().getSuit()).getRank()) > 0) {
                     final Card bcSecond = player.getCards().findMaxUnderCard(result);
-                    if (bcSecond != null && bcSecond.getRank().compareTo(getRival(player).getPlayedCard().getRank()) > 0) {
+                    if (bcSecond != null && bcSecond.getRank().compareTo(rivalCard.getRank()) > 0) {
                         return bcSecond;
                     }
                 } else {
                     boolean hook = getRival(player).getCards().hasPrevFromSameSuit(result) && getRival(player).getCards().hasNextFromSameSuit(result);
-                    if (hook || player.getCards().getSuitCount(getRival(player).getPlayedCard().getSuit()) == 2) {
-                        if (result.getRank().compareTo(getRival(player).getPlayedCard().getRank()) > 0) {
+                    if (hook || player.getCards().getSuitCount(rivalCard.getSuit()) == 2) {
+                        if (result.getRank().compareTo(rivalCard.getRank()) > 0) {
                             return result;
                         }
                     }
                 }
             }
-            return player.getCards().findMinAboveCard(getRival(player).getPlayedCard());
+            return player.getCards().findMinAboveCard(rivalCard);
         }
 
         return null;
