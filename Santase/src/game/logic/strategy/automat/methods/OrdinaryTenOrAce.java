@@ -35,50 +35,54 @@ public final class OrdinaryTenOrAce extends BaseMethod {
      * @return Card object instance or null.
      */
     protected Card getPlayMethodCard(final Player player) {
-        // check for Ten trump if player played
-        if (getRival(player).getPlayedCard().getRank().equals(Rank.Ten) && getRival(player).getPlayedCard().getSuit().equals(game.getTrumpSuit())) {
-            final Card AceTrump = player.getCards().findCard(Rank.Ace, game.getTrumpSuit());
-            if (AceTrump != null) {
-                return AceTrump;
-            }
-        }
+        final Card rivalCard = getRival(player).getPlayedCard();
 
-        // check for Ten or ACE not TRUMP
-        if ((getRival(player).getPlayedCard().getRank().equals(Rank.Ace) || getRival(player).getPlayedCard().getRank().equals(Rank.Ten))
-                && !getRival(player).getPlayedCard().getSuit().equals(game.getTrumpSuit())) {
-            Card result = player.getCards().findCard(Rank.Jack, game.getTrumpSuit());
-            if (result != null) {
-                return result;
+        if (rivalCard != null) {
+            // check for Ten trump if player played
+            if (rivalCard.getRank().equals(Rank.Ten) && rivalCard.getSuit().equals(game.getTrumpSuit())) {
+                final Card AceTrump = player.getCards().findCard(Rank.Ace, game.getTrumpSuit());
+                if (AceTrump != null) {
+                    return AceTrump;
+                }
             }
 
-            result = player.getCards().findCard(Rank.Nine, game.getTrumpSuit());
-            if (result != null
-                    && (game.getGameCards().getCard(game.getGameCards().getSize() - 1).getRank().equals(Rank.Jack) || game.getGameCards().getSize() == 4)) {
-                return result;
-            }
+            // check for Ten or ACE not TRUMP
+            if ((rivalCard.getRank().equals(Rank.Ace) || rivalCard.getRank().equals(Rank.Ten))
+                    && !rivalCard.getSuit().equals(game.getTrumpSuit())) {
+                Card result = player.getCards().findCard(Rank.Jack, game.getTrumpSuit());
+                if (result != null) {
+                    return result;
+                }
 
-            if (result != null && player.getCards().hasCouple(game.getTrumpSuit())) {
-                return result;
-            }
+                result = player.getCards().findCard(Rank.Nine, game.getTrumpSuit());
+                if (result != null
+                        && (game.getGameCards().getCard(game.getGameCards().getSize() - 1).getRank().equals(Rank.Jack) || game.getGameCards().getSize() == 4)) {
+                    return result;
+                }
 
-            result = player.getCards().findCard(Rank.Queen, game.getTrumpSuit());
-            if (result != null && noPossibleCoupleCard(player, result)) {
-                return result;
-            }
+                if (result != null && player.getCards().hasCouple(game.getTrumpSuit())) {
+                    return result;
+                }
 
-            result = player.getCards().findCard(Rank.King, game.getTrumpSuit());
-            if (result != null && noPossibleCoupleCard(player, result)) {
-                return result;
-            }
+                result = player.getCards().findCard(Rank.Queen, game.getTrumpSuit());
+                if (result != null && noPossibleCoupleCard(player, result)) {
+                    return result;
+                }
 
-            result = player.getCards().findCard(Rank.Ten, game.getTrumpSuit());
-            if (result != null) {
-                return result;
-            }
+                result = player.getCards().findCard(Rank.King, game.getTrumpSuit());
+                if (result != null && noPossibleCoupleCard(player, result)) {
+                    return result;
+                }
 
-            result = player.getCards().findCard(Rank.Ace, game.getTrumpSuit());
-            if (result != null) {
-                return result;
+                result = player.getCards().findCard(Rank.Ten, game.getTrumpSuit());
+                if (result != null) {
+                    return result;
+                }
+
+                result = player.getCards().findCard(Rank.Ace, game.getTrumpSuit());
+                if (result != null) {
+                    return result;
+                }
             }
         }
         return null;
