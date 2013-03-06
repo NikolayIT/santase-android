@@ -6,8 +6,17 @@ import android.content.res.Resources;
 import android.util.TypedValue;
 
 import com.karamanov.framework.message.MessageProcessor;
+import com.karamanov.framework.message.MessageType;
 
 public class MessageApplication extends Application {
+
+    public final static MessageType MT_KEY_PRESSED = new MessageType("MT_KEY_PRESSED");
+
+    public final static MessageType MT_TOUCH_EVENT = new MessageType("MT_TOUCH_EVENT");
+
+    public final static MessageType MT_EXIT_EVENT = new MessageType("MT_EXIT_EVENT");
+
+    public final static MessageType MT_PAINT_EVENT = new MessageType("MT_PAINT_EVENT");
 
     private final MessageProcessor messageProcessor;
 
