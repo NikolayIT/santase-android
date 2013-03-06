@@ -9,7 +9,7 @@ public final class MessageProcessor implements Processor {
     private final MessageQueue messageQueue;
 
     private boolean processMessages = true;
-    
+
     /**
      * Hash table which maps messages with handlers.
      */
@@ -23,7 +23,7 @@ public final class MessageProcessor implements Processor {
     public final void start() {
         messageThread.start();
     }
-    
+
     /**
      * Sends message.
      * @param message - to be send.
@@ -50,24 +50,12 @@ public final class MessageProcessor implements Processor {
     public final void runMessaging() {
         processMessages = true;
     }
-    
-    /*
-    public void lock() {
-        synchronized (locker) {
-            try {
-                locker.wait();
-            } catch (InterruptedException e) {
-            }
-        }
-    }
 
-    public void unlock() {
-        synchronized (locker) {
-            locker.notify();
-        }
-    }
-    */
-    
+    /*
+     * public void lock() { synchronized (locker) { try { locker.wait(); } catch (InterruptedException e) { } } } public void unlock() { synchronized (locker) {
+     * locker.notify(); } }
+     */
+
     /**
      * Adds message listener for the concrete message type.
      * @param messageType concrete message type.
@@ -87,19 +75,19 @@ public final class MessageProcessor implements Processor {
     public final void removeMessageListener(final MessageType messageType) {
         listenersHash.remove(messageType);
     }
-    
+
     /**
      * Process one message.
      */
     public final void process() {
-        //if (processMessages) {
-            final Message message = messageQueue.getMessage();
-            if (message != null) {
-                final Messageable messageable = (Messageable) listenersHash.get(message.getMessageType());
-                if (messageable != null) {
-                    messageable.performMessage(message);
-                }
+        // if (processMessages) {
+        final Message message = messageQueue.getMessage();
+        if (message != null) {
+            final Messageable messageable = (Messageable) listenersHash.get(message.getMessageType());
+            if (messageable != null) {
+                messageable.performMessage(message);
             }
-        //}
+        }
+        // }
     }
 }

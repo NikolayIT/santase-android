@@ -14,10 +14,10 @@ import game.logic.strategy.automat.methods.base.BaseMethod;
 
 /**
  * OrdinaryWinCoupleCard class. PlayCardMethod which implements the logic of playing a win couple card.
- * 
  * @author Dimitar Karamanov
  */
 public final class OrdinaryWinCoupleCard extends BaseMethod {
+
     /**
      * Helper method.
      */
@@ -25,7 +25,6 @@ public final class OrdinaryWinCoupleCard extends BaseMethod {
 
     /**
      * Constructor.
-     * 
      * @param game SantaseGame instance.
      */
     public OrdinaryWinCoupleCard(final Game game) {
@@ -35,7 +34,6 @@ public final class OrdinaryWinCoupleCard extends BaseMethod {
 
     /**
      * Returns player's card.
-     * 
      * @param player AI player.
      * @param opposite player.
      * @return Card object instance or null.

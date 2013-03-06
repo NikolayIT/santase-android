@@ -13,10 +13,10 @@ import java.util.Iterator;
 
 /**
  * PlayCardMethodList class. Wrapper class of system collection used to hold and access PlayCardMethod instances.
- * 
  * @author Dimitar Karamanov
  */
 public final class PlayCardMethodList {
+
     /**
      * Internal container collection.
      */
@@ -38,7 +38,6 @@ public final class PlayCardMethodList {
 
     /**
      * Adds a method to the collection.
-     * 
      * @param method to be added
      */
     public void add(PlayCardMethod method) {
@@ -47,7 +46,6 @@ public final class PlayCardMethodList {
 
     /**
      * Returns collection size.
-     * 
      * @return int size of the method's collection
      */
     public int size() {
@@ -56,7 +54,6 @@ public final class PlayCardMethodList {
 
     /**
      * Returns iterator for the collection.
-     * 
      * @return PlayCardMethodIterator iterator.
      */
     public PlayCardMethodIterator iterator() {
@@ -67,6 +64,7 @@ public final class PlayCardMethodList {
      * PlayableIteratorImpl class. Implements PlayCardMethodIterator interface.
      */
     private class PlayCardMethodIteratorImpl implements PlayCardMethodIterator {
+
         /**
          * The internal collection enumerator.
          */
@@ -74,7 +72,6 @@ public final class PlayCardMethodList {
 
         /**
          * Constructor.
-         * 
          * @param enumerator the internal collection enumerator.
          */
         public PlayCardMethodIteratorImpl(Iterator<PlayCardMethod> enumeration) {
@@ -83,7 +80,6 @@ public final class PlayCardMethodList {
 
         /**
          * Returns true if the iteration has more elements.
-         * 
          * @return boolean true if the iteration has more elements false otherwise.
          */
         public boolean hasNext() {
@@ -92,7 +88,6 @@ public final class PlayCardMethodList {
 
         /**
          * Returns the next element in the iteration.
-         * 
          * @return Playable the next element in the iteration.
          */
         public PlayCardMethod next() {

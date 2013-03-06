@@ -13,13 +13,12 @@ import game.logic.strategy.automat.methods.base.BaseMethod;
 
 /**
  * ObligatoryBiggerCard class. PlayCardMethod which implements the logic of playing a obligatory bigger card.
- * 
  * @author Dimitar Karamanov
  */
 public final class ObligatoryBiggerCard extends BaseMethod {
+
     /**
      * Constructor.
-     * 
      * @param game SantaseGame instance.
      */
     public ObligatoryBiggerCard(final Game game) {
@@ -28,7 +27,6 @@ public final class ObligatoryBiggerCard extends BaseMethod {
 
     /**
      * Returns player's card.
-     * 
      * @param player AI player.
      * @param opposite player.
      * @return Card object instance or null.

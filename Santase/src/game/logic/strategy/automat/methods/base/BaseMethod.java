@@ -20,21 +20,20 @@ import game.logic.strategy.automat.base.PlayCardMethod;
 
 /**
  * BaseMethod class. Based class of all AI methods. Contains several helper methods used in the concrete methods.
- * 
  * @author Dimitar Karamanov
  */
 public abstract class BaseMethod implements PlayCardMethod {
-    
+
     /**
      * ONE_CARD constant.
      */
     protected static final int ONE_CARD = 1;
-    
+
     /**
      * TWO_CARDS constant.
      */
     protected static final int TWO_CARDS = 2;
-    
+
     /**
      * Santase game internal object.
      */
@@ -42,7 +41,6 @@ public abstract class BaseMethod implements PlayCardMethod {
 
     /**
      * Constructor.
-     * 
      * @param game SantaseGame instance.
      */
     public BaseMethod(final Game game) {
@@ -51,7 +49,6 @@ public abstract class BaseMethod implements PlayCardMethod {
 
     /**
      * Returns player's card.
-     * 
      * @param player who is on turn.
      * @param opposite player.
      * @return Card object instance or null.
@@ -64,7 +61,6 @@ public abstract class BaseMethod implements PlayCardMethod {
 
     /**
      * Returns player's card.
-     * 
      * @param player AI player.
      * @param opposite player.
      * @return Card object instance or null.
@@ -73,7 +69,6 @@ public abstract class BaseMethod implements PlayCardMethod {
 
     /**
      * Returns eventual couple points.
-     * 
      * @param pack players pack.
      * @return 0 or the max eventual couple points.
      */
@@ -94,7 +89,6 @@ public abstract class BaseMethod implements PlayCardMethod {
 
     /**
      * Returns a pack with possible enemy cards.
-     * 
      * @param player AI player.
      * @param opposite player.
      * @param withLastCard
@@ -113,7 +107,6 @@ public abstract class BaseMethod implements PlayCardMethod {
 
     /**
      * Returns true if has power trumps, false otherwise.
-     * 
      * @param player AI player.
      * @param opposite player.
      * @param withLastCard
@@ -151,7 +144,6 @@ public abstract class BaseMethod implements PlayCardMethod {
 
     /**
      * Returns if the provided card is from trump suit.
-     * 
      * @param card provided one.
      * @return boolean true if the card is not null and trump false otherwise.
      */
@@ -161,7 +153,6 @@ public abstract class BaseMethod implements PlayCardMethod {
 
     /**
      * Returns if the card can be part of future couple or not.
-     * 
      * @param player which plays the cards.
      * @param opposite player.
      * @param card the played one.
@@ -199,7 +190,6 @@ public abstract class BaseMethod implements PlayCardMethod {
 
     /**
      * Returns couples points for provided suit.
-     * 
      * @param suit provided one.
      * @return couple points.
      */
@@ -209,7 +199,6 @@ public abstract class BaseMethod implements PlayCardMethod {
 
     /**
      * Returns sure hand points.
-     * 
      * @param playerPack AI player pack.
      * @param oppositePack opposite player pack.
      * @param hands hands pack.
@@ -231,7 +220,6 @@ public abstract class BaseMethod implements PlayCardMethod {
 
     /**
      * Returns a single hand points from provided suit.
-     * 
      * @param playerPack AI player pack.
      * @param oppositePack opposite player pack.
      * @param hands pack.
@@ -262,7 +250,6 @@ public abstract class BaseMethod implements PlayCardMethod {
 
     /**
      * Returns points of hands when the opposite player has no trump suit cards.
-     * 
      * @param playerPack AI player pack.
      * @param oppositePack opposite player pack.
      * @param hands pack.
@@ -299,7 +286,6 @@ public abstract class BaseMethod implements PlayCardMethod {
 
     /**
      * Returns if the provided card is the best suit card or not.
-     * 
      * @param player AI player.
      * @param opposite player.
      * @param card which is checked.

@@ -14,13 +14,12 @@ import game.logic.strategy.automat.methods.base.BaseMethod;
 
 /**
  * ObligatorySingleLooser class. PlayCardMethod which implements the logic of playing a obligatory single loose card.
- * 
  * @author Dimitar Karamanov
  */
 public final class ObligatorySingleLooser extends BaseMethod {
+
     /**
      * Constructor.
-     * 
      * @param game SantaseGame instance.
      */
     public ObligatorySingleLooser(final Game game) {
@@ -29,7 +28,6 @@ public final class ObligatorySingleLooser extends BaseMethod {
 
     /**
      * Returns player's card.
-     * 
      * @param player AI player.
      * @param opposite standart player.
      * @return Card object instance or null.

@@ -18,10 +18,10 @@ import game.logic.strategy.automat.methods.base.BaseMethod;
 
 /**
  * OrdinaryCloseGameCard class. PlayCardMethod which implements the logic of playing a card for closing the game.
- * 
  * @author Dimitar Karamanov
  */
 public final class OrdinaryCloseGameCard extends BaseMethod {
+
     /**
      * 
      */
@@ -29,7 +29,6 @@ public final class OrdinaryCloseGameCard extends BaseMethod {
 
     /**
      * Constructor.
-     * 
      * @param game SantaseGame instance.
      */
     public OrdinaryCloseGameCard(final Game game) {
@@ -38,7 +37,6 @@ public final class OrdinaryCloseGameCard extends BaseMethod {
 
     /**
      * Returns player's card.
-     * 
      * @param player AI player.
      * @param opposite player.
      * @return Card object instance or null.
@@ -54,7 +52,6 @@ public final class OrdinaryCloseGameCard extends BaseMethod {
 
     /**
      * Returns if the player can close the game.
-     * 
      * @param player AI player.
      * @param opposite player.
      * @return boolean true if can, false otherwise.
@@ -77,7 +74,6 @@ public final class OrdinaryCloseGameCard extends BaseMethod {
 
     /**
      * Returns if the player can close the game by power forty cards.
-     * 
      * @param human AI player.
      * @param opposite player.
      * @return boolean true if can, false otherwise.
@@ -104,7 +100,6 @@ public final class OrdinaryCloseGameCard extends BaseMethod {
 
     /**
      * Returns if the player can close the game.
-     * 
      * @param human AI player.
      * @param opposite player.
      * @return boolean true if can, false otherwise.
@@ -115,7 +110,6 @@ public final class OrdinaryCloseGameCard extends BaseMethod {
 
     /**
      * Returns potentional hands points.
-     * 
      * @param player AI player.
      * @param opposite player.
      * @return boolean true if can, false otherwise.
@@ -139,7 +133,6 @@ public final class OrdinaryCloseGameCard extends BaseMethod {
 
     /**
      * Returns a single hand minimum possible points.
-     * 
      * @param copyPack copy pack of the AI player.
      * @param oppositePointsCards copy pack of the opposite player - used for minimum points card calculation.
      * @param oppositeSuitCards copy pack of the opposite player.
@@ -175,7 +168,6 @@ public final class OrdinaryCloseGameCard extends BaseMethod {
 
     /**
      * Returns true if the player has last close chance or not.
-     * 
      * @param human AI player.
      * @param opposite player.
      * @return boolean true if has, false otherwise.
@@ -186,7 +178,6 @@ public final class OrdinaryCloseGameCard extends BaseMethod {
 
     /**
      * Returns the potental points if closed the game on last chance.
-     * 
      * @param player AI player.
      * @param opposite player.
      * @return the potental points if closed the game on last chance.
@@ -209,7 +200,6 @@ public final class OrdinaryCloseGameCard extends BaseMethod {
 
     /**
      * Returns the potential points if closed the game on last chance.
-     * 
      * @param copyPack copy pack of the player.
      * @param possibleOppositeCards possible opposite player cards.
      * @return the potential points of single hand.

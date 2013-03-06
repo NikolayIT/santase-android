@@ -16,13 +16,12 @@ import game.logic.strategy.automat.methods.base.BaseMethod;
 
 /**
  * ObligatorySingleHand class. PlayCardMethod which implements the logic of playing a obligatory single hand card.
- * 
  * @author Dimitar Karamanov
  */
 public final class ObligatorySingleHand extends BaseMethod {
+
     /**
      * Constructor.
-     * 
      * @param game SantaseGame instance.
      */
     public ObligatorySingleHand(final Game game) {
@@ -31,7 +30,6 @@ public final class ObligatorySingleHand extends BaseMethod {
 
     /**
      * Returns player's card.
-     * 
      * @param player AI player.
      * @param opposite standart player.
      * @return Card object instance or null.

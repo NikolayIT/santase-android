@@ -13,7 +13,6 @@ import game.beans.pack.card.suit.SuitIterator;
 
 /**
  * Couples class.
- * 
  * @author Dimitar Karamanov
  */
 public final class Couples implements Serializable {
@@ -47,7 +46,6 @@ public final class Couples implements Serializable {
 
     /**
      * Sets couple for provided suit.
-     * 
      * @param suit provided suit.
      */
     public void setCouple(final Suit suit) {
@@ -56,7 +54,6 @@ public final class Couples implements Serializable {
 
     /**
      * Returns couples points.
-     * 
      * @param trumpSuit trump suit.
      * @return int couples points.
      */
@@ -70,7 +67,6 @@ public final class Couples implements Serializable {
 
     /**
      * Returns couples count.
-     * 
      * @return int couples count.
      */
     public int getCoupleCount() {
@@ -86,7 +82,6 @@ public final class Couples implements Serializable {
 
     /**
      * Returns true if has couple from provided suit.
-     * 
      * @param suit provided suit.
      * @return boolean true if has couple from provided suit.
      */
@@ -96,7 +91,6 @@ public final class Couples implements Serializable {
 
     /**
      * Returns couple points for specified suit.
-     * 
      * @param suit specified suit.
      * @return int couple points for specified suit.
      */

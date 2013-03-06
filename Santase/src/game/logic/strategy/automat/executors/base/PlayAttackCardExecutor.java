@@ -8,7 +8,6 @@ public abstract class PlayAttackCardExecutor extends PlayCardExecutor {
 
     /**
      * Constructor
-     * 
      * @param game BelotGame instance.
      */
     public PlayAttackCardExecutor(final Game game) {
@@ -17,7 +16,6 @@ public abstract class PlayAttackCardExecutor extends PlayCardExecutor {
 
     /**
      * Handler method providing the user to write additional code which is executed after the getPlayerCard(Player).
-     * 
      * @param player for which is called the executor.
      * @param opposite player.
      * @param result the result of the method getPlayerCard(Player)

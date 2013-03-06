@@ -14,7 +14,6 @@ import game.beans.pack.card.suit.Suit;
 
 /**
  * GamePlayer class.
- * 
  * @author Dimitar Karamanov
  */
 public final class Player implements Serializable {
@@ -78,7 +77,6 @@ public final class Player implements Serializable {
 
     /**
      * Initialization of new game
-     * 
      * @param gameCards pack
      */
     public void newGame(final Pack gameCards) {
@@ -114,7 +112,6 @@ public final class Player implements Serializable {
 
     /**
      * Returns player points.
-     * 
      * @param trumpSuit trump suit
      * @return players points
      */
@@ -131,7 +128,6 @@ public final class Player implements Serializable {
 
     /**
      * Return true if the player has a couple of a provided suit false otherwise.
-     * 
      * @param suit which will be cheked for a couple
      * @return boolean true or false
      */

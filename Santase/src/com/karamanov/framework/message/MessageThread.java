@@ -7,7 +7,6 @@
  */
 package com.karamanov.framework.message;
 
-
 /**
  * @author Dimitar Karamanov
  */
@@ -25,7 +24,6 @@ public final class MessageThread extends Thread {
 
     /**
      * Constructor.
-     *
      * @param messageQueue which the thread will process.
      */
     public MessageThread(Processor messageProcessor) {

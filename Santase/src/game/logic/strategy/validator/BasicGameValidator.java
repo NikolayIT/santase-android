@@ -8,7 +8,6 @@ public abstract class BasicGameValidator {
 
     /**
      * Validates a player played card.
-     * 
      * @param player
      * @param ownCard
      * @param rivalCard

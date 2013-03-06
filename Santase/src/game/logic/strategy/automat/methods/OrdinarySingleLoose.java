@@ -15,13 +15,12 @@ import game.logic.strategy.automat.methods.base.BaseMethod;
 
 /**
  * OrdinarySingleLoose class. PlayCardMethod which implements the logic of playing a ordinary single loose card.
- * 
  * @author Dimitar Karamanov
  */
 public final class OrdinarySingleLoose extends BaseMethod {
+
     /**
      * Constructor.
-     * 
      * @param game SantaseGame instance.
      */
     public OrdinarySingleLoose(final Game game) {
@@ -30,7 +29,6 @@ public final class OrdinarySingleLoose extends BaseMethod {
 
     /**
      * Returns player's card.
-     * 
      * @param player AI player.
      * @param opposite player.
      * @return Card object instance or null.

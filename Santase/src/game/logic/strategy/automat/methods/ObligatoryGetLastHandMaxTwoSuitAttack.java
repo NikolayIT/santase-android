@@ -25,7 +25,7 @@ public class ObligatoryGetLastHandMaxTwoSuitAttack extends BaseMethod {
         List<Suit> rSuits = getSuitList(rival);
 
         if (pSuits.size() == 2) {
-            
+
             Card maxSuitCard = null;
             if (equal(pSuits, rSuits)) {
                 for (Iterator<Suit> iterator = pSuits.iterator(); iterator.hasNext();) {
@@ -69,7 +69,7 @@ public class ObligatoryGetLastHandMaxTwoSuitAttack extends BaseMethod {
                     return false;
                 }
             }
-            
+
             return true;
         }
         return false;

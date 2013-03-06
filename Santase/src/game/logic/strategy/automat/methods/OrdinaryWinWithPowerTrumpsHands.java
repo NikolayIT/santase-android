@@ -16,15 +16,14 @@ import game.logic.strategy.automat.methods.base.BaseMethod;
 
 /**
  * OrdinaryWinWithPowerTrumpsHands class. PlayCardMethod which implements the logic of playing a card to win the game with power trumps.
- * 
  * @author Dimitar Karamanov
  */
 public final class OrdinaryWinWithPowerTrumpsHands extends BaseMethod {
+
     final static int POSSIBLE_MORE_POINTS = 6;
 
     /**
      * Constructor.
-     * 
      * @param game SantaseGame instance.
      */
     public OrdinaryWinWithPowerTrumpsHands(final Game game) {
@@ -33,7 +32,6 @@ public final class OrdinaryWinWithPowerTrumpsHands extends BaseMethod {
 
     /**
      * Returns player's card.
-     * 
      * @param player AI player.
      * @param opposite standart player.
      * @return Card object instance or null.
@@ -47,7 +45,6 @@ public final class OrdinaryWinWithPowerTrumpsHands extends BaseMethod {
 
     /**
      * Returns power trumps hands points.
-     * 
      * @param player AI player.
      * @param opposite player.
      * @return int the power trump hands points.
@@ -75,7 +72,6 @@ public final class OrdinaryWinWithPowerTrumpsHands extends BaseMethod {
 
     /**
      * Returns power trumps single hand points.
-     * 
      * @param copyPack copy of AI player pack.
      * @param possibleOppositeCards possible cards of opposite player.
      * @return int the power trump single hand points.

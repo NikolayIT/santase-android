@@ -8,20 +8,18 @@ package game.beans.pack.card.rank;
 
 /**
  * RankIterator interface.
- * 
  * @author Dimitar Karamanov
  */
 public interface RankIterator {
+
     /**
      * Returns true if the iteration has more elements.
-     * 
      * @return boolean true if the iteration has more elements false otherwise
      */
     boolean hasNext();
 
     /**
      * Returns the next element in the iteration.
-     * 
      * @return Rank the next element in the iteration.
      */
     Rank next();

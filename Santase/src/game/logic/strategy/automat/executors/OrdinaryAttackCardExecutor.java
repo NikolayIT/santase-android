@@ -20,13 +20,12 @@ import game.logic.strategy.automat.methods.SmallestOfAll;
 
 /**
  * OrdinaryAttackCardExecutor class executor.
- * 
  * @author Dimitar Karamanov
  */
 public final class OrdinaryAttackCardExecutor extends PlayAttackCardExecutor {
+
     /**
      * Constructor.
-     * 
      * @param game a BelotGame instance.
      */
     public OrdinaryAttackCardExecutor(final Game game) {
@@ -44,7 +43,6 @@ public final class OrdinaryAttackCardExecutor extends PlayAttackCardExecutor {
 
     /**
      * Handler method providing the user facility to check custom condition for methods executions.
-     * 
      * @param player for which is called the executor.
      * @param opposite for which is called the executor.
      * @return true to process method execution false to not.

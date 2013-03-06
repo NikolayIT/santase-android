@@ -13,7 +13,6 @@ import game.beans.pack.card.suit.Suit;
 
 /**
  * Card class.
- * 
  * @autor Dimitar Karamanov
  */
 public final class Card implements Serializable {
@@ -40,7 +39,6 @@ public final class Card implements Serializable {
 
     /**
      * Constructor.
-     * 
      * @param suit - card's suit
      * @param rank - card's rank
      */
@@ -53,7 +51,6 @@ public final class Card implements Serializable {
     /**
      * The method return card's points.
      * @param card instance.
-     * 
      * @return int card's points as a integer value.
      */
     public static int getPoints(final Card card) {
@@ -82,7 +79,6 @@ public final class Card implements Serializable {
 
     /**
      * Compares this card with the specified object(card) for order.
-     * 
      * @param obj specified object (card).
      * @return int value which may be: = 0 if this card and the specified object(card) are equal > 0 if this card is bigger than the specified object(card) < 0
      *         if this card is less than the specified object(card)
@@ -94,7 +90,6 @@ public final class Card implements Serializable {
 
     /**
      * The method checks if this card and specified object (card) are equal.
-     * 
      * @param obj specified object.
      * @return boolean true if this card is equal to specified object and false otherwise.
      */
@@ -108,7 +103,6 @@ public final class Card implements Serializable {
 
     /**
      * The method returns card's hash code.
-     * 
      * @return int card's hash code value.
      */
     public int hashCode() {
@@ -117,7 +111,6 @@ public final class Card implements Serializable {
 
     /**
      * Returns a string representation of the object.
-     * 
      * @return String a string representation of the object.
      */
     public String toString() {
@@ -126,7 +119,6 @@ public final class Card implements Serializable {
 
     /**
      * Checks if this card rank is Rank.Queen or Rank.King.
-     * 
      * @return boolean true if this card rank is Rank.Queen or Rank.King false otherwise.
      */
     public boolean isKingOrQueen() {
@@ -135,7 +127,6 @@ public final class Card implements Serializable {
 
     /**
      * Checks if this card and specified card are from same suit and this card rank is bigger then specified card's rank.
-     * 
      * @param card with which is checked
      * @return boolean true if this card and specified card suit are equal and this card rank is bigger than specified card's rank false otherwise.
      */

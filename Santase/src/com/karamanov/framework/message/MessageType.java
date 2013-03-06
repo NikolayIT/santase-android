@@ -14,7 +14,7 @@ package com.karamanov.framework.message;
  * @author Dimitar Karamanov
  */
 public final class MessageType {
-    
+
     /**
      * Type ID.
      */

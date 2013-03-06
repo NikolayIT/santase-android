@@ -16,10 +16,10 @@ import game.logic.strategy.validator.ObligatoryGameValidator;
 
 /**
  * ClosedGameAdviser class.
- * 
  * @author Dimitar Karamanov
  */
 public final class ClosedGameAdviser extends BasicGameAdviser {
+
     /**
      * ClosedAttackCardExecutor helper.
      */
@@ -32,7 +32,6 @@ public final class ClosedGameAdviser extends BasicGameAdviser {
 
     /**
      * Constructor.
-     * 
      * @param game SantaseGame instance.
      */
     public ClosedGameAdviser(Game game) {
@@ -43,7 +42,6 @@ public final class ClosedGameAdviser extends BasicGameAdviser {
 
     /**
      * Return an attack card.
-     * 
      * @param aiPlayer
      * @param stPlayer
      * @return
@@ -54,7 +52,6 @@ public final class ClosedGameAdviser extends BasicGameAdviser {
 
     /**
      * Return a defense card.
-     * 
      * @param aiPlayer
      * @param stPlayer
      * @return

@@ -14,13 +14,12 @@ import game.logic.strategy.automat.methods.base.BaseMethod;
 
 /**
  * ClosedDoubleSuitCard class. PlayCardMethod which implements the logic of playing a double suit card in a closed game.
- * 
  * @author Dimitar Karamanov
  */
 public final class ClosedDoubleSuitCard extends BaseMethod {
+
     /**
      * Constructor.
-     * 
      * @param game SantaseGame instance.
      */
     public ClosedDoubleSuitCard(final Game game) {
@@ -29,7 +28,6 @@ public final class ClosedDoubleSuitCard extends BaseMethod {
 
     /**
      * Returns player's card.
-     * 
      * @param player AI player.
      * @param opposite player.
      * @return Card object instance or null.

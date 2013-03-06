@@ -14,10 +14,10 @@ import game.logic.strategy.automat.methods.base.BaseMethod;
 
 /**
  * CoupleCard class. PlayCardMethod which implements the logic of playing a couple card.
- * 
  * @author Dimitar Karamanov
  */
 public final class CoupleCard extends BaseMethod {
+
     /**
      * Helper method.
      */
@@ -25,7 +25,6 @@ public final class CoupleCard extends BaseMethod {
 
     /**
      * Constructor.
-     * 
      * @param game SantaseGame instance.
      */
     public CoupleCard(final Game game) {
@@ -35,7 +34,6 @@ public final class CoupleCard extends BaseMethod {
 
     /**
      * Returns player's card.
-     * 
      * @param player AI player.
      * @param opposite player.
      * @return Card object instance or null.

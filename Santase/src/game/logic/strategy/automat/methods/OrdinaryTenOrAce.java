@@ -14,13 +14,12 @@ import game.logic.strategy.automat.methods.base.BaseMethod;
 
 /**
  * OrdinaryTenOrAce class. PlayCardMethod which implements the logic of playing a ten or ace rank card.
- * 
  * @author Dimitar Karamanov
  */
 public final class OrdinaryTenOrAce extends BaseMethod {
+
     /**
      * Constructor.
-     * 
      * @param game SantaseGame instance.
      */
     public OrdinaryTenOrAce(final Game game) {
@@ -29,7 +28,6 @@ public final class OrdinaryTenOrAce extends BaseMethod {
 
     /**
      * Returns player's card.
-     * 
      * @param player AI player.
      * @param opposite player.
      * @return Card object instance or null.
@@ -47,8 +45,7 @@ public final class OrdinaryTenOrAce extends BaseMethod {
             }
 
             // check for Ten or ACE not TRUMP
-            if ((rivalCard.getRank().equals(Rank.Ace) || rivalCard.getRank().equals(Rank.Ten))
-                    && !rivalCard.getSuit().equals(game.getTrumpSuit())) {
+            if ((rivalCard.getRank().equals(Rank.Ace) || rivalCard.getRank().equals(Rank.Ten)) && !rivalCard.getSuit().equals(game.getTrumpSuit())) {
                 Card result = player.getCards().findCard(Rank.Jack, game.getTrumpSuit());
                 if (result != null) {
                     return result;

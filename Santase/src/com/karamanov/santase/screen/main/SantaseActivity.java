@@ -46,13 +46,19 @@ public class SantaseActivity extends MessageActivity implements OnSharedPreferen
     private RelativeLayout relative;
 
     public static final int NAV_PRESS = -1;
+
     public static final int NAV_LEFT = -2;
+
     public static final int NAV_RIGHT = -3;
 
     private final static int CLOSE_GAME_INDEX = 1;
+
     private static final int GAME_NEW_INDEX = 2;
+
     private static final int PLAYED_CARDS_INDEX = 3;
+
     private static final int TIP_CARD_INDEX = 4;
+
     private static final int PREF_INDEX = 5;
 
     /**
@@ -66,7 +72,7 @@ public class SantaseActivity extends MessageActivity implements OnSharedPreferen
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        
+
         addMessageListener(Santase.MT_KEY_PRESSED, new KeyPressedListener());
         addMessageListener(Santase.MT_TOUCH_EVENT, new TouchListener());
         addMessageListener(Santase.MT_EXIT_EVENT, new ExitListener());
@@ -133,7 +139,7 @@ public class SantaseActivity extends MessageActivity implements OnSharedPreferen
     protected void onDestroy() {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         preferences.unregisterOnSharedPreferenceChangeListener(this);
-              
+
         super.onDestroy();
     }
 
@@ -215,20 +221,22 @@ public class SantaseActivity extends MessageActivity implements OnSharedPreferen
             AlertDialog.Builder myAlertDialog = new AlertDialog.Builder(this);
             myAlertDialog.setTitle(getString(R.string.Confirm));
             myAlertDialog.setMessage(getString(R.string.NewEraseQuestion));
-            
+
             myAlertDialog.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+
                 public void onClick(DialogInterface dialog, int which) {
                     Santase.resetGame(SantaseActivity.this);
                     repaint();
                 }
             });
-            
+
             myAlertDialog.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
-               public void onClick(DialogInterface dialog, int which) {
+
+                public void onClick(DialogInterface dialog, int which) {
                     //
                 }
             });
-            
+
             myAlertDialog.setCancelable(false);
             myAlertDialog.show();
             return true;
@@ -304,17 +312,19 @@ public class SantaseActivity extends MessageActivity implements OnSharedPreferen
             myAlertDialog.setTitle(getString(R.string.Confirm));
             myAlertDialog.setMessage(getString(R.string.ExitQuestion));
             myAlertDialog.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+
                 public void onClick(DialogInterface dialog, int which) {
                     Message tMessage = new Message(Santase.MT_EXIT_EVENT);
                     triggerMessage(tMessage);
                 }
             });
             myAlertDialog.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+
                 public void onClick(DialogInterface dialog, int which) {
                     //
                 }
             });
-            
+
             myAlertDialog.setCancelable(false);
             myAlertDialog.show();
         } else {
@@ -359,6 +369,7 @@ public class SantaseActivity extends MessageActivity implements OnSharedPreferen
     }
 
     private class TouchListener implements Messageable {
+
         public void performMessage(Message message) {
             if (message.getData() instanceof PointF) {
                 PointF xy = (PointF) message.getData();
@@ -385,6 +396,7 @@ public class SantaseActivity extends MessageActivity implements OnSharedPreferen
     }
 
     private class ButtonPressListener implements OnClickListener {
+
         private final Integer i;
 
         public ButtonPressListener(Integer i) {

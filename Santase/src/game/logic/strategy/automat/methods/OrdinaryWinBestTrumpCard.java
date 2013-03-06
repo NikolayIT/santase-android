@@ -15,13 +15,12 @@ import game.logic.strategy.automat.methods.base.BaseMethod;
 
 /**
  * OrdinaryWinBestTrumpCard class. PlayCardMethod which implements the logic of playing a the best trump card to win the game.
- * 
  * @author Dimitar Karamanov
  */
 public final class OrdinaryWinBestTrumpCard extends BaseMethod {
+
     /**
      * Constructor.
-     * 
      * @param game SantaseGame instance.
      */
     public OrdinaryWinBestTrumpCard(final Game game) {
@@ -30,7 +29,6 @@ public final class OrdinaryWinBestTrumpCard extends BaseMethod {
 
     /**
      * Returns player's card.
-     * 
      * @param player AI player.
      * @param opposite player.
      * @return Card object instance or null.

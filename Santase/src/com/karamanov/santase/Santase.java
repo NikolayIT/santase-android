@@ -25,7 +25,7 @@ import com.karamanov.framework.MessageApplication;
 import com.karamanov.framework.message.MessageType;
 
 public class Santase extends MessageApplication {
-    
+
     public final static MessageType MT_KEY_PRESSED = new MessageType("MT_KEY_PRESSED");
 
     public final static MessageType MT_TOUCH_EVENT = new MessageType("MT_TOUCH_EVENT");
@@ -35,7 +35,7 @@ public class Santase extends MessageApplication {
     public final static MessageType MT_PAINT_EVENT = new MessageType("MT_PAINT_EVENT");
 
     private static final String SANTASE_DAT = "santase.dat";
-    
+
     private final SantaseFacade santaseFacade;
 
     public Santase() {
@@ -49,7 +49,7 @@ public class Santase extends MessageApplication {
         }
         return new SantaseFacade();
     }
-    
+
     public static synchronized void initSantaseFacade(Activity context) {
         if (!Santase.loadGame(context)) {
             getSantaseFacade(context).getGame().newGame();
