@@ -16,10 +16,10 @@ import game.logic.strategy.validator.OrdinaryGameValidator;
 
 /**
  * OrdinaryGameAdviser class.
- * 
  * @author Dimitar Karamanov
  */
 public final class OrdinaryGameAdviser extends BasicGameAdviser {
+
     /**
      * OrdinaryAttackCardExecutor helper.
      */
@@ -32,7 +32,6 @@ public final class OrdinaryGameAdviser extends BasicGameAdviser {
 
     /**
      * Constructor.
-     * 
      * @param game SantaseGame instance.
      */
     public OrdinaryGameAdviser(Game game) {
@@ -43,7 +42,6 @@ public final class OrdinaryGameAdviser extends BasicGameAdviser {
 
     /**
      * Returns an attack card.
-     * 
      * @param aiPlayer
      * @param stPlayer
      * @return
@@ -54,7 +52,6 @@ public final class OrdinaryGameAdviser extends BasicGameAdviser {
 
     /**
      * Returns a defense card.
-     * 
      * @param aiPlayer
      * @param stPlayer
      * @return

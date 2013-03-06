@@ -14,13 +14,12 @@ import game.logic.strategy.automat.methods.base.BaseMethod;
 
 /**
  * ObligatoryForceToPlayTrump class. PlayCardMethod which implements the logic of playing a no need card so the opposite to play a trump one.
- * 
  * @author Dimitar Karamanov
  */
 public final class ObligatoryForceToPlayTrump extends BaseMethod {
+
     /**
      * Constructor.
-     * 
      * @param game SantaseGame instance.
      */
     public ObligatoryForceToPlayTrump(final Game game) {
@@ -29,7 +28,6 @@ public final class ObligatoryForceToPlayTrump extends BaseMethod {
 
     /**
      * Returns player's card.
-     * 
      * @param player AI player.
      * @param opposite player.
      * @return Card object instance or null.

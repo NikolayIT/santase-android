@@ -15,13 +15,12 @@ import game.logic.strategy.automat.methods.base.BaseMethod;
 
 /**
  * ObligatoryTotalAttack class. PlayCardMethod which implements the logic of playing a card in obligatory when the player can win the game.
- * 
  * @author Dimitar Karamanov
  */
 public final class ObligatoryTotalAttack extends BaseMethod {
+
     /**
      * Constructor.
-     * 
      * @param game SantaseGame instance.
      */
     public ObligatoryTotalAttack(final Game game) {
@@ -30,7 +29,6 @@ public final class ObligatoryTotalAttack extends BaseMethod {
 
     /**
      * Returns player's card.
-     * 
      * @param player AI player.
      * @param opposite standart player.
      * @return Card object instance or null.
@@ -55,7 +53,6 @@ public final class ObligatoryTotalAttack extends BaseMethod {
 
     /**
      * Returns a sutable card from the pack.
-     * 
      * @param hands Pack with hand cards.
      * @return Card object instance or null.
      */

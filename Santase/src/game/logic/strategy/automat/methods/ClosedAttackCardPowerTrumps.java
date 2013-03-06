@@ -14,10 +14,10 @@ import game.logic.strategy.automat.methods.base.BaseMethod;
 
 /**
  * ClosedAttackCardPowerTrumps class. PlayCardMethod which implements the logic of playing a card when the player has power trumps.
- * 
  * @author Dimitar Karamanov
  */
 public final class ClosedAttackCardPowerTrumps extends BaseMethod {
+
     /**
      * Help play card method.
      */
@@ -25,7 +25,6 @@ public final class ClosedAttackCardPowerTrumps extends BaseMethod {
 
     /**
      * Constructor.
-     * 
      * @param game SantaseGame instance.
      */
     public ClosedAttackCardPowerTrumps(final Game game) {
@@ -35,7 +34,6 @@ public final class ClosedAttackCardPowerTrumps extends BaseMethod {
 
     /**
      * Returns player's card.
-     * 
      * @param player AI player.
      * @param opposite player.
      * @return Card object instance or null.

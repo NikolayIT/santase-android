@@ -23,7 +23,7 @@ public class ObligatoryGetLastHandMaxTrumpAttack extends BaseMethod {
                 break;
             }
         }
-        
+
         if (hasBestTrumpCard) {
             for (PackIterator iterator = player.getCards().iterator(); iterator.hasNext();) {
                 final Card card = iterator.next();
@@ -32,7 +32,7 @@ public class ObligatoryGetLastHandMaxTrumpAttack extends BaseMethod {
                 }
             }
         }
-        
+
         return result;
     }
 }

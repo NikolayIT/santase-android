@@ -15,11 +15,10 @@ import game.logic.strategy.automat.methods.base.BaseMethod;
 
 /**
  * OrdinaryHandCard class. PlayCardMethod which implements the logic of playing a ordinary hand card.
- * 
  * @author Dimitar Karamanov
  */
 public final class OrdinaryHandCard extends BaseMethod {
-    
+
     /**
      * Constructor.
      * @param game SantaseGame instance.
@@ -30,7 +29,6 @@ public final class OrdinaryHandCard extends BaseMethod {
 
     /**
      * Returns player's card.
-     * 
      * @param player AI player.
      * @param opposite player.
      * @return Card object instance or null.
@@ -47,7 +45,6 @@ public final class OrdinaryHandCard extends BaseMethod {
 
     /**
      * Returns player's bigger card them opposite player.
-     * 
      * @param human AI player.
      * @param opposite standart player.
      * @return Card object instance or null.

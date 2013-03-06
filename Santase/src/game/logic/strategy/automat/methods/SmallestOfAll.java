@@ -13,13 +13,12 @@ import game.logic.strategy.automat.methods.base.BaseMethod;
 
 /**
  * SmallestOfAll class. PlayCardMethod which implements the logic of playing a the smallest of all card.
- * 
  * @author Dimitar Karamanov
  */
 public final class SmallestOfAll extends BaseMethod {
+
     /**
      * Constructor.
-     * 
      * @param game SantaseGame instance.
      */
     public SmallestOfAll(final Game game) {
@@ -28,7 +27,6 @@ public final class SmallestOfAll extends BaseMethod {
 
     /**
      * Returns player's card.
-     * 
      * @param player AI player.
      * @param opposite player.
      * @return Card object instance or null.

@@ -88,7 +88,6 @@ public final class Game implements Serializable {
 
     /**
      * Returns action status.
-     * 
      * @return action status.
      */
     public final void clearGameActionStatus() {
@@ -134,7 +133,7 @@ public final class Game implements Serializable {
             human.newGame(gameCards);
         }
     }
-    
+
     /**
      * New game.
      * @param player player.
@@ -189,7 +188,7 @@ public final class Game implements Serializable {
             }
         }
     }
-    
+
     public final void processTrick() {
         checkMove();
         addHand();
@@ -210,7 +209,6 @@ public final class Game implements Serializable {
 
     /**
      * Returns trump suit.
-     * 
      * @return trump suit.
      */
     public final Suit getTrumpSuit() {
@@ -219,7 +217,6 @@ public final class Game implements Serializable {
 
     /**
      * Changes trump card.
-     * 
      * @param card instance.
      * @param gPlayer player.
      */
@@ -232,7 +229,7 @@ public final class Game implements Serializable {
             gameCards.add(card);
         }
     }
-    
+
     public int calculateCurrentGamePlayerPoints(final Player lastHandPlayer, final Player player) {
         if (isNotClosedGame()) {
             final Player opposite = getRival(lastHandPlayer);
@@ -241,7 +238,7 @@ public final class Game implements Serializable {
             return calculateClosedGamePoints(lastHandPlayer, player);
         }
     }
-    
+
     private int calculateClosedGamePoints(Player lastHandPlayer, Player player) {
         Player opposite = getRival(lastHandPlayer);
         if (lastHandPlayer.equals(playerClosedGame)) {
@@ -254,7 +251,7 @@ public final class Game implements Serializable {
             return lastHandPlayer.equals(player) ? 3 : 0;
         }
     }
-    
+
     private int calculateRegularGamePoints(final Player loser) {
         if (loser.getPoints(trumpSuit) >= POINTS_ZONE) {
             return 1;
@@ -267,7 +264,6 @@ public final class Game implements Serializable {
 
     /**
      * Calculate game points.
-     * 
      * @param lastHandPlayer player.
      * @param player player.
      */
@@ -281,17 +277,17 @@ public final class Game implements Serializable {
             humanPoints = calculateClosedGamePoints(lastHandPlayer, human);
             computerPoints = calculateClosedGamePoints(lastHandPlayer, computer);
         }
-        
+
         if (humanPoints > 0) {
             human.setLittleGames(human.getLittleGames() + humanPoints);
             setTrickAttackPlayer(computer);
         }
-        
+
         if (computerPoints > 0) {
             computer.setLittleGames(computer.getLittleGames() + computerPoints);
             setTrickAttackPlayer(human);
         }
-        
+
         checkLittleGames();
     }
 
@@ -301,7 +297,7 @@ public final class Game implements Serializable {
             computer.setLittleGames(0);
             human.setBigGames(human.getBigGames() + 1);
         }
-        
+
         if (computer.getLittleGames() >= MAX_LITTLE_GAMES) {
             human.setLittleGames(0);
             computer.setLittleGames(0);
@@ -403,7 +399,7 @@ public final class Game implements Serializable {
     public final Pack getGameCards() {
         return gameCards;
     }
-    
+
     public final boolean isBigNewGame() {
         return (human.getBigGames() != 0 || computer.getBigGames() != 0) && (human.getLittleGames() == 0 && computer.getLittleGames() == 0);
     }

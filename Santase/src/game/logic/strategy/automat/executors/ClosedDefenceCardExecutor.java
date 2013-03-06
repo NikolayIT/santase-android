@@ -16,13 +16,12 @@ import game.logic.strategy.automat.methods.SmallestOfSuit;
 
 /**
  * ClosedDefenceInAttack class.
- * 
  * @author Dimitar Karamanov
  */
 public final class ClosedDefenceCardExecutor extends PlayCardExecutor {
+
     /**
      * Constructor.
-     * 
      * @param game SantaseGame instance.
      */
     public ClosedDefenceCardExecutor(final Game game) {

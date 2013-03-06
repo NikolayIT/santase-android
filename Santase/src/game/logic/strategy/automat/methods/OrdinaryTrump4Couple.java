@@ -14,15 +14,14 @@ import game.logic.strategy.automat.methods.base.BaseMethod;
 
 /**
  * OrdinaryTrump4Couple class. PlayCardMethod which implements the logic of playing a trump card to play after couple card.
- * 
  * @author Dimitar Karamanov
  */
 public final class OrdinaryTrump4Couple extends BaseMethod {
+
     private final OrdinaryTrumpCard ordinaryTrumpCard;
 
     /**
      * Constructor.
-     * 
      * @param game SantaseGame instance.
      */
     public OrdinaryTrump4Couple(final Game game) {
@@ -32,7 +31,6 @@ public final class OrdinaryTrump4Couple extends BaseMethod {
 
     /**
      * Returns player's card.
-     * 
      * @param player AI player.
      * @param opposite player.
      * @return Card object instance or null.
@@ -50,7 +48,6 @@ public final class OrdinaryTrump4Couple extends BaseMethod {
 
     /**
      * Returns player's card.
-     * 
      * @param player AI player.
      * @return Card object instance or null.
      */

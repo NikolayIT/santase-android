@@ -17,13 +17,12 @@ import game.logic.strategy.automat.methods.base.BaseMethod;
 
 /**
  * ClosedTrumpCard class. PlayCardMethod which implements the logic of playing a trump card in a cloased game.
- * 
  * @author Dimitar Karamanov
  */
 public final class ClosedTrumpCard extends BaseMethod {
+
     /**
      * Constructor.
-     * 
      * @param game SantaseGame instance.
      */
     public ClosedTrumpCard(final Game game) {
@@ -32,7 +31,6 @@ public final class ClosedTrumpCard extends BaseMethod {
 
     /**
      * Returns player's card.
-     * 
      * @param player AI player.
      * @param opposite player.
      * @return Card object instance or null.
@@ -78,7 +76,6 @@ public final class ClosedTrumpCard extends BaseMethod {
 
     /**
      * Return true if the cards is the biggest not played card from its suit.
-     * 
      * @param player AI player.
      * @param opposite player.
      * @param card which is checked.

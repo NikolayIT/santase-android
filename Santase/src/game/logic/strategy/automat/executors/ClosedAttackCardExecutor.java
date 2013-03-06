@@ -17,13 +17,12 @@ import game.logic.strategy.automat.methods.SmallestOfAll;
 
 /**
  * ClosedAttackCardExecutor class.
- * 
  * @author Dimitar Karamanov
  */
 public final class ClosedAttackCardExecutor extends PlayAttackCardExecutor {
+
     /**
      * Constructor.
-     * 
      * @param game a BelotGame instance.
      */
     public ClosedAttackCardExecutor(final Game game) {

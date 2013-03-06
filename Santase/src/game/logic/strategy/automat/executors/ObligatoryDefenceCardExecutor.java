@@ -17,7 +17,6 @@ import game.logic.strategy.automat.methods.SmallestOfSuit;
 
 /**
  * ObligatoryDefenceCardExecutor class.
- * 
  * @author Dimitar Karamanov
  */
 public final class ObligatoryDefenceCardExecutor extends PlayCardExecutor {

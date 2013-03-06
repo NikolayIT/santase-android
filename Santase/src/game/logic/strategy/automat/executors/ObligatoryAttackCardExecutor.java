@@ -20,13 +20,12 @@ import game.logic.strategy.automat.methods.SmallestOfAll;
 
 /**
  * ObligatoryAttackCardExecutor class.
- * 
  * @author Dimitar Karamanov.
  */
 public final class ObligatoryAttackCardExecutor extends PlayAttackCardExecutor {
+
     /**
      * Constructor.
-     * 
      * @param game a BelotGame instance.
      */
     public ObligatoryAttackCardExecutor(final Game game) {

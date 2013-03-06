@@ -13,13 +13,12 @@ import game.logic.strategy.automat.methods.base.BaseMethod;
 
 /**
  * ObligatoryTrumpCard class. PlayCardMethod which implements the logic of playing a obligatory trump card.
- * 
  * @author Dimitar Karamanov
  */
 public final class ObligatoryTrumpCard extends BaseMethod {
+
     /**
      * Constructor.
-     * 
      * @param game SantaseGame instance.
      */
     public ObligatoryTrumpCard(final Game game) {
@@ -28,7 +27,6 @@ public final class ObligatoryTrumpCard extends BaseMethod {
 
     /**
      * Returns player's card.
-     * 
      * @param player AI player.
      * @param opposite standard player.
      * @return Card object instance or null.

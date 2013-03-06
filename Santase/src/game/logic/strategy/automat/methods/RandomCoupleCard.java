@@ -17,13 +17,12 @@ import game.logic.strategy.automat.methods.base.BaseMethod;
 
 /**
  * RandomCoupleCard class. PlayCardMethod which implements the logic of playing a random couple card.
- * 
  * @author Dimitar Karamanov
  */
 public final class RandomCoupleCard extends BaseMethod {
+
     /**
      * Constructor.
-     * 
      * @param game SantaseGame instance.
      */
     public RandomCoupleCard(final Game game) {
@@ -32,7 +31,6 @@ public final class RandomCoupleCard extends BaseMethod {
 
     /**
      * Returns player's card.
-     * 
      * @param player AI player.
      * @param opposite player.
      * @return Card object instance or null.

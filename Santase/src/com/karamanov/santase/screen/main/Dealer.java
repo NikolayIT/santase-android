@@ -47,7 +47,9 @@ public class Dealer {
     private MessageScreen messageScreen;
 
     public static final int NAV_PRESS = -1;
+
     public static final int NAV_LEFT = -2;
+
     public static final int NAV_RIGHT = -3;
 
     private static final long PLAY_DELAY = 200;
@@ -109,20 +111,23 @@ public class Dealer {
 
     private void showCloseGameDialog() {
         handler.post(new Runnable() {
+
             public void run() {
                 AlertDialog.Builder myAlertDialog = new AlertDialog.Builder(context);
                 myAlertDialog.setTitle(context.getString(R.string.Confirm));
                 myAlertDialog.setMessage(context.getString(R.string.CloseGameQuestion));
                 myAlertDialog.setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+
                     public void onClick(DialogInterface dialog, int which) {
                         turnToPlayerClosedMode();
                     }
                 });
                 myAlertDialog.setNegativeButton(android.R.string.cancel, new DialogInterface.OnClickListener() {
+
                     public void onClick(DialogInterface dialog, int which) {
                     }
                 });
-                
+
                 myAlertDialog.setCancelable(false);
                 myAlertDialog.show();
             }
@@ -232,7 +237,6 @@ public class Dealer {
 
     /**
      * Displays a message.
-     * 
      * @param player which call the message function.
      * @param card played by player.
      */
@@ -242,6 +246,7 @@ public class Dealer {
 
         final BooleanFlag flag = new BooleanFlag();
         handler.post(new Runnable() {
+
             public void run() {
                 messageScreen = new MessageScreen(context, messages, flag);
                 messageScreen.show();
@@ -461,7 +466,6 @@ public class Dealer {
 
     /**
      * Checks key click.
-     * 
      * @param keyCode pressed key code.
      * @param gameAction status.
      */
@@ -498,7 +502,6 @@ public class Dealer {
 
     /**
      * Process the selected card.
-     * 
      * @param card selected one.
      */
     private void processSelectCard(final Card card) {

@@ -18,10 +18,10 @@ import game.logic.strategy.automat.methods.base.BaseMethod;
 
 /**
  * ObligatoryDefenceInAttackWithoutLoose class. PlayCardMethod which implements the logic of playing a obligatory defense in attack card whithout loose.
- * 
  * @author Dimitar Karamanov
  */
 public final class ObligatoryDefenceInAttackWithoutLoose extends BaseMethod {
+
     /**
      * Help play card method.
      */
@@ -39,7 +39,6 @@ public final class ObligatoryDefenceInAttackWithoutLoose extends BaseMethod {
 
     /**
      * Constructor.
-     * 
      * @param game SantaseGame instance.
      */
     public ObligatoryDefenceInAttackWithoutLoose(final Game game) {
@@ -51,7 +50,6 @@ public final class ObligatoryDefenceInAttackWithoutLoose extends BaseMethod {
 
     /**
      * Returns player's card.
-     * 
      * @param player AI player.
      * @param opposite player.
      * @return Card object instance or null.
@@ -67,7 +65,6 @@ public final class ObligatoryDefenceInAttackWithoutLoose extends BaseMethod {
 
     /**
      * Returns defence card on attack player.
-     * 
      * @param player AI player.
      * @param opposite player.
      * @return defence in attack card.
@@ -109,7 +106,6 @@ public final class ObligatoryDefenceInAttackWithoutLoose extends BaseMethod {
 
     /**
      * Returns true if can play without game loose, false otherwise.
-     * 
      * @param player AI player.
      * @param opposite player.
      * @param card played one.

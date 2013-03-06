@@ -65,6 +65,7 @@ public class TricksActivity extends Activity {
 }
 
 class HandView extends LinearLayout {
+
     public HandView(Context context, Card winnerCard, Card loserCard) {
         super(context);
 

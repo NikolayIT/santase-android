@@ -25,7 +25,7 @@ import com.karamanov.santase.Santase;
 import com.karamanov.santase.screen.base.SantasePainter;
 
 class LogoView extends View {
-    
+
     /**
      * Desk image.
      */

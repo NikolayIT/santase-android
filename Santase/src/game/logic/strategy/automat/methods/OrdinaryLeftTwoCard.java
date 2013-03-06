@@ -13,16 +13,14 @@ import game.logic.strategy.automat.methods.base.BaseMethod;
 
 /**
  * OrdinaryLeftTwoCard class. PlayCardMethod which implements the logic of playing a card when left only two cards to (one hand) till obligatory game mode.
- * 
  * @author Dimitar Karamanov
  */
 public final class OrdinaryLeftTwoCard extends BaseMethod {
-    
+
     private final OrdinarySingleLoose ordinarySingleLoose;
 
     /**
      * Constructor.
-     * 
      * @param game SantaseGame instance.
      */
     public OrdinaryLeftTwoCard(final Game game) {
@@ -32,7 +30,6 @@ public final class OrdinaryLeftTwoCard extends BaseMethod {
 
     /**
      * Returns player's card.
-     * 
      * @param player AI player.
      * @param opposite player.
      * @return Card object instance or null.

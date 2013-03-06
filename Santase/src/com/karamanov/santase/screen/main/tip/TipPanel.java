@@ -39,21 +39,21 @@ public class TipPanel extends TableLayout {
      */
     public TipPanel(Context context, Player player, ArrayList<MessageData> messages) {
         super(context);
-        
+
         TextView textView = new TextView(context);
         textView.setText(R.string.Tip);
         textView.setTextColor(Color.WHITE);
         textView.setGravity(Gravity.CENTER_HORIZONTAL);
         textView.setTypeface(Typeface.DEFAULT_BOLD);
-        
+
         TableRow.LayoutParams params = new TableRow.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
         params.span = 2;
         textView.setLayoutParams(params);
-        
+
         TableRow row = new TableRow(context);
         row.addView(textView);
         row.setBackgroundResource(R.drawable.message_title);
-        
+
         addView(row);
 
         for (MessageData data : messages) {

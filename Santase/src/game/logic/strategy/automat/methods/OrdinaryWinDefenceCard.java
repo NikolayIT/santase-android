@@ -14,15 +14,14 @@ import game.logic.strategy.automat.methods.base.BaseMethod;
 
 /**
  * OrdinaryWinDefenceCard class. PlayCardMethod which implements the logic of playing a win defence card.
- * 
  * @author Dimitar Karamanov
  */
 public class OrdinaryWinDefenceCard extends BaseMethod {
+
     final private BestHandCard bestHandCard;
 
     /**
      * Constructor.
-     * 
      * @param game SantaseGame instance.
      */
     public OrdinaryWinDefenceCard(final Game game) {
@@ -32,7 +31,6 @@ public class OrdinaryWinDefenceCard extends BaseMethod {
 
     /**
      * Returns player's card.
-     * 
      * @param player AI player.
      * @param opposite player.
      * @return Card object instance or null.

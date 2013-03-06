@@ -17,7 +17,7 @@ public class ObligatoryGetLastHandMaxOneSuitAttack extends BaseMethod {
     protected Card getPlayMethodCard(Player player) {
         boolean sameSuit = true;
         Suit suit = null;
-        
+
         for (PackIterator iterator = player.getCards().iterator(); iterator.hasNext();) {
             final Card card = iterator.next();
             if (suit != null && !suit.equals(card.getSuit())) {
@@ -26,7 +26,7 @@ public class ObligatoryGetLastHandMaxOneSuitAttack extends BaseMethod {
             }
             suit = card.getSuit();
         }
-        
+
         for (PackIterator iterator = game.getRival(player).getCards().iterator(); iterator.hasNext();) {
             final Card card = iterator.next();
             if (suit != null && !suit.equals(card.getSuit())) {
@@ -35,14 +35,14 @@ public class ObligatoryGetLastHandMaxOneSuitAttack extends BaseMethod {
             }
             suit = card.getSuit();
         }
-        
+
         if (sameSuit) {
             Card card = player.getCards().findMaxSuitCard(suit);
             if (card != null && isBestSuitCardLeft(player, card)) {
                 return player.getCards().findMinSuitCard(suit);
             }
         }
-        
+
         return null;
     }
 }

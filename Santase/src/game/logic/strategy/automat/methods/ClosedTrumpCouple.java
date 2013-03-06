@@ -14,13 +14,12 @@ import game.logic.strategy.automat.methods.base.BaseMethod;
 
 /**
  * ClosedTrumpCouple class. PlayCardMethod which implements the logic of playing a card ....
- * 
  * @author Dimitar Karamanov
  */
 public final class ClosedTrumpCouple extends BaseMethod {
+
     /**
      * Constructor.
-     * 
      * @param game SantaseGame instance.
      */
     public ClosedTrumpCouple(final Game game) {
@@ -29,7 +28,6 @@ public final class ClosedTrumpCouple extends BaseMethod {
 
     /**
      * Returns player's card.
-     * 
      * @param player AI player.
      * @param opposite player.
      * @return Card object instance or null.

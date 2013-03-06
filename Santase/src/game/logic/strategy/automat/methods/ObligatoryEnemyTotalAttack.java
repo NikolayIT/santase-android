@@ -14,10 +14,10 @@ import game.logic.strategy.automat.methods.base.BaseMethod;
 
 /**
  * ObligatoryEnemyTotalAttack class. PlayCardMethod which implements the logic of playing a obligatory card when enemy can win.
- * 
  * @author Dimitar Karamanov
  */
 public final class ObligatoryEnemyTotalAttack extends BaseMethod {
+
     /**
      * Help play card method.
      */
@@ -30,7 +30,6 @@ public final class ObligatoryEnemyTotalAttack extends BaseMethod {
 
     /**
      * Constructor.
-     * 
      * @param game SantaseGame instance.
      */
     public ObligatoryEnemyTotalAttack(final Game game) {
@@ -41,7 +40,6 @@ public final class ObligatoryEnemyTotalAttack extends BaseMethod {
 
     /**
      * Returns player's card.
-     * 
      * @param player AI player.
      * @param opposite standart player.
      * @return Card object instance or null.

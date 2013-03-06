@@ -16,7 +16,6 @@ import game.logic.strategy.validator.ObligatoryGameValidator;
 
 /**
  * ObligatoryGameAdviser class.
- * 
  * @author Dimitar Karamanov
  */
 public final class ObligatoryGameAdviser extends BasicGameAdviser {
@@ -33,7 +32,6 @@ public final class ObligatoryGameAdviser extends BasicGameAdviser {
 
     /**
      * Constructor.
-     * 
      * @param game SantaseGame.
      */
     public ObligatoryGameAdviser(Game game) {
@@ -44,7 +42,6 @@ public final class ObligatoryGameAdviser extends BasicGameAdviser {
 
     /**
      * Returns an attack card.
-     * 
      * @param aiPlayer
      * @param stPlayer
      * @return
@@ -55,7 +52,6 @@ public final class ObligatoryGameAdviser extends BasicGameAdviser {
 
     /**
      * Returns a defense card.
-     * 
      * @param aiPlayer
      * @param stPlayer
      * @return

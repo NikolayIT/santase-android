@@ -14,13 +14,12 @@ import game.logic.strategy.automat.methods.base.BaseMethod;
 /**
  * BestHandCard class. PlayCardMethod which implements the logic of playing the biggest by Rank hand card. The return card can be trump one or from the same
  * suit.
- * 
  * @author Dimitar Karamanov
  */
 public final class BestHandCard extends BaseMethod {
+
     /**
      * Constructor.
-     * 
      * @param game SantaseGame instance.
      */
     public BestHandCard(final Game game) {
@@ -29,7 +28,6 @@ public final class BestHandCard extends BaseMethod {
 
     /**
      * Returns player's card.
-     * 
      * @param player AI player.
      * @param opposite player.
      * @return Card object instance or null.
@@ -45,8 +43,9 @@ public final class BestHandCard extends BaseMethod {
             if (maxSuitCard != null && maxSuitCard.getRank().compareTo(rivalCard.getRank()) > 0) {
                 result = maxSuitCard;
             }
-            
-            if (!rivalCard.getSuit().equals(game.getTrumpSuit()) && maxTrumpCard != null && (maxSuitCard == null || maxSuitCard.getRank().compareTo(maxTrumpCard.getRank()) < 0)) {
+
+            if (!rivalCard.getSuit().equals(game.getTrumpSuit()) && maxTrumpCard != null
+                    && (maxSuitCard == null || maxSuitCard.getRank().compareTo(maxTrumpCard.getRank()) < 0)) {
                 result = maxTrumpCard;
             }
         }

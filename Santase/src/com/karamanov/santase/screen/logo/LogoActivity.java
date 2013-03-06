@@ -9,7 +9,6 @@
  */
 package com.karamanov.santase.screen.logo;
 
-
 import com.karamanov.santase.Santase;
 import com.karamanov.santase.screen.main.SantaseActivity;
 
@@ -21,7 +20,6 @@ import android.view.MotionEvent;
 
 /**
  * LogoFrame class.
- * 
  * @author Dimitar Karamanov
  */
 public class LogoActivity extends Activity {
@@ -30,7 +28,6 @@ public class LogoActivity extends Activity {
 
     /**
      * Constructor.
-     * 
      * @param canvas parent container game canvas
      * @param rootComponent original root component
      */

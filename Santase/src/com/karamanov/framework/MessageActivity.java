@@ -98,7 +98,7 @@ public class MessageActivity extends Activity {
     public final void triggerMessage(final Message message) {
         triggerMessage(message, false);
     }
-    
+
     /**
      * Adds user message to the end of the queue.
      * @param message new message.

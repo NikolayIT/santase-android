@@ -15,7 +15,6 @@ import game.logic.strategy.validator.ValidateCode;
 
 /**
  * BasicGameAdviser class.
- * 
  * @author Dimitar Karamanov
  */
 public abstract class BasicGameAdviser {
@@ -29,7 +28,6 @@ public abstract class BasicGameAdviser {
 
     /**
      * Constructor.
-     * 
      * @param game SantaseGme instance.
      */
     public BasicGameAdviser(Game game, BasicGameValidator validator) {
@@ -39,7 +37,6 @@ public abstract class BasicGameAdviser {
 
     /**
      * Returns a player card.
-     * 
      * @param aiPlayer
      * @param stPlayer
      * @return
@@ -50,7 +47,6 @@ public abstract class BasicGameAdviser {
 
     /**
      * Return an attack card.
-     * 
      * @param aiPlayer
      * @param stPlayer
      * @return
@@ -59,7 +55,6 @@ public abstract class BasicGameAdviser {
 
     /**
      * Returns a defense card.
-     * 
      * @param aiPlayer
      * @param stPlayer
      * @return
@@ -68,7 +63,6 @@ public abstract class BasicGameAdviser {
 
     /**
      * Validates a player played card.
-     * 
      * @param player
      * @param ownCard
      * @param rivalCard

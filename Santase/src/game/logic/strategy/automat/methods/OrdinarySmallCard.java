@@ -16,13 +16,12 @@ import game.logic.strategy.automat.methods.base.BaseMethod;
 
 /**
  * OrdinarySmallCard class. PlayCardMethod which implements the logic of playing a small card.
- * 
  * @author Dimitar Karamanov
  */
 public final class OrdinarySmallCard extends BaseMethod {
+
     /**
      * Constructor.
-     * 
      * @param game SantaseGame instance.
      */
     public OrdinarySmallCard(final Game game) {
@@ -31,7 +30,6 @@ public final class OrdinarySmallCard extends BaseMethod {
 
     /**
      * Returns player's card.
-     * 
      * @param player AI player.
      * @param opposite player.
      * @return Card object instance or null.
@@ -78,7 +76,6 @@ public final class OrdinarySmallCard extends BaseMethod {
 
     /**
      * Check if the player has enough points to stop the game.
-     * 
      * @param player AI player.
      * @param card played one.
      * @return Card object.

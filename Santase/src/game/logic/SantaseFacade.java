@@ -18,7 +18,6 @@ import game.logic.strategy.validator.ValidateCode;
 
 /**
  * SantaseGame class represents a Facade which implements the basic logic methods.
- * 
  * @author Dimitar Karamanov
  */
 public final class SantaseFacade {
@@ -73,7 +72,6 @@ public final class SantaseFacade {
 
     /**
      * Returns tip message for the provided player.
-     * 
      * @param gPlayer player.
      * @return String representing tip message.
      */
@@ -88,7 +86,7 @@ public final class SantaseFacade {
      * @return Card instance.
      */
     public Card getAICard(final Player player) {
-        player.setPlayedCard(null);//first null -> getCard() ?
+        player.setPlayedCard(null);// first null -> getCard() ?
         player.setPlayedCard(getCard(player));
         checkGameActionStatus(player);
         return player.getCards().remove(player.getPlayedCard());

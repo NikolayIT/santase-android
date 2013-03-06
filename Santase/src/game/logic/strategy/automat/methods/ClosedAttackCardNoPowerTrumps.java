@@ -16,10 +16,10 @@ import game.logic.strategy.automat.methods.base.BaseMethod;
 
 /**
  * ClosedAttackCardNoPowerTrumps class. PlayCardMethod which implements the logic of playing an attack card when no power trumps in closed game.
- * 
  * @author Dimitar Karamanov
  */
 public final class ClosedAttackCardNoPowerTrumps extends BaseMethod {
+
     /**
      * Help play card method.
      */
@@ -27,7 +27,6 @@ public final class ClosedAttackCardNoPowerTrumps extends BaseMethod {
 
     /**
      * Constructor.
-     * 
      * @param game SantaseGame instance.
      */
     public ClosedAttackCardNoPowerTrumps(final Game game) {
@@ -37,7 +36,6 @@ public final class ClosedAttackCardNoPowerTrumps extends BaseMethod {
 
     /**
      * Returns player's card.
-     * 
      * @param player AI player.
      * @param opposite player.
      * @return Card object instance or null.
@@ -57,7 +55,6 @@ public final class ClosedAttackCardNoPowerTrumps extends BaseMethod {
 
     /**
      * Returns an attack card when there is no power trump cards.
-     * 
      * @param player AI player.
      * @param opposite player.
      * @return Card object instnace or null.

@@ -95,7 +95,6 @@ public final class Suit implements Serializable {
 
     /**
      * The method checks if this Suit and specified object (Suit) are equal.
-     * 
      * @param obj specified object.
      * @return boolean true if this Suit is equal to specified object and false otherwise.
      */
@@ -109,7 +108,6 @@ public final class Suit implements Serializable {
 
     /**
      * Returns suit iterator.
-     * 
      * @return SuitIterator iterator.
      */
     public static SuitIterator iterator() {
@@ -128,7 +126,6 @@ public final class Suit implements Serializable {
 
         /**
          * Constructor.
-         * 
          * @param enumerator the internal collection enumerator.
          */
         private SuitIteratorImpl(final Iterator<Suit> enumeration) {

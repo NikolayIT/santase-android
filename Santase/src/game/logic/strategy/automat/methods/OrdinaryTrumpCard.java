@@ -15,13 +15,12 @@ import game.logic.strategy.automat.methods.base.BaseMethod;
 
 /**
  * OrdinaryTrumpCard class. PlayCardMethod which implements the logic of playing a ordinary trump card.
- * 
  * @author Dimitar Karamanov
  */
 public final class OrdinaryTrumpCard extends BaseMethod {
+
     /**
      * Constructor.
-     * 
      * @param game SantaseGame instance.
      */
     public OrdinaryTrumpCard(final Game game) {
@@ -30,7 +29,6 @@ public final class OrdinaryTrumpCard extends BaseMethod {
 
     /**
      * Returns player's card.
-     * 
      * @param player AI player.
      * @param opposite player.
      * @return Card object instance or null.
@@ -94,7 +92,6 @@ public final class OrdinaryTrumpCard extends BaseMethod {
 
     /**
      * Returns cards with same rank from different suit.
-     * 
      * @param human AI player.
      * @param card which rank and different suit is searching for.
      * @return Card object instance or null.

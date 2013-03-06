@@ -8,16 +8,15 @@ public class ObligatoryGetLastHandAttack extends PlayAttackCardExecutor {
 
     public ObligatoryGetLastHandAttack(Game game) {
         super(game);
-        
+
         register(new ObligatoryGetLastHandMaxTrumpAttack(game));
         register(new ObligatoryGetLastHandMaxOneSuitAttack(game));
         register(new ObligatoryGetLastHandMaxTwoSuitAttack(game));
         register(new ObligatoryForceToPlayTrump(game));
     }
-    
+
     /**
      * Handler method providing the user facility to check custom condtion for methods executions.
-     * 
      * @param player for which is called the executor
      * @param opposite player.
      * @return true to process method execution false to not.
