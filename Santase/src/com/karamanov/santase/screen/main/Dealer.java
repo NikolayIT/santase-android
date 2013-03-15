@@ -400,14 +400,6 @@ public class Dealer {
         }
     }
 
-    /*
-     * public void displayChangeTrumpCard() { showInfo(context.getString(R.string.AnnounceChangeTrumpCard)); }
-     */
-
-    /*
-     * private void displayCloseGame() { showInfo(context.getString(R.string.AnnounceCloseGame)); }
-     */
-
     private String getComputerCoupleMessageExit(Suit suit) {
         String message = context.getString(R.string.AndroidHasACoupleExit);
         message = textDecorator.replaceSuit(suit, message);
@@ -428,12 +420,6 @@ public class Dealer {
         message = textDecorator.translateCouple(suit, santaseFacade.getGame().getTrumpSuit(), message);
         showInfo(message, santasePainter.getSuitImage(suit));
     }
-
-    /*
-     * private void displayCoupleMessage(Suit suit) { String message = context.getString(R.string.AndroidHasCoupleOf); message = textDecorator.replaceSuit(suit,
-     * message); message = textDecorator.translateCouple(suit, santaseFacade.getGame().getTrumpSuit(), message); showInfo(message,
-     * santasePainter.getSuitImage(suit)); }
-     */
 
     private Card getHumanCardUnderPointer(final float x, final float y) {
         Player player = santaseFacade.getGame().getHuman();
