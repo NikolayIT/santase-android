@@ -31,7 +31,7 @@ import com.karamanov.santase.screen.main.message.MessageData;
  * MessagePanel class.
  * @author Dimitar Karamanov
  */
-public class TipPanel extends TableLayout {
+public final class TipPanel extends TableLayout {
 
     /**
      * Constructor.
