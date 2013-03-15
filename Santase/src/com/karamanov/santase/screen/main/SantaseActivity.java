@@ -68,7 +68,9 @@ public class SantaseActivity extends MessageActivity implements OnSharedPreferen
         super();
     }
 
-    /** Called when the activity is first created. */
+    /** 
+     * Called when the activity is first created. 
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
