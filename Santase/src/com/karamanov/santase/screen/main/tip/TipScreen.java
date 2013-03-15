@@ -14,7 +14,7 @@ import android.view.MotionEvent;
 import android.view.Window;
 import android.view.WindowManager;
 
-public class TipScreen extends Dialog {
+public final class TipScreen extends Dialog {
 
     public TipScreen(Context context, Player player, ArrayList<MessageData> messages) {
         super(context);
